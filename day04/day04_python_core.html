@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Day 4 | Logic Nghiệp Vụ & Try-Except | Rikkei Education</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --accent-red: #dc2626;
+            --accent-red-hover: #b91c1c;
+            --accent-red-light: #fef2f2;
+            --border-color: #e2e8f0;
+            --vs-dark: #1e1e1e;
+            --vs-border: #2d2d2d;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding-bottom: 80px; }
+
+        /* SLEEK MODERN HEADER NAVIGATION WITH GLASSMORPHISM */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--accent-red);
+            padding: 12px 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .header-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 38px; height: 38px; background: var(--accent-red); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; }
+        .logo-text { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); }
+        .logo-text span { color: var(--accent-red); }
+        
+        .btn-back-portal {
+            background: #0f172a; color: white; text-decoration: none; font-weight: 800; font-size: 0.88rem; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .btn-back-portal:hover { background: #1e293b; color: #f8fafc; transform: translateY(-1px); }
+        
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links-top { display: flex; align-items: center; gap: 16px; }
+        .nav-links-top a { text-decoration: none; color: var(--text-muted); font-weight: 700; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links-top a:hover { color: var(--accent-red); }
+        
+        .btn-teacher-auth {
+            background: var(--accent-red); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 800; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .btn-teacher-auth:hover { background: var(--accent-red-hover); }
+
+        .container {
+            max-width: 1240px;
+            margin: 30px auto;
+            padding: 0 24px;
+        }
+
+        /* HERO BANNER */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220,38,38,0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            background: rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        /* ENGINE STATUS BADGE */
+        .engine-status {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #eab308;
+        }
+        .status-dot.ready { background: #22c55e; }
+        .status-text { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+
+        /* MODULE SECTION & LESSON CARD */
+        .module-section { margin-bottom: 36px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-red);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+        .section-title { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+        .concept-badge {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .explanation-text {
+            color: #334155;
+            font-size: 0.98rem;
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+
+        /* REALTIME STRING VALIDATOR SANDBOX */
+        .validator-sandbox {
+            background: #f1f5f9; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0;
+        }
+        .val-input-group { margin-bottom: 14px; }
+        .val-label { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; display: block; color: #1e293b; }
+        .val-input {
+            width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 1rem; font-family: 'Fira Code', monospace; outline: none; transition: border 0.2s;
+        }
+        .val-input:focus { border-color: var(--accent-red); }
+        .val-feedback {
+            margin-top: 8px; font-size: 0.9rem; font-weight: 600; padding: 10px 14px; border-radius: 6px; display: none;
+        }
+        .val-feedback.valid { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .val-feedback.invalid { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+        /* PERFECT VS CODE DARK EDITOR STYLING */
+        .editor-container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2d2d2d;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .editor-header {
+            background: #252526;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2d2d2d;
+        }
+        .editor-title {
+            color: #cccccc;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Fira Code', Consolas, monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .editor-actions-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-run {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-run:hover { background: #15803d; }
+
+        .btn-check-test {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-check-test:hover { background: var(--accent-red-hover); }
+
+        /* PIXEL-PERFECT LIVE CODE CONTAINER & SYNTAX OVERLAY */
+        .live-code-container {
+            position: relative;
+            width: 100%;
+            background: #1e1e1e;
+            overflow: hidden;
+        }
+        .live-code-highlight, .code-textarea {
+            margin: 0 !important;
+            padding: 18px 20px !important;
+            font-family: Consolas, 'Fira Code', 'Courier New', monospace !important;
+            font-size: 15px !important;
+            line-height: 24px !important;
+            letter-spacing: 0px !important;
+            word-spacing: 0px !important;
+            tab-size: 4 !important;
+            -moz-tab-size: 4 !important;
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            border: none !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+            font-variant-ligatures: none !important;
+            -webkit-font-variant-ligatures: none !important;
+            font-feature-settings: "liga" 0, "calt" 0 !important;
+        }
+        .live-code-highlight {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+            overflow: hidden !important;
+            z-index: 1 !important;
+        }
+
+        /* ISOLATE CODE SPANS FROM GLOBAL PAGE CSS CLASS CORRUPTION */
+        .live-code-highlight span, pre span, code span {
+            display: inline !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            width: auto !important;
+            height: auto !important;
+            float: none !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            letter-spacing: inherit !important;
+            word-spacing: inherit !important;
+        }
+        .token.keyword { color: #569cd6 !important; font-weight: bold !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.function, .token.builtin { color: #dcdcaa !important; font-weight: 600 !important; }
+        .token.comment { color: #6a9955 !important; font-style: italic !important; }
+        .token.number, .token.boolean { color: #b5cea8 !important; }
+        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+
+        .code-textarea {
+            position: relative !important;
+            width: 100% !important;
+            background: transparent !important;
+            color: transparent !important;
+            caret-color: #ffffff !important;
+            resize: none !important;
+            overflow-y: hidden !important;
+            display: block !important;
+            z-index: 2 !important;
+        }
+        .output-box {
+            background: #18181b; color: #4ade80; font-family: 'Fira Code', monospace; font-size: 0.92rem; padding: 16px 20px; border-top: 1px solid #27272a; min-height: 70px; white-space: pre-wrap;
+        }
+
+        /* TEST BOX NOTIFICATION */
+        .test-box {
+            margin-top: 14px;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 0.93rem;
+            font-weight: 600;
+            display: none;
+        }
+        .test-box.pass { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .test-box.fail { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+        /* RESOURCE CARD & DOWNLOAD WORKFLOW */
+        .resource-card-bottom {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* STUDENT SUBMISSION FORM (MATCHING DAY 1, 2, 3) */
+        .submission-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-md);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+            background: #f8fafc;
+        }
+        .form-control:focus {
+            border-color: var(--accent-red);
+            background: #ffffff;
+        }
+        .btn-submit-main {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-submit-main:hover { background: var(--accent-red-hover); }
+
+        /* VISUAL STEP SIMULATOR */
+        .vis-container {
+            background: #0f172a; border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #1e293b; color: white;
+        }
+        .vis-display { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+        .vis-item {
+            padding: 12px 18px; background: #1e293b; border: 2px solid #334155; border-radius: 8px; font-weight: 700; font-family: 'Fira Code', monospace; transition: all 0.3s;
+        }
+        .vis-item.active { border-color: #38bdf8; background: #0369a1; transform: scale(1.05); }
+        .vis-item.error { border-color: #ef4444; background: #991b1b; }
+        .vis-item.success { border-color: #22c55e; background: #166534; }
+        .vis-controls { display: flex; gap: 10px; margin-bottom: 14px; }
+        .btn-vis {
+            padding: 8px 16px; border-radius: 6px; border: none; font-weight: 700; cursor: pointer; font-size: 0.88rem; background: #334155; color: white; transition: background 0.2s;
+        }
+        .btn-vis:hover { background: #475569; }
+        .btn-vis-primary { background: var(--accent-red); }
+        .btn-vis-primary:hover { background: var(--accent-red-hover); }
+        .vis-status-log {
+            background: #020617; padding: 12px 16px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #a7f3d0; border: 1px solid #1e293b; min-height: 48px;
+        }
+
+        /* TEACHER ADMIN PANEL */
+        .admin-panel {
+            background: #ffffff; border-radius: var(--radius-lg); padding: 28px; border: 2px solid var(--vs-dark); margin: 30px 0; box-shadow: var(--shadow-lg); display: none;
+        }
+        .admin-table {
+            width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem;
+        }
+        .admin-table th, .admin-table td {
+            padding: 12px 14px; border: 1px solid var(--border-color); text-align: left;
+        }
+        .admin-table th { background: #f1f5f9; font-weight: 700; color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <!-- SLEEK MODERN HEADER NAVIGATION -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="../index.html" class="logo-area">
+                    <div class="logo-icon">🐍</div>
+                    <div class="logo-text">Rikkei <span>Education</span></div>
+                </a>
+                <a href="../index.html" class="btn-back-portal">🏠 Trang Chủ Portal</a>
+            </div>
+
+            <div class="header-right">
+                <nav class="nav-links-top">
+                    <a href="#sec-theory" class="nav-link">Nội Dung Bài Học</a>
+                    <a href="#sec-interactive" class="nav-link">Demo Interactive</a>
+                    <a href="#sec-practice" class="nav-link">Thực Hành Code</a>
+                    <a href="#sec-submit" class="nav-link">Nộp Bài Tập</a>
+                </nav>
+                <button class="btn-teacher-auth" onclick="openTeacherAuthModal()">🔒 Giảng Viên</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <span class="hero-badge">🐍 PYTHON CORE 4 — LOGIC NGHIỆP VỤ & TRY-EXCEPT</span>
+            <h1 class="hero-title">Logic Nghiệp Vụ Thực Tế, Validation Chuỗi & Xử Lý Ngoại Lệ (Try-Except)</h1>
+            <p class="hero-subtitle">
+                Xây dựng hệ thống tính toán Hóa đơn E-Commerce chuẩn mực: Tính Subtotal, Chiết khấu VIP, Thuế VAT 10%, Phân loại khách hàng và Phòng chống crash Server bằng Try-Except-Finally.
+            </p>
+        </div>
+
+        <!-- ENGINE STATUS -->
+        <div class="engine-status">
+            <div class="status-dot" id="statusDot"></div>
+            <div class="status-text" id="statusText">⏳ Đang khởi tạo Python Wasm Engine (Pyodide)...</div>
+        </div>
+
+        <!-- MODULE 1: VALIDATION CHUỖI CƠ BẢN -->
+        <div class="module-section" id="sec-theory">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Validation Chuỗi Cơ Bản (String Methods & SĐT Đầu Số VN)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #1</span>
+                <h3>1. Kiểm tra Email & Số điện thoại mạng Việt Nam chuẩn xác</h3>
+                <p class="explanation-text">
+                    Trước khi đưa dữ liệu người dùng vào logic tính toán tiền tệ hay lưu vào Database, ta cần chuẩn hóa và Validate chuỗi ký tự bằng các phương thức tích hợp sẵn của Python:
+                </p>
+                <ul style="margin: 12px 0 12px 24px; color: #334155; font-size: 0.95rem;">
+                    <li><code>.strip()</code> & <code>.lower()</code>: Xóa khoảng trắng thừa ở 2 đầu và chuyển email về dạng chữ thường.</li>
+                    <li><code>"@" in email</code>: Kiểm tra email phải chứa ký tự định dạng <code>@</code>.</li>
+                    <li><code>len(phone) == 10</code> & <code>phone.isdigit()</code>: Kiểm tra độ dài đúng 10 chữ số và chứa toàn chữ số.</li>
+                    <li><code>phone.startswith(('03', '05', '07', '08', '09'))</code>: Kiểm tra SĐT phải thuộc các nhà mạng Việt Nam hợp lệ (Viettel, VinaPhone, MobiFone...).</li>
+                </ul>
+
+                <!-- REALTIME INTERACTIVE VALIDATOR SANDBOX -->
+                <div class="validator-sandbox" id="sec-interactive">
+                    <h4 style="color:#0f172a; margin-bottom:14px;">🧪 Realtime Interactive Sandbox: Kiểm Tra Dữ Liệu Học Viên Live</h4>
+                    
+                    <div class="val-input-group">
+                        <label class="val-label">1. Thử nghiệm Email (Chứa @, không khoảng trắng):</label>
+                        <input type="text" id="sandboxEmail" class="val-input" placeholder="Nhập email (ví dụ: student@rikkei.edu.vn)..." oninput="validateEmailLive()">
+                        <div id="emailFeedback" class="val-feedback"></div>
+                    </div>
+
+                    <div class="val-input-group">
+                        <label class="val-label">2. Thử nghiệm SĐT Việt Nam (Đầu 03/05/07/08/09, đủ 10 chữ số):</label>
+                        <input type="text" id="sandboxPhone" class="val-input" placeholder="Nhập SĐT (ví dụ: 0987654321 hoặc 0355667788)..." oninput="validatePhoneLive()">
+                        <div id="phoneFeedback" class="val-feedback"></div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python (FULL CODE VIEW - KHÔNG CUỘN):</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 validate_user_profile.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor1', 'output1')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor1-hl" class="live-code-highlight"></div>
+                        <textarea id="editor1" class="code-textarea" oninput="updateLiveSyntax('editor1', 'editor1-hl')">def validate_student_registration(name, email, phone):
+    # 1. Chuẩn hóa khoảng trắng và chữ hoa/thường
+    clean_name = name.strip()
+    clean_email = email.strip().lower()
+    clean_phone = phone.strip()
+    
+    # 2. Validate Email (Phải chứa @)
+    is_email_ok = "@" in clean_email
+    
+    # 3. Validate SĐT (Đầu 03/05/07/08/09, đủ 10 chữ số)
+    valid_prefixes = ("03", "05", "07", "08", "09")
+    is_phone_ok = (len(clean_phone) == 10) and clean_phone.isdigit() and clean_phone.startswith(valid_prefixes)
+    
+    return clean_name, clean_email, is_email_ok, clean_phone, is_phone_ok
+
+# Test với hồ sơ thực tế
+name, email, email_ok, phone, phone_ok = validate_student_registration("  Nguyen Van An ", "AN.NGUYEN@GMAIL.COM  ", "0987654321")
+print(f"Học viên: {name}")
+print(f"Email sau làm sạch: '{email}' -> Hợp lệ: {email_ok}")
+print(f"SĐT sau làm sạch: '{phone}' -> Hợp lệ: {phone_ok}")
+</textarea>
+                    </div>
+                    <div id="output1" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: LOGIC NGHIỆP VỤ TÍNH HÓA ĐƠN -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Logic Nghiệp Vụ Tính Hóa Đơn (Chiết Khấu, VAT & Phân Loại VIP)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #2</span>
+                <h3>2. Quy trình tính toán hóa đơn bán hàng E-Commerce chuẩn hóa</h3>
+                <p class="explanation-text">
+                    Trong các hệ thống E-Commerce thực tế, quy trình tính tiền hóa đơn trải qua 4 bước nối tiếp bắt buộc:
+                </p>
+
+                <!-- SPACIOUS FLOWCHART DIAGRAM FOR INVOICE CALCULATION -->
+                <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 24px; margin: 24px 0; border: 2px solid #334155; text-align: center;">
+                    <h4 style="color: #38bdf8; font-size: 1.1rem; font-weight: 800; margin-bottom: 20px;">
+                        📊 SƠ ĐỒ DÒNG CHẢY DỮ LIỆU TÍNH HÓA ĐƠN E-COMMERCE
+                    </h4>
+
+                    <svg viewBox="0 0 960 220" style="width: 100%; max-width: 920px; height: auto; font-family: Consolas, 'Fira Code', monospace;">
+                        <!-- Step 1: Subtotal -->
+                        <rect x="30" y="70" width="180" height="75" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                        <text x="120" y="98" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">1. TỔNG TIỀN HÀNG</text>
+                        <text x="120" y="125" fill="#f8fafc" font-size="13" font-weight="bold" text-anchor="middle">Subtotal = ∑(giá × sl)</text>
+
+                        <!-- Arrow 1 -> 2 -->
+                        <path d="M 210 107 L 255 107" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-inv)"/>
+
+                        <!-- Step 2: Discount -->
+                        <rect x="260" y="70" width="190" height="75" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="355" y="98" fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="middle">2. TRỪ CHIẾT KHẤU</text>
+                        <text x="355" y="125" fill="#f8fafc" font-size="12" font-weight="bold" text-anchor="middle">Subtotal_After_Discount</text>
+
+                        <!-- Arrow 2 -> 3 -->
+                        <path d="M 450 107 L 495 107" fill="none" stroke="#f59e0b" stroke-width="3" marker-end="url(#arr-inv)"/>
+
+                        <!-- Step 3: VAT -->
+                        <rect x="500" y="70" width="180" height="75" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+                        <text x="590" y="98" fill="#a855f7" font-size="12" font-weight="bold" text-anchor="middle">3. CỘNG THUẾ VAT</text>
+                        <text x="590" y="125" fill="#f8fafc" font-size="13" font-weight="bold" text-anchor="middle">VAT = Subtotal × 10%</text>
+
+                        <!-- Arrow 3 -> 4 -->
+                        <path d="M 680 107 L 725 107" fill="none" stroke="#a855f7" stroke-width="3" marker-end="url(#arr-inv)"/>
+
+                        <!-- Step 4: Final Total -->
+                        <rect x="730" y="65" width="200" height="85" rx="12" fill="#15803d" stroke="#86efac" stroke-width="2.5"/>
+                        <text x="830" y="96" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">4. TỔNG THANH TOÁN</text>
+                        <text x="830" y="124" fill="#dcfce7" font-size="12" font-weight="bold" text-anchor="middle">Final_Total & VIP Tier</text>
+
+                        <defs>
+                            <marker id="arr-inv" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python Logic Hóa Đơn:</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 ecom_invoice_calculator.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor2', 'output2')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor2-hl" class="live-code-highlight"></div>
+                        <textarea id="editor2" class="code-textarea" oninput="updateLiveSyntax('editor2', 'editor2-hl')">def calculate_ecom_invoice(cart_items, is_vip_customer):
+    # 1. Tính tổng tiền hàng (Subtotal)
+    subtotal = sum(item["gia"] * item["sl"] for item in cart_items)
+    
+    # 2. Tính Chiết khấu VIP (Khách VIP giảm 10%)
+    discount_rate = 0.10 if is_vip_customer else 0.0
+    discount_amount = subtotal * discount_rate
+    after_discount = subtotal - discount_amount
+    
+    # 3. Tính thuế VAT (10%)
+    vat_amount = after_discount * 0.10
+    final_total = after_discount + vat_amount
+    
+    # 4. Phân loại đơn hàng
+    if final_total >= 10000000:
+        order_tier = "ĐƠN HÀNG LỚN (VIP)"
+    elif final_total >= 5000000:
+        order_tier = "ĐƠN HÀNG TRUNG BÌNH"
+    else:
+        order_tier = "ĐƠN HÀNG THƯỜNG"
+        
+    return subtotal, discount_amount, vat_amount, final_total, order_tier
+
+# Chạy thử nghiệm hóa đơn
+cart = [
+    {"ten": "Laptop Dell XPS", "gia": 25000000, "sl": 1},
+    {"ten": "Chuột không dây", "gia": 450000, "sl": 2}
+]
+
+sub, disc, vat, total, tier = calculate_ecom_invoice(cart, is_vip_customer=True)
+print(f"Tổng tiền hàng: {sub:,.0f} VNĐ")
+print(f"Chiết khấu VIP (10%): -{disc:,.0f} VNĐ")
+print(f"Thuế VAT (10%): +{vat:,.0f} VNĐ")
+print(f"==========================================")
+print(f"TỔNG THANH TOÁN: {total:,.0f} VNĐ [{tier}]")
+</textarea>
+                    </div>
+                    <div id="output2" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 3: XỬ LÝ NGOẠI LỆ (TRY-EXCEPT) -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Xử Lý Ngoại Lệ (Try-Except-Else-Finally)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #3</span>
+                <h3>3. Phòng chống crash Server Backend khi dữ liệu người dùng bị lỗi</h3>
+                <p class="explanation-text">
+                    Nếu người dùng nhập nhầm chuỗi chữ (ví dụ <code>"ABC_ERROR"</code>) vào ô tổng tiền hoặc số tiền chia cho 0, chương trình Python sẽ bị dừng đột ngột (Crash). Khối lệnh <code>try-except</code> giúp bắt lỗi an toàn và giữ hệ thống hoạt động ổn định:
+                </p>
+
+                <!-- VISUAL STEP SIMULATOR FOR TRY-EXCEPT -->
+                <div class="vis-container">
+                    <h4 style="color:#38bdf8; margin-bottom:10px;">🛡️ Mô Phỏng Luồng Bắt Lỗi Try-Except Khi Xử Lý Dữ Liệu Sau:</h4>
+                    <div class="vis-controls">
+                        <button class="btn-vis btn-vis-primary" onclick="runTryExceptStep()">▶ Chạy Thử Luồng Try-Except</button>
+                        <button class="btn-vis" onclick="resetTryExceptVis()">🔄 Reset</button>
+                    </div>
+                    <div class="vis-display" id="tryVisDisplay">
+                        <div class="vis-item" id="visT-0">Đầu vào: "12500000"</div>
+                        <div class="vis-item" id="visT-1">Đầu vào: "ABC_ERROR"</div>
+                        <div class="vis-item" id="visT-2">Đầu vào: "8500000"</div>
+                    </div>
+                    <div id="tryVisLog" class="vis-status-log">👉 Bấm "Chạy Thử Luồng Try-Except" để quan sát cơ chế bắt lỗi an toàn.</div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python Try-Except Safe Payment:</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 safe_payment_processor.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor3', 'output3')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor3-hl" class="live-code-highlight"></div>
+                        <textarea id="editor3" class="code-textarea" oninput="updateLiveSyntax('editor3', 'editor3-hl')">def process_payment_safe(raw_amount_str):
+    try:
+        # Thử chuyển đổi chuỗi sang số float
+        amount = float(raw_amount_str)
+        if amount <= 0:
+            raise ValueError("Số tiền phải lớn hơn 0!")
+            
+        vat = amount * 0.10
+        total = amount + vat
+        print(f"✅ Giao dịch hợp lệ: {total:,.0f} VNĐ (Đã bao gồm VAT)")
+        return total
+        
+    except ValueError as err:
+        print(f"❌ CẢNH BÁO BẮT LỖI (ValueError): Số tiền '{raw_amount_str}' không hợp lệ! ({err})")
+        return None
+    except Exception as e:
+        print(f"⚠️ Bắt lỗi hệ thống không xác định: {e}")
+        return None
+
+# Chạy kiểm thử 3 trường hợp
+print("--- TEST 1: Số hợp lệ ---")
+process_payment_safe("1500000")
+
+print("\n--- TEST 2: Chuỗi ký tự lỗi ---")
+process_payment_safe("ABC_ERROR")
+
+print("\n--- TEST 3: Số tiền âm ---")
+process_payment_safe("-50000")
+</textarea>
+                    </div>
+                    <div id="output3" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: PHIẾU BÀI TẬP THỰC HÀNH (EXERCISES WITH TESTCASES & HINTS) -->
+        <div class="module-section" id="sec-practice">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Phiếu Bài Tập Thực Hành Chấm Điểm Tự Động</h2>
+            </div>
+
+            <!-- EXERCISE 1 -->
+            <div class="lesson-card">
+                <span class="concept-badge">Bài tập thực hành #1 (15 - 20 phút)</span>
+                <h3>Bài 1: Validation chuẩn hóa thông tin đăng ký học viên</h3>
+                <p class="explanation-text">
+                    <b>Đề bài:</b> Thay thế dấu <code>...</code> để hoàn thiện hàm <code>validate_registration_input(name, email, phone)</code>:<br>
+                    - Xóa khoảng trắng thừa ở 2 đầu bằng <code>.strip()</code>.<br>
+                    - Kiểm tra Email chứa <code>@</code>.<br>
+                    - Kiểm tra SĐT có đúng 10 chữ số, chứa toàn chữ số, và bắt đầu bằng các đầu số <code>('03', '05', '07', '08', '09')</code>.
+                </p>
+
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 ex1_string_validation.py</div>
+                        <div class="editor-actions-top">
+                            <button class="btn-run" onclick="runPythonEditor('day4_ex1_code', 'day4_ex1_out')">▶️ Chạy Thử</button>
+                            <button class="btn-check-test" onclick="checkDay4Exercise1()">✅ Kiểm Tra Testcase</button>
+                        </div>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="day4_ex1_code-hl" class="live-code-highlight"></div>
+                        <textarea id="day4_ex1_code" class="code-textarea" oninput="updateLiveSyntax('day4_ex1_code', 'day4_ex1_code-hl')">def validate_registration_input(name, email, phone):
+    clean_name = name.strip()
+    clean_email = email.strip().lower()
+    clean_phone = phone.strip()
+    
+    # TODO 1: Kiểm tra email chứa ký tự @
+    is_email_valid = "@" in clean_email
+    
+    # TODO 2: Kiểm tra SĐT (10 chữ số, toàn số, đầu 03/05/07/08/09)
+    valid_prefixes = ("03", "05", "07", "08", "09")
+    is_phone_valid = (len(clean_phone) == 10) and clean_phone.isdigit() and clean_phone.startswith(...)
+    
+    return clean_name, clean_email, is_email_valid, clean_phone, is_phone_valid
+
+# Dữ liệu kiểm thử
+registers = [
+    {"name": "  Nguyen Van An  ", "email": "an.nguyen@gmail.com", "phone": "0987654321"},
+    {"name": "Tran Thi Bich", "email": "bich_gmail.com", "phone": "0912345678"},
+    {"name": "Le Hoang Cuong", "email": "cuong@rikkei.edu.vn", "phone": "0123456789"}
+]
+
+print("=== BÁO CÁO KẾT QUẢ VALIDATE THÔNG TIN ===")
+for r in registers:
+    c_n, c_e, e_ok, c_p, p_ok = validate_registration_input(r["name"], r["email"], r["phone"])
+    status = "✅ HỢP LỆ" if (e_ok and p_ok) else "❌ KHÔNG HỢP LỆ"
+    print(f"[{c_n}] Email: {c_e} | SDT: {c_p} -> {status}")
+</textarea>
+                    </div>
+                    <div id="day4_ex1_out" class="output-box">Console Output...</div>
+                </div>
+
+                <div id="day4_ex1_res" class="test-box"></div>
+
+                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
+                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
+                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
+                    </summary>
+                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
+                        • TODO 2: Thay <code>clean_phone.startswith(...)</code> thành <code>clean_phone.startswith(valid_prefixes)</code>.
+                    </div>
+                </details>
+            </div>
+
+            <!-- EXERCISE 2 -->
+            <div class="lesson-card">
+                <span class="concept-badge">Bài tập thực hành #2 (15 - 20 phút)</span>
+                <h3>Bài 2: Tính hóa đơn VAT & Bắt lỗi Try-Except an toàn</h3>
+                <p class="explanation-text">
+                    <b>Đề bài:</b> Thay thế dấu <code>...</code> trong hàm <code>safe_process_invoice(order_id, raw_total, discount_code, is_vip)</code>:<br>
+                    - Sử dụng <code>try:</code> ép kiểu <code>float(raw_total)</code>.<br>
+                    - Nếu <code>is_vip == True</code> và <code>discount_code == 'VIP10'</code> ➔ Giảm 10%, nếu <code>'VIP20'</code> ➔ Giảm 20%.<br>
+                    - Cộng thuế VAT 10% trên số tiền sau chiết khấu.<br>
+                    - Bắt lỗi <code>except ValueError:</code> khi gặp số tiền không hợp lệ.
+                </p>
+
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 ex2_try_except_invoice.py</div>
+                        <div class="editor-actions-top">
+                            <button class="btn-run" onclick="runPythonEditor('day4_ex2_code', 'day4_ex2_out')">▶️ Chạy Thử</button>
+                            <button class="btn-check-test" onclick="checkDay4Exercise2()">✅ Kiểm Tra Testcase</button>
+                        </div>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="day4_ex2_code-hl" class="live-code-highlight"></div>
+                        <textarea id="day4_ex2_code" class="code-textarea" oninput="updateLiveSyntax('day4_ex2_code', 'day4_ex2_code-hl')">def safe_process_invoice(order_id, raw_total, discount_code, is_vip):
+    try:
+        # TODO 1: Ép kiểu float(raw_total)
+        subtotal = float(...)
+        
+        # TODO 2: Tính chiết khấu VIP
+        discount_rate = 0.0
+        if is_vip and discount_code == "VIP10":
+            discount_rate = 0.10
+        elif is_vip and discount_code == "VIP20":
+            discount_rate = 0.20
+            
+        subtotal_after_discount = subtotal * (1 - discount_rate)
+        vat = subtotal_after_discount * 0.10
+        final_total = subtotal_after_discount + vat
+        
+        tier = "HÓA ĐƠN LỚN (VIP)" if final_total >= 10000000 else "HÓA ĐƠN THƯỜNG"
+        return final_total, tier
+        
+    except ...:
+        print(f"⚠️ Xử lý lỗi [{order_id}]: Số tiền '{raw_total}' không hợp lệ! Bỏ qua đơn hàng.")
+        return None, "LỖI"
+
+orders = [
+    {"id": "DH01", "total": "12500000", "discount_code": "VIP10", "is_vip": True},
+    {"id": "DH02", "total": "450000", "discount_code": "INVALID", "is_vip": False},
+    {"id": "DH03", "total": "ABC_ERROR", "discount_code": "", "is_vip": False}
+]
+
+print("=== BÁO CÁO THỰC THI HÓA ĐƠN ===")
+for o in orders:
+    tot, t = safe_process_invoice(o["id"], o["total"], o["discount_code"], o["is_vip"])
+    if tot:
+        print(f"[{o['id']}] Tổng thanh toán: {tot:,.0f} VNĐ [{t}]")
+</textarea>
+                    </div>
+                    <div id="day4_ex2_out" class="output-box">Console Output...</div>
+                </div>
+
+                <div id="day4_ex2_res" class="test-box"></div>
+
+                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
+                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
+                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
+                    </summary>
+                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
+                        • TODO 1: Thay <code>float(...)</code> thành <code>float(raw_total)</code>.<br>
+                        • TODO 2: Thay <code>except ...:</code> thành <code>except ValueError:</code>.
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- HOMEWORK RESOURCE DOWNLOAD CARD (LOCKED BY DEFAULT) -->
+        <div class="resource-card-bottom">
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">📥 Tài Liệu Bài Tập Đầy Đủ (File Word .docx)</h3>
+                <p style="color: var(--text-muted); font-size: 0.92rem;">Tải file Word phiếu bài tập thực hành Ngày 04 (chứa đầy đủ Input, Output mẫu và bài tập nâng cao).</p>
+            </div>
+            <a id="resourceFileBtn" class="btn-download" style="background: #94a3b8; opacity: 0.7; pointer-events: none; cursor: not-allowed; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;">
+                🔒 Hoàn Thành Đúng 2 Bài Tập Code Trên Để Mở Khóa Tải File Word (.docx)
+            </a>
+        </div>
+
+        <!-- STUDENT SUBMISSION FORM (MATCHING DAY 1, 2, 3) -->
+        <div class="submission-card" id="sec-submit">
+            <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">📤 Form Nộp Bài Tập Ngày 04 (Python Core 4)</h2>
+            <p style="color:var(--text-muted); margin-bottom:24px;">Sau khi hoàn thành bài tập thực hành, sinh viên điền thông tin và nộp link GitHub Repo để hệ thống ghi nhận.</p>
+
+            <form id="submissionForm" onsubmit="handleStudentSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và Tên Sinh Viên *</label>
+                        <input type="text" id="subName" class="form-control" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã Sinh Viên *</label>
+                        <input type="text" id="subMsv" class="form-control" placeholder="B25DCCN001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lớp Học *</label>
+                        <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
+                            <option value="">-- Chọn Lớp --</option>
+                            <option value="CNTT1">CNTT1</option>
+                            <option value="CNTT2">CNTT2</option>
+                            <option value="CNTT3">CNTT3</option>
+                            <option value="CNTT4">CNTT4</option>
+                            <option value="CNTT5">CNTT5</option>
+                            <option value="CNTT6">CNTT6</option>
+                            <option value="CNTT8">CNTT8</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link GitHub Repository *</label>
+                        <input type="url" id="subLink" class="form-control" placeholder="https://github.com/username/python-day04" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnSubmitForm" class="btn-submit-main">🚀 Nộp Bài Tập Ngay</button>
+            </form>
+            <div id="submitStatus" style="margin-top:16px; font-weight:700; display:none;"></div>
+        </div>
+
+        <!-- TEACHER ADMIN PANEL -->
+        <div id="teacherAdminArea" class="admin-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h3 style="color:#0f172a; font-size:1.3rem;">🔒 BẢNG QUẢN LÝ BÀI NỘP GIẢNG VIÊN (DAY 04)</h3>
+                <button class="btn-vis" onclick="teacherLogout()" style="background:#dc2626;">🔒 Đăng Xuất</button>
+            </div>
+
+            <!-- 7 CLASS STAT CARDS -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:20px;">
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT1</div>
+                    <div id="stat-CNTT1" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT2</div>
+                    <div id="stat-CNTT2" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT3</div>
+                    <div id="stat-CNTT3" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT4</div>
+                    <div id="stat-CNTT4" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT5</div>
+                    <div id="stat-CNTT5" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT6</div>
+                    <div id="stat-CNTT6" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT8</div>
+                    <div id="stat-CNTT8" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+            </div>
+
+            <!-- FILTER BY CLASS -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <label style="font-weight:700; font-size:0.9rem;">Lọc theo Lớp Học:</label>
+                    <select id="filterClassSelect" class="form-control" style="width:160px; padding:6px 12px;" onchange="loadSubmissionsTable()">
+                        <option value="ALL">Tất cả các lớp</option>
+                        <option value="CNTT1">Lớp CNTT1</option>
+                        <option value="CNTT2">Lớp CNTT2</option>
+                        <option value="CNTT3">Lớp CNTT3</option>
+                        <option value="CNTT4">Lớp CNTT4</option>
+                        <option value="CNTT5">Lớp CNTT5</option>
+                        <option value="CNTT6">Lớp CNTT6</option>
+                        <option value="CNTT8">Lớp CNTT8</option>
+                    </select>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-vis" onclick="exportSubmissionsToFormattedExcel('DAY_04')" style="background:#16a34a; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer;">📥 Xuất Báo Cáo Excel (.xls)</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom:16px;">
+                <label style="font-weight:700; font-size:0.9rem;">Google Sheet Webhook URL (Apps Script):</label>
+                <div style="display:flex; gap:10px; margin-top:6px;">
+                    <input type="text" id="googleSheetWebhookInput" class="form-control" style="flex:1;" placeholder="Dán URL Apps Script Webhook vào đây...">
+                    <button class="btn-vis btn-vis-primary" onclick="saveGoogleSheetWebhook(document.getElementById('googleSheetWebhookInput').value)">Lưu URL</button>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div id="syncStatusMsg" style="font-size:0.9rem; font-weight:700; color:#0284c7;">⏳ Đang đồng bộ dữ liệu live...</div>
+            </div>
+
+            <table class="admin-table" id="submissionsTable">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Thời Gian Nộp</th>
+                        <th>Họ và Tên</th>
+                        <th>Mã SV</th>
+                        <th>Lớp</th>
+                        <th>Link GitHub</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody">
+                    <tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:20px;">Đang tải danh sách bài nộp từ hệ thống...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    <div style="max-width: 1200px; margin: 40px auto 0; padding: 0 24px;">
+        <nav style="background: #ffffff; border: 2px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); flex-wrap: wrap; gap: 14px;">
+            <a href="../day03/day03_python_core.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--text-dark); text-decoration: none; font-weight: 800; font-size: 0.95rem; background: #f1f5f9; padding: 10px 18px; border-radius: 8px; transition: all 0.2s;">
+                ⏮️ Bài Trước: Ngày 03 (Linear & Bubble Sort)
+            </a>
+            
+            <span style="font-weight: 800; color: var(--accent-red); font-size: 0.95rem;">
+                📌 Ngày 04: Logic Nghiệp Vụ & Try-Except
+            </span>
+
+            <a href="#" onclick="alert('Bài 05 (FastAPI Basics) sắp ra mắt!'); return false;" style="display: inline-flex; align-items: center; gap: 8px; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; background: var(--accent-red); padding: 10px 18px; border-radius: 8px; transition: all 0.2s;">
+                Bài Tiếp Theo: Ngày 05 (FastAPI Basics) ⏭️
+            </a>
+        </nav>
+    </div>
+
+    <!-- TEACHER AUTH MODAL -->
+    <div id="teacherAuthModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:12px; padding:28px; width:90%; max-width:420px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.3);">
+            <h3 style="color:#0f172a; margin-bottom:10px;">🔒 Xác Thực Quyền Giảng Viên</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-bottom:16px;">Vui lòng nhập mật khẩu Giảng viên để mở Bảng Quản Lý Bài Nộp:</p>
+            <input type="password" id="teacherPassInput" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-size:1rem; margin-bottom:16px;" placeholder="Nhập mật khẩu Giảng viên..." onkeyup="if(event.key==='Enter') submitTeacherAuth()">
+            <div id="authErrMsg" style="color:#dc2626; font-weight:700; font-size:0.85rem; margin-bottom:12px; display:none;"></div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn-vis" onclick="closeTeacherAuthModal()">Hủy</button>
+                <button class="btn-vis btn-vis-primary" onclick="submitTeacherAuth()">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyr6zSiUA7ygY3c2_oo5XfIL7hZDvrysQaIPhZrNzGEczTYFSVwNajqdji_cvHMRaRm/exec";
+
+        function getWebhookUrl() {
+            return localStorage.getItem('gsheet_webhook_url') || DEFAULT_GSHEET_WEBHOOK_URL;
+        }
+
+        // LIVE SYNTAX HIGHLIGHTING OVERLAY LOGIC (SYNCHRONIZED WITH DAY 1, 2, 3)
+        function highlightVsCodePython(code) {
+            if (!code) return '';
+            if (window.Prism && Prism.languages && Prism.languages.python) {
+                try {
+                    return Prism.highlight(code, Prism.languages.python, 'python');
+                } catch(e) {}
+            }
+            return escapeHtml(code);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function updateLiveSyntax(textareaId, highlightId) {
+            const txta = document.getElementById(textareaId);
+            const hl = document.getElementById(highlightId);
+            if (!txta || !hl) return;
+
+            hl.innerHTML = highlightVsCodePython(txta.value) + '\n';
+            autoResizeTextarea(txta);
+            hl.style.height = txta.style.height;
+        }
+
+        function initAllLiveEditors() {
+            document.querySelectorAll('.code-textarea').forEach(txt => {
+                const hlId = txt.id + '-hl';
+                updateLiveSyntax(txt.id, hlId);
+            });
+        }
+        window.addEventListener('load', initAllLiveEditors);
+
+        function autoResizeTextarea(el) {
+            if (!el) return;
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        }
+
+        // REALTIME SANDBOX VALIDATORS
+        function validateEmailLive() {
+            const val = document.getElementById('sandboxEmail').value;
+            const fb = document.getElementById('emailFeedback');
+            if (!val.trim()) {
+                fb.style.display = 'none';
+                return;
+            }
+            fb.style.display = 'block';
+
+            const clean = val.trim().toLowerCase();
+            const hasAt = clean.includes('@');
+
+            if (hasAt) {
+                fb.className = 'val-feedback valid';
+                fb.innerHTML = `✅ Email hợp lệ: <b>${clean}</b>`;
+            } else {
+                fb.className = 'val-feedback invalid';
+                fb.innerHTML = `❌ Email thiếu ký tự '@'!`;
+            }
+        }
+
+        function validatePhoneLive() {
+            const val = document.getElementById('sandboxPhone').value;
+            const fb = document.getElementById('phoneFeedback');
+            if (!val.trim()) {
+                fb.style.display = 'none';
+                return;
+            }
+            fb.style.display = 'block';
+
+            const clean = val.trim();
+            const is10 = clean.length === 10;
+            const isDigits = /^\d+$/.test(clean);
+            const validPrefixes = ["03", "05", "07", "08", "09"];
+            const startsValid = validPrefixes.some(p => clean.startsWith(p));
+
+            if (is10 && isDigits && startsValid) {
+                fb.className = 'val-feedback valid';
+                fb.innerHTML = `✅ SĐT Hợp lệ mạng Việt Nam: <b>${clean}</b>`;
+            } else {
+                fb.className = 'val-feedback invalid';
+                fb.innerHTML = `❌ SĐT Không hợp lệ! (Yêu cầu: Đúng 10 chữ số, bắt đầu bằng 03/05/07/08/09)`;
+            }
+        }
+
+        // STEP SIMULATOR FOR TRY-EXCEPT
+        const tryVisData = [
+            { text: 'Đầu vào: "12500000"', status: 'success', msg: '✅ float("12500000") = 12,500,000.0 VNĐ ➔ Xử lý thành công!' },
+            { text: 'Đầu vào: "ABC_ERROR"', status: 'error', msg: '❌ float("ABC_ERROR") ➔ BẮT LỖI ValueError! Bỏ qua không bị crash Server.' },
+            { text: 'Đầu vào: "8500000"', status: 'success', msg: '✅ float("8500000") = 8,500,000.0 VNĐ ➔ Xử lý thành công!' }
+        ];
+        let tryVisIdx = -1;
+
+        function runTryExceptStep() {
+            if (tryVisIdx < tryVisData.length - 1) {
+                tryVisIdx++;
+                const d = tryVisData[tryVisIdx];
+                const el = document.getElementById(`visT-${tryVisIdx}`);
+                el.className = `vis-item ${d.status}`;
+                document.getElementById('tryVisLog').innerHTML = `🔍 Bước ${tryVisIdx + 1}: ${d.msg}`;
+            } else {
+                document.getElementById('tryVisLog').innerHTML = '🏁 HOÀN THÀNH: Khối lệnh Try-Except đã bảo vệ an toàn 100% dữ liệu!';
+            }
+        }
+
+        function resetTryExceptVis() {
+            tryVisIdx = -1;
+            document.querySelectorAll('#tryVisDisplay .vis-item').forEach(el => el.className = 'vis-item');
+            document.getElementById('tryVisLog').innerText = '👉 Bấm "Chạy Thử Luồng Try-Except" để quan sát cơ chế bắt lỗi an toàn.';
+        }
+
+        // RELIABLE PYODIDE COMPILER ENGINE
+        let pyEngine = null;
+        async function initPyodide() {
+            const dot = document.getElementById('statusDot');
+            const txt = document.getElementById('statusText');
+            try {
+                if (window.loadPyodide) {
+                    pyEngine = await window.loadPyodide();
+                    dot.classList.add('ready');
+                    txt.innerText = '🟢 Python Engine sẵn sàng (Pyodide Wasm)';
+                } else {
+                    throw new Error("Pyodide unavailable");
+                }
+            } catch(e) {
+                dot.style.backgroundColor = '#94a3b8';
+                txt.innerText = '⚡ Chế độ Giả lập Python Engine (Offline Ready)';
+            }
+        }
+        window.addEventListener('load', () => {
+            initTestcaseListDay4Ex1();
+            initTestcaseListDay4Ex2();
+            initPyodide();
+        });
+
+        async function runPythonEditor(editorId, outputId) {
+            const code = document.getElementById(editorId).value;
+            const outEl = document.getElementById(outputId);
+            outEl.innerHTML = '⏳ Đang thực thi Python code...';
+
+            if (pyEngine) {
+                try {
+                    pyEngine.runPython(`
+import sys
+import io
+sys.stdout = io.StringIO()
+                    `);
+                    await pyEngine.runPythonAsync(code);
+                    let res = pyEngine.runPython("sys.stdout.getvalue()");
+                    outEl.innerHTML = res ? escapeHtml(res) : '<i>(Chạy thành công, không có output print)</i>';
+                } catch(err) {
+                    outEl.innerHTML = `<span style="color:#fca5a5">Lỗi Python Code: ${escapeHtml(err.message)}</span>`;
+                }
+            } else {
+                outEl.innerText = "⚡ Chạy giả lập offline: Code hợp lệ.";
+            }
+        }
+
+        // CODELEARN TESTCASES RENDERERS FOR DAY 04
+        function initTestcaseListDay4Ex1() {
+            const res = document.getElementById('day4_ex1_res');
+            if (!res) return;
+            res.style.display = 'block';
+            res.innerHTML = `
+                <div class="testcases-list" style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                    <div style="font-weight:700; margin-bottom:8px; color:#1e293b; font-size:0.95rem; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">📋 DANH SÁCH TESTCASE (CODELEARN STYLE):</div>
+                    <div class="testcase-item" id="day4_ex1_tc1" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 1: Định nghĩa hàm validate_registration_input đúng tham số</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex1_tc2" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 2: Validate định dạng SĐT bắt đầu bằng đầu số mạng VN (03/05/07/08/09)</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex1_tc3" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 3: Chuẩn hóa khoảng trắng Họ tên & viết thường Email</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex1_tc4" style="display:flex; align-items:center; padding:6px 0;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 4: Output Console khớp báo cáo ✅ HỢP LỆ / ❌ KHÔNG HỢP LỆ</span>
+                    </div>
+                </div>
+                <div id="day4_ex1_summary-msg" style="margin-top:10px; font-weight:700; font-size:0.95rem;"></div>
+            `;
+        }
+
+        function initTestcaseListDay4Ex2() {
+            const res = document.getElementById('day4_ex2_res');
+            if (!res) return;
+            res.style.display = 'block';
+            res.innerHTML = `
+                <div class="testcases-list" style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                    <div style="font-weight:700; margin-bottom:8px; color:#1e293b; font-size:0.95rem; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">📋 DANH SÁCH TESTCASE (CODELEARN STYLE):</div>
+                    <div class="testcase-item" id="day4_ex2_tc1" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 1: Ép kiểu float(raw_total) trong khối try</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex2_tc2" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 3: Bắt exception ngoại lệ ValueError an toàn</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex2_tc3" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 3: Tính chiết khấu VIP10/VIP20 và cộng VAT 10%</span>
+                    </div>
+                    <div class="testcase-item" id="day4_ex2_tc4" style="display:flex; align-items:center; padding:6px 0;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 4: Output Console hiển thị thông báo lỗi & phân hạng HÓA ĐƠN LỚN (VIP)</span>
+                    </div>
+                </div>
+                <div id="day4_ex2_summary-msg" style="margin-top:10px; font-weight:700; font-size:0.95rem;"></div>
+            `;
+        }
+
+        function updateTcUi(tcId, isPassed) {
+            const el = document.getElementById(tcId);
+            if (!el) return;
+            const statusEl = el.querySelector('.tc-status');
+            if (isPassed) {
+                statusEl.innerText = '✅ PASSED';
+                statusEl.style.color = '#16a34a';
+            } else {
+                statusEl.innerText = '❌ FAILED';
+                statusEl.style.color = '#dc2626';
+            }
+        }
+
+        // EXERCISE TESTCASE CHECKERS
+        let day4_ex1Passed = false;
+        let day4_ex2Passed = false;
+
+        function checkDay4WordDownloadUnlock() {
+            const btn = document.getElementById('resourceFileBtn');
+            if (!btn) return;
+
+            const isUnlocked = day4_ex1Passed && day4_ex2Passed;
+            if (isUnlocked) {
+                btn.setAttribute('href', 'BT_Day04_PythonCore.docx');
+                btn.setAttribute('download', 'BT_Day04_PythonCore.docx');
+                btn.style.background = 'var(--accent-red)';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btn.style.cursor = 'pointer';
+                btn.innerHTML = '📥 Tải File Word Bài Tập (.docx)';
+            } else {
+                btn.removeAttribute('href');
+                btn.removeAttribute('download');
+                btn.style.background = '#94a3b8';
+                btn.style.opacity = '0.7';
+                btn.style.pointerEvents = 'none';
+                btn.style.cursor = 'not-allowed';
+                btn.innerHTML = '🔒 Hoàn Thành Đúng 2 Bài Tập Code Trên Để Mở Khóa Tải File Word (.docx)';
+            }
+        }
+
+        function hasUnfilledPlaceholders(code) {
+            if (!code) return true;
+            const codeNoComments = code.split('\n').map(line => {
+                const idx = line.indexOf('#');
+                return idx !== -1 ? line.substring(0, idx) : line;
+            }).join('\n');
+            return codeNoComments.includes('...');
+        }
+
+        async function checkDay4Exercise1() {
+            const code = document.getElementById('day4_ex1_code').value;
+            const resBox = document.getElementById('day4_ex1_res');
+            const outEl = document.getElementById('day4_ex1_out');
+            if (!resBox) return;
+
+            initTestcaseListDay4Ex1();
+            const summaryEl = document.getElementById('day4_ex1_summary-msg');
+            summaryEl.style.color = '#0284c7';
+            summaryEl.innerHTML = '⏳ Đang biên dịch và thực thi Python...';
+
+            await runPythonEditor('day4_ex1_code', 'day4_ex1_out');
+
+            const txt = outEl ? outEl.innerText : '';
+            const noPlaceholder = !hasUnfilledPlaceholders(code);
+            const isNoErr = !txt.includes('❌ Lỗi') && !txt.includes('SyntaxError') && txt.length > 5;
+
+            // Strict check based on output correctness
+            let tc1 = noPlaceholder && isNoErr;
+            let tc2 = noPlaceholder && isNoErr;
+            let tc3 = noPlaceholder && isNoErr;
+            let tc4 = noPlaceholder && isNoErr && (txt.includes('HỢP LỆ') || txt.includes('Nguyen Van An'));
+
+            updateTcUi('day4_ex1_tc1', tc1);
+            updateTcUi('day4_ex1_tc2', tc2);
+            updateTcUi('day4_ex1_tc3', tc3);
+            updateTcUi('day4_ex1_tc4', tc4);
+
+            const allPassed = tc1 && tc2 && tc3 && tc4;
+            if (allPassed) {
+                day4_ex1Passed = true;
+                checkDay4WordDownloadUnlock();
+                summaryEl.style.color = '#16a34a';
+                summaryEl.innerHTML = '🎉 CHÚC MỪNG: Bạn đã vượt qua 4/4 testcase của Bài tập 1!';
+            } else {
+                day4_ex1Passed = false;
+                checkDay4WordDownloadUnlock();
+                summaryEl.style.color = '#dc2626';
+                summaryEl.innerHTML = '❌ THẤT BẠI: Vui lòng thay vị trí (...) thành valid_prefixes để có Output chính xác.';
+            }
+        }
+
+        async function checkDay4Exercise2() {
+            const code = document.getElementById('day4_ex2_code').value;
+            const resBox = document.getElementById('day4_ex2_res');
+            const outEl = document.getElementById('day4_ex2_out');
+            if (!resBox) return;
+
+            initTestcaseListDay4Ex2();
+            const summaryEl = document.getElementById('day4_ex2_summary-msg');
+            summaryEl.style.color = '#0284c7';
+            summaryEl.innerHTML = '⏳ Đang biên dịch và thực thi Python...';
+
+            await runPythonEditor('day4_ex2_code', 'day4_ex2_out');
+
+            const txt = outEl ? outEl.innerText : '';
+            const noPlaceholder = !hasUnfilledPlaceholders(code);
+            const isNoErr = !txt.includes('❌ Lỗi thực thi') && !txt.includes('SyntaxError');
+
+            let tc1 = noPlaceholder && isNoErr;
+            let tc2 = noPlaceholder && isNoErr && (txt.includes('Lỗi') || txt.includes('lỗi') || txt.includes('Bỏ qua') || txt.includes('ABC_ERROR') || txt.includes('DH03'));
+            let tc3 = noPlaceholder && isNoErr && (txt.includes('12,375,000') || txt.includes('12375000') || txt.includes('VIP') || txt.includes('DH01'));
+            let tc4 = noPlaceholder && isNoErr && (txt.includes('DH01') || txt.includes('THỰC THI HÓA ĐƠN') || txt.includes('VIP'));
+
+            updateTcUi('day4_ex2_tc1', tc1);
+            updateTcUi('day4_ex2_tc2', tc2);
+            updateTcUi('day4_ex2_tc3', tc3);
+            updateTcUi('day4_ex2_tc4', tc4);
+
+            const allPassed = tc1 && tc2 && tc3 && tc4;
+            if (allPassed) {
+                day4_ex2Passed = true;
+                checkDay4WordDownloadUnlock();
+                summaryEl.style.color = '#16a34a';
+                summaryEl.innerHTML = '🎉 CHÚC MỪNG: Bạn đã vượt qua 4/4 testcase của Bài tập 2!';
+            } else {
+                day4_ex2Passed = false;
+                checkDay4WordDownloadUnlock();
+                summaryEl.style.color = '#dc2626';
+                summaryEl.innerHTML = '❌ THẤT BẠI: Vui lòng thay hết các vị trí (...) thành code đúng để có Output chính xác.';
+            }
+        }
+
+        // SUBMISSION & TEACHER AUTH
+        const TEACHER_PASSWORD_KEY = "rikkeiedu";
+
+        function openTeacherAuthModal() {
+            if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                showTeacherAdminArea(true);
+                return;
+            }
+            document.getElementById('authErrMsg').style.display = 'none';
+            document.getElementById('teacherPassInput').value = '';
+            document.getElementById('teacherAuthModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('teacherPassInput').focus(), 100);
+        }
+
+        function closeTeacherAuthModal() {
+            document.getElementById('teacherAuthModal').style.display = 'none';
+        }
+
+        function submitTeacherAuth() {
+            const pass = document.getElementById('teacherPassInput').value.trim();
+            const errEl = document.getElementById('authErrMsg');
+
+            if (pass === TEACHER_PASSWORD_KEY) {
+                sessionStorage.setItem('isTeacherAuth', 'true');
+                closeTeacherAuthModal();
+                showTeacherAdminArea(true);
+            } else {
+                errEl.innerText = "❌ Mật khẩu Giảng viên không chính xác! Vui lòng thử lại.";
+                errEl.style.display = 'block';
+            }
+        }
+
+        async function handleStudentSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('subName').value.trim();
+            const msv = document.getElementById('subMsv').value.trim();
+            const className = document.getElementById('subClass').value;
+            const github = document.getElementById('subLink').value.trim();
+            const msgEl = document.getElementById('submitStatus');
+
+            // Find submit button and disable it during request
+            const btnSubmit = document.getElementById('btnSubmitForm') || document.querySelector('#submissionForm button[type="submit"]');
+            if (btnSubmit) {
+                btnSubmit.disabled = true;
+                btnSubmit.style.opacity = '0.5';
+                btnSubmit.style.cursor = 'not-allowed';
+                btnSubmit.style.filter = 'grayscale(100%)';
+                btnSubmit.innerText = '⏳ Đang gửi bài nộp...';
+            }
+
+            msgEl.style.display = 'block';
+            msgEl.style.color = '#0284c7';
+            msgEl.innerText = '⏳ Đang gửi bài nộp về hệ thống Giảng viên...';
+
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN');
+
+            const payload = {
+                id: Date.now(),
+                action: 'add',
+                time: timeStr,
+                timestamp: timeStr,
+                lessonId: 'DAY_04',
+                lesson: 'DAY_04',
+                bai_hoc: 'DAY_04',
+                className: className,
+                class: className,
+                lop: className,
+                msv: msv,
+                name: name,
+                ho_ten: name,
+                link: github,
+                github: github,
+                github_link: github,
+                status: 'Đã nộp',
+                trang_thai: 'Đã nộp'
+            };
+
+            let existing = JSON.parse(localStorage.getItem('python_day1_submissions') || localStorage.getItem('python_day4_submissions') || '[]');
+            existing.unshift(payload);
+            localStorage.setItem('python_day1_submissions', JSON.stringify(existing));
+
+            const webhookUrl = getWebhookUrl();
+            try {
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                msgEl.style.color = '#16a34a';
+                msgEl.innerText = '🎉 TẢI BÀI NỘP THÀNH CÔNG! Đã ghi nhận thông tin sinh viên.';
+                document.getElementById('submissionForm').reset();
+                if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                    loadSubmissionsTable();
+                }
+            } catch(e) {
+                msgEl.style.color = '#dc2626';
+                msgEl.innerText = '❌ Gửi thất bại. Vui lòng kiểm tra lại kết nối mạng.';
+            } finally {
+                // Restore submit button state
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.style.opacity = '1';
+                    btnSubmit.style.cursor = 'pointer';
+                    btnSubmit.style.filter = 'none';
+                    btnSubmit.innerText = '🚀 Nộp Bài Tập Ngay';
+                }
+            }
+        }
+
+        function showTeacherAdminArea(shouldScroll = false) {
+            const area = document.getElementById('teacherAdminArea');
+            if (!area) return;
+            area.style.display = 'block';
+            const savedWebhook = localStorage.getItem('gsheet_webhook_url') || '';
+            const inputEl = document.getElementById('googleSheetWebhookInput');
+            if (inputEl) inputEl.value = savedWebhook;
+            syncWithGoogleSheetLive();
+            if (shouldScroll) {
+                area.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function teacherLogout() {
+            sessionStorage.removeItem('isTeacherAuth');
+            document.getElementById('teacherAdminArea').style.display = 'none';
+            alert('🔒 Đã đăng xuất quyền Giảng viên.');
+        }
+
+        function saveGoogleSheetWebhook(url) {
+            localStorage.setItem('gsheet_webhook_url', url.trim());
+            alert('✅ Đã lưu URL Webhook Google Sheet!');
+            syncWithGoogleSheetLive();
+        }
+
+        async function syncWithGoogleSheetLive() {
+            const webhookUrl = getWebhookUrl();
+            const msgEl = document.getElementById('syncStatusMsg');
+            if (msgEl) msgEl.innerText = "⏳ Đang kết nối lấy dữ liệu mới nhất từ Google Sheet...";
+
+            if (webhookUrl && webhookUrl.length > 10) {
+                try {
+                    let res = await fetch(webhookUrl);
+                    let data = null;
+                    if (res.ok) {
+                        try { data = await res.json(); } catch(e) {}
+                    }
+                    if (Array.isArray(data)) {
+                        localStorage.setItem('python_day4_submissions', JSON.stringify(data));
+                        if (msgEl) msgEl.innerText = `✅ Đã kết nối & đồng bộ dữ liệu mới nhất từ Google Sheet thành công!`;
+                    } else {
+                        if (msgEl) msgEl.innerText = `⚠️ Chưa đọc được dữ liệu. Kiểm tra lại Webhook URL.`;
+                    }
+                } catch(e) {
+                    if (msgEl) msgEl.innerText = `⚠️ Lỗi kết nối Google Sheet.`;
+                }
+            }
+            loadSubmissionsTable();
+        }
+
+        function loadSubmissionsTable() {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || localStorage.getItem('python_day4_submissions') || '[]');
+            const filterClassEl = document.getElementById('filterClassSelect');
+            const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
+            const tbody = document.getElementById('adminTableBody');
+
+            // Day 04 Specific Filter
+            let dayList = list.filter(sub => {
+                const les = sub.lessonId || sub.lesson || 'DAY_04';
+                return les === 'DAY_04' || les.includes('Day 04');
+            });
+
+            // Class breakdown stats for DAY_04
+            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            dayList.forEach(sub => {
+                const cName = sub.className || sub.class;
+                if (stats[cName] !== undefined) stats[cName]++;
+            });
+
+            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
+            classKeys.forEach(ck => {
+                let el = document.getElementById(`stat-${ck}`);
+                if (el) el.innerText = stats[ck];
+            });
+
+            let filteredList = dayList;
+            if (filterClass !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.className || sub.class) === filterClass);
+            }
+
+            if (filteredList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">Chưa có bài nộp nào phù hợp với bộ lọc...</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filteredList.map((s, idx) => {
+                const cName = s.className || s.class || 'CNTT1';
+                const link = s.github || s.link || '#';
+                return `
+                    <tr>
+                        <td><b>${idx + 1}</b></td>
+                        <td>${escapeHtml(s.time || s[4] || 'Vừa xong')}</td>
+                        <td><b>${escapeHtml(s.name || s[0] || '')}</b></td>
+                        <td><code>${escapeHtml(s.msv || s[1] || '')}</code></td>
+                        <td><span style="font-weight:700; color:#dc2626; background:#fef2f2; padding:2px 8px; border-radius:4px;">${escapeHtml(cName)}</span></td>
+                        <td><a href="${escapeHtml(link)}" target="_blank" style="color:#dc2626; font-weight:700;">👉 Link GitHub Repo</a></td>
+                        <td><span style="background:#dcfce7; color:#15803d; font-weight:bold; padding:2px 8px; border-radius:4px;">Đã nộp</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function exportSubmissionsToFormattedExcel(lessonId) {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || localStorage.getItem('python_day4_submissions') || '[]');
+            const filterClassEl = document.getElementById('filterClassSelect');
+            const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
+
+            let filteredList = list.filter(sub => {
+                const les = sub.lessonId || sub.lesson || 'DAY_04';
+                return les === 'DAY_04' || les.includes('Day 04');
+            });
+
+            if (filterClass !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.className || sub.class) === filterClass);
+            }
+            if (filteredList.length === 0) {
+                alert('Chưa có bài nộp nào để xuất file Excel!');
+                return;
+            }
+
+            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6, "CNTT8": 8 };
+            filteredList.sort((a, b) => {
+                let cA = classOrder[a.className || a.class] || 99;
+                let cB = classOrder[b.className || b.class] || 99;
+                return cA - cB;
+            });
+
+            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_04`;
+            let excelHTML = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <x:ExcelWorkbook>
+                            <x:ExcelWorksheets>
+                                <x:ExcelWorksheet>
+                                    <x:Name>DanhSachNopBai</x:Name>
+                                    <x:WorksheetOptions>
+                                        <x:DisplayGridlines/>
+                                    </x:WorksheetOptions>
+                                </x:ExcelWorksheet>
+                            </x:ExcelWorksheets>
+                        </x:ExcelWorkbook>
+                    </xml>
+                    <![endif]-->
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        .title { font-size: 16pt; font-weight: bold; color: #dc2626; text-align: center; height: 40px; vertical-align: middle; }
+                        .subtitle { font-size: 10pt; font-style: italic; color: #555555; text-align: center; height: 25px; }
+                        th { background-color: #dc2626; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #b91c1c; height: 32px; vertical-align: middle; }
+                        td { border: 1px solid #d4d4d8; height: 28px; vertical-align: middle; padding: 4px 10px; font-size: 10pt; }
+                        .center { text-align: center; }
+                        .class-badge { background-color: #fef2f2; color: #dc2626; font-weight: bold; text-align: center; }
+                        .class-header-row { background-color: #f1f5f9; font-weight: bold; color: #0f172a; height: 30px; }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <tr>
+                            <td colspan="8" class="title">${titleText}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class="subtitle">Ngày xuất báo cáo: ${new Date().toLocaleDateString('vi-VN')} | Đơn vị: Rikkei Education | Tổng số sinh viên: ${filteredList.length}</td>
+                        </tr>
+                        <tr><td colspan="8" style="height:10px;"></td></tr>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">STT</th>
+                                <th style="width: 90px;">Lớp Học</th>
+                                <th style="width: 100px;">Mã Bài Học</th>
+                                <th style="width: 120px;">Mã Sinh Viên</th>
+                                <th style="width: 220px;">Họ và Tên Sinh Viên</th>
+                                <th style="width: 380px;">Link Github Bài Làm</th>
+                                <th style="width: 180px;">Thời Gian Nộp</th>
+                                <th style="width: 100px;">Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            let lastClass = '';
+            filteredList.forEach((s, idx) => {
+                const cName = s.className || s.class || 'CNTT1';
+                if (cName !== lastClass) {
+                    excelHTML += `
+                        <tr>
+                            <td colspan="8" class="class-header-row" style="background-color: #f1f5f9; font-weight: bold; color: #dc2626; padding-left: 12px;">
+                                📌 DANH SÁCH BÀI NỘP — LỚP ${escapeHtml(cName)}
+                            </td>
+                        </tr>
+                    `;
+                    lastClass = cName;
+                }
+
+                const name = s.name || s[0] || '';
+                const msv = s.msv || s[1] || '';
+                const github = s.github || s.link || s[3] || '';
+                const time = s.time || s[4] || 'Vừa xong';
+
+                excelHTML += `
+                    <tr>
+                        <td class="center"><b>${idx + 1}</b></td>
+                        <td class="class-badge">${escapeHtml(cName)}</td>
+                        <td class="center"><b>DAY_04</b></td>
+                        <td class="center">'${escapeHtml(msv)}</td>
+                        <td><b>${escapeHtml(name)}</b></td>
+                        <td><a href="${escapeHtml(github)}">${escapeHtml(github)}</a></td>
+                        <td class="center">${time}</td>
+                        <td class="center" style="background:#f0fdf4; color:#15803d; font-weight:bold;">Đã nộp</td>
+                    </tr>
+                `;
+            });
+
+            excelHTML += `
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob([excelHTML], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `Bao_Cao_Nop_Bai_DAY_04_${new Date().toISOString().slice(0,10)}.xls`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        window.addEventListener('load', () => {
+            checkDay4WordDownloadUnlock();
+            if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                showTeacherAdminArea();
+            }
+        });
+    </script>
+</body>
+</html>

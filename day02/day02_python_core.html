@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Day 2 | Rikkei Academy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pyodide/0.25.0/pyodide.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --accent-red: #dc2626;
+            --accent-red-hover: #b91c1c;
+            --accent-red-light: #fef2f2;
+            --border-color: #e2e8f0;
+            --vs-dark: #1e1e1e;
+            --vs-border: #2d2d2d;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding-bottom: 80px; }
+
+        /* STANDARDIZED HEADER NAVIGATION */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.2rem; color: var(--text-dark); }
+        .logo-badge { background: var(--accent-red); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* UNIFIED BEAUTIFUL CURRICULUM DROPDOWN ACROSS ALL PAGES */
+        .curriculum-select-wrapper { display: flex; align-items: center; gap: 10px; }
+        .curriculum-select {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--accent-red);
+            background: #ffffff;
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(220,38,38,0.1);
+            transition: all 0.2s;
+        }
+        .curriculum-select:hover { background: var(--accent-red-light); }
+
+        .btn-teacher-auth {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-teacher-auth:hover { background: #334155; }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 24px; }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-tag { display: inline-block; background: rgba(220, 38, 38, 0.9); color: white; font-weight: 800; font-size: 0.8rem; padding: 4px 14px; border-radius: 20px; text-transform: uppercase; margin-bottom: 12px; }
+        .hero-banner h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .hero-banner p { color: #94a3b8; font-size: 1.05rem; max-width: 850px; }
+
+        /* Lesson Module Cards */
+        .module-section { margin-bottom: 40px; }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .section-number { background: var(--accent-red); color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+        .section-title { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .concept-badge { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.8rem; padding: 4px 12px; border-radius: 6px; margin-bottom: 12px; text-transform: uppercase; }
+
+        .explanation-text { font-size: 1.05rem; color: #334155; line-height: 1.7; margin-bottom: 16px; }
+        .highlight-box {
+            background: #f8fafc; border-left: 4px solid var(--accent-red); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 0.98rem; color: #1e293b;
+        }
+
+        /* VS CODE DARK THEME STYLING FOR PRE AND CODE */
+        pre[class*="language-"], 
+        .diagram-code-box pre {
+            margin: 0 !important;
+            padding: 20px !important;
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+            border-radius: 8px !important;
+            font-family: 'Fira Code', monospace !important;
+            font-size: 1.02rem !important;
+            line-height: 1.7 !important;
+            text-shadow: none !important;
+            border: 1px solid #2d2d2d !important;
+            box-sizing: border-box !important;
+            font-weight: 500 !important;
+            display: block !important;
+            overflow-x: auto !important;
+        }
+
+        code[class*="language-"],
+        .diagram-code-box code {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: none !important;
+            color: inherit !important;
+            border: none !important;
+            border-radius: 0 !important;
+            text-shadow: none !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            font-weight: inherit !important;
+            box-sizing: border-box !important;
+            display: inline !important;
+        }
+
+        pre[class*="language-"] *, 
+        code[class*="language-"] *,
+        .diagram-code-box pre *,
+        .diagram-code-box code * {
+            color: #d4d4d4 !important;
+            font-weight: 500 !important;
+            text-shadow: none !important;
+            background: none !important;
+        }
+
+        .token.keyword { color: #569cd6 !important; font-weight: 700 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.comment { color: #6a9955 !important; font-style: italic !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; font-weight: 600 !important; }
+
+        /* CLEAN LIGHT MODE INLINE CODE STYLING (IMAGE 3 BUG FIX) */
+        :not(pre) > code {
+            background: #f1f5f9 !important;
+            color: #dc2626 !important;
+            padding: 2px 7px !important;
+            border-radius: 4px !important;
+            border: 1px solid #cbd5e1 !important;
+            font-family: 'Fira Code', monospace !important;
+            font-size: 0.88em !important;
+            font-weight: 600 !important;
+            text-shadow: none !important;
+        }
+
+        /* CLEAN WHITE BACKGROUND FOR THEORY CODE BLOCKS (USER IMAGE REQUEST) */
+        .theory-block pre, 
+        .theory-block code, 
+        .lesson-card pre,
+        .lesson-card code,
+        div[style*="background:#fff"] pre, 
+        div[style*="background:#fff"] code {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+        }
+
+        .theory-block pre *, 
+        .theory-block code *, 
+        .lesson-card pre *,
+        .lesson-card code *,
+        div[style*="background:#fff"] pre *, 
+        div[style*="background:#fff"] code * {
+            text-shadow: none !important;
+        }
+
+        .theory-block .token.keyword, .lesson-card .token.keyword, div[style*="background:#fff"] .token.keyword { color: #2563eb !important; font-weight: 800 !important; }
+        .theory-block .token.string, .lesson-card .token.string, div[style*="background:#fff"] .token.string { color: #059669 !important; font-weight: 600 !important; }
+        .theory-block .token.function, .lesson-card .token.function, div[style*="background:#fff"] .token.function { color: #d97706 !important; font-weight: 700 !important; }
+        .theory-block .token.number, .lesson-card .token.number, div[style*="background:#fff"] .token.number { color: #7c3aed !important; font-weight: 700 !important; }
+        .theory-block .token.operator, .lesson-card .token.operator, div[style*="background:#fff"] .token.operator { color: #dc2626 !important; font-weight: 700 !important; }
+        .theory-block .token.comment, .lesson-card .token.comment, div[style*="background:#fff"] .token.comment { color: #64748b !important; font-style: italic !important; }
+
+        /* INTERACTIVE VISUALIZER BOXES */
+        .visualizer-box {
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #334155;
+        }
+        .visualizer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #1e293b; padding-bottom: 10px; }
+        .visualizer-title { font-weight: 700; font-size: 1rem; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+
+        .vis-controls { display: flex; gap: 10px; }
+        .btn-vis {
+            background: #334155; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .btn-vis:hover { background: #475569; }
+        .btn-vis-primary { background: var(--accent-red); }
+        .btn-vis-primary:hover { background: var(--accent-red-hover); }
+
+        .vis-display { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+        .vis-item {
+            background: #1e293b; border: 2px solid #334155; padding: 12px 18px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 1.1rem; font-weight: 700; transition: all 0.3s;
+        }
+        .vis-item.active { border-color: #38bdf8; background: #0284c7; color: white; transform: scale(1.08); box-shadow: 0 0 12px rgba(56, 189, 248, 0.5); }
+        .vis-item.flag-warning { border-color: #ef4444; background: #991b1b; color: white; }
+        .vis-item.passed { border-color: #22c55e; background: #166534; color: white; }
+
+        .vis-status-log {
+            background: #020617; padding: 12px 16px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #a7f3d0; border: 1px solid #1e293b; min-height: 48px;
+        }
+
+        /* REALTIME STRING VALIDATOR SANDBOX (POINT 5 FIX) */
+        .validator-sandbox {
+            background: #f1f5f9; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0;
+        }
+        .val-input-group { margin-bottom: 14px; }
+        .val-label { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; display: block; color: #1e293b; }
+        .val-input {
+            width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 1rem; font-family: 'Fira Code', monospace; outline: none; transition: border 0.2s;
+        }
+        .val-input:focus { border-color: var(--accent-red); }
+        .val-feedback {
+            margin-top: 8px; font-size: 0.9rem; font-weight: 600; padding: 10px 14px; border-radius: 6px; display: none;
+        }
+        .val-feedback.valid { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .val-feedback.invalid { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+        /* PERFECT VS CODE DARK EDITOR STYLING */
+        .editor-container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2d2d2d;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .editor-header {
+            background: #252526;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2d2d2d;
+        }
+        .editor-title {
+            color: #cccccc;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Fira Code', Consolas, monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-run {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-run:hover { background: #15803d; }
+
+        /* PIXEL-PERFECT LIVE CODE CONTAINER & SYNTAX OVERLAY */
+        .live-code-container {
+            position: relative;
+            width: 100%;
+            background: #1e1e1e;
+            overflow: hidden;
+        }
+        .live-code-highlight, .code-textarea {
+            margin: 0 !important;
+            padding: 18px 20px !important;
+            font-family: Consolas, 'Fira Code', 'Courier New', monospace !important;
+            font-size: 15px !important;
+            line-height: 24px !important;
+            letter-spacing: 0px !important;
+            word-spacing: 0px !important;
+            tab-size: 4 !important;
+            -moz-tab-size: 4 !important;
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            border: none !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+            font-variant-ligatures: none !important;
+            -webkit-font-variant-ligatures: none !important;
+            font-feature-settings: "liga" 0, "calt" 0 !important;
+        }
+        .live-code-highlight {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+            overflow: hidden !important;
+            z-index: 1 !important;
+        }
+        /* ISOLATE CODE SPANS FROM GLOBAL PAGE CSS CLASS CORRUPTION (MATCHING DAY 1 & DAY 3) */
+        .live-code-highlight span, pre span, code span {
+            display: inline !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            width: auto !important;
+            height: auto !important;
+            float: none !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            letter-spacing: inherit !important;
+            word-spacing: inherit !important;
+        }
+        .token.keyword { color: #569cd6 !important; font-weight: bold !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.function, .token.builtin { color: #dcdcaa !important; font-weight: 600 !important; }
+        .token.comment { color: #6a9955 !important; font-style: italic !important; }
+        .token.number, .token.boolean { color: #b5cea8 !important; }
+        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+
+        .code-textarea {
+            position: relative !important;
+            width: 100% !important;
+            background: transparent !important;
+            color: transparent !important;
+            caret-color: #ffffff !important;
+            resize: none !important;
+            overflow-y: hidden !important;
+            display: block !important;
+            z-index: 2 !important;
+        }
+        .output-box {
+            background: #18181b; color: #4ade80; font-family: 'Fira Code', monospace; font-size: 0.92rem; padding: 16px 20px; border-top: 1px solid #27272a; min-height: 70px; white-space: pre-wrap;
+        }
+
+        /* STUDENT SUBMISSION FORM */
+        .submission-card {
+            background: #ffffff; border: 2px solid var(--accent-red); border-radius: var(--radius-lg); padding: 32px; margin-top: 40px; box-shadow: var(--shadow-lg);
+        }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.9rem; font-weight: 700; color: #1e293b; }
+        .form-control {
+            padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; outline: none; transition: border 0.2s;
+        }
+        .form-control:focus { border-color: var(--accent-red); }
+        .btn-submit-main {
+            background: var(--accent-red); color: white; border: none; padding: 14px 28px; border-radius: var(--radius-md); font-weight: 800; font-size: 1.05rem; cursor: pointer; width: 100%; transition: all 0.2s;
+        }
+        .btn-submit-main:hover { background: var(--accent-red-hover); transform: translateY(-1px); }
+
+        /* RESOURCE DOWNLOAD CARD AT THE BOTTOM (POINT 1) */
+        .resource-card-bottom {
+            background: #ffffff;
+            border: 2px solid #334155;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+        }
+        .resource-info { display: flex; align-items: center; gap: 18px; }
+        .resource-icon { width: 56px; height: 56px; background: var(--accent-red-light); color: var(--accent-red); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; }
+        .btn-download {
+            background: var(--accent-red); color: white; padding: 14px 28px; border-radius: var(--radius-md); font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.2s;
+        }
+        .btn-download:hover { background: var(--accent-red-hover); transform: translateY(-1px); }
+
+        /* TEACHER ADMIN PANEL AREA */
+        .teacher-admin-panel {
+            display: none; background: #ffffff; border: 2px solid #0f172a; border-radius: var(--radius-lg); padding: 32px; margin-top: 40px; box-shadow: var(--shadow-lg);
+        }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 16px; }
+        .admin-title { font-size: 1.4rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; }
+        
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 10px; text-align: center; }
+        .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent-red); }
+        .stat-label { font-size: 0.78rem; color: #64748b; font-weight: 700; }
+
+        .table-responsive { overflow-x: auto; margin-top: 16px; }
+        table.admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+        table.admin-table th { background: #0f172a; color: white; padding: 12px 14px; font-weight: 700; }
+        table.admin-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        table.admin-table tr:hover { background: #f8fafc; }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: #e2e8f0; color: #475569; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; }
+        .status-dot.ready { background: #22c55e; }
+    </style>
+</head>
+<body>
+
+    <!-- STANDARDIZED HEADER NAVIGATION -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-badge">Rikkei Academy</span>
+                <span>Python Core & FastAPI Portal</span>
+                <a href="../index.html" style="background:#0f172a; color:#fff; text-decoration:none; font-weight:800; font-size:0.85rem; padding:6px 14px; border-radius:6px; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s;">🏠 Trang Chủ Portal</a>
+            </div>
+
+
+
+            <div style="display:flex; align-items:center; gap:14px;">
+                <div id="pyodideStatus" class="status-badge">
+                    <span id="statusDot" class="status-dot"></span>
+                    <span id="statusText">Pyodide Engine: Đang khởi tạo...</span>
+                </div>
+                <button class="btn-teacher-auth" onclick="openTeacherAuthModal()">🔑 Đăng Nhập Quản Lý</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <span class="banner-tag">Tuần 1 - Ngày 2</span>
+            <h1>Ngày 2: Python Core 2 — Tư Duy Thuật Toán & String Validation</h1>
+            <p>Nắm vững Tư duy Cắm Cờ (Flag Pattern), Đếm & Tính Tổng Tích Lũy (Accumulator), Max/Min 1 lần duyệt ($O(N)$ Single Pass) và Validate dữ liệu chuỗi Email/SĐT chuẩn mực.</p>
+        </div>
+
+
+        <!-- MODULE 1: TƯ DUY CẮM CỜ (FLAG PATTERN) -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Tư Duy Cắm Cờ (Flag Pattern / State Tracking)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #1</span>
+                <h3>1. Khái niệm & Tại sao phải "Cắm Cờ"?</h3>
+                <p class="explanation-text">
+                    Trong thực tế lập trình, ta thường gặp các bài toán kiểm soát điều kiện: <i>"Kiểm tra xem danh sách có bất kỳ sự cố nào hay không"</i> hoặc <i>"Xác nhận xem toàn bộ hệ thống có hoạt động an toàn không"</i>.
+                </p>
+                
+                <div class="highlight-box">
+                    💡 <b>Tư duy Cắm cờ (Flag):</b> Khai báo một biến Boolean (ví dụ <code>is_valid = True</code> hoặc <code>is_overloaded = False</code>) trước vòng lặp. Khi duyệt mảng, nếu gặp phần tử vi phạm điều kiện, ta <b>bật cờ (gán lại giá trị)</b>. Kết thúc vòng lặp, ta dựa vào cờ để đưa ra thông báo cuối cùng.
+                </div>
+
+                <!-- Interactive Visualizer 1 -->
+                <div class="visualizer-box">
+                    <div class="visualizer-header">
+                        <div class="visualizer-title">⚡ Mô Phỏng Trực Quan: Kiểm Tra CPU Overload (> 85%)</div>
+                        <div class="vis-controls">
+                            <button class="btn-vis btn-vis-primary" onclick="runFlagVisualizerStep()">▶ Chạy Từng Bước (Step)</button>
+                            <button class="btn-vis" onclick="resetFlagVisualizer()">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <p style="font-size:0.88rem; color:#94a3b8; margin-bottom:10px;">Danh sách CPU Loads: <b>[45%, 62%, 78%, 88%, 30%, 92%]</b> | Cờ <code>is_overloaded</code> ban đầu = <b style="color:#22c55e;">False</b></p>
+                    <div id="vis1Display" class="vis-display">
+                        <div class="vis-item" id="vis1-0">45%</div>
+                        <div class="vis-item" id="vis1-1">62%</div>
+                        <div class="vis-item" id="vis1-2">78%</div>
+                        <div class="vis-item" id="vis1-3">88%</div>
+                        <div class="vis-item" id="vis1-4">30%</div>
+                        <div class="vis-item" id="vis1-5">92%</div>
+                    </div>
+                    <div id="vis1Log" class="vis-status-log">👉 Bấm "Chạy Từng Bước" để bắt đầu mô phỏng thuật toán Cắm Cờ.</div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python (FULL CODE VIEW - KHÔNG CUỘN):</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 flag_pattern_demo.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor1', 'output1')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor1-hl" class="live-code-highlight"></div>
+                        <textarea id="editor1" class="code-textarea" oninput="updateLiveSyntax('editor1', 'editor1-hl')"># Bài toán: Kiểm tra hệ thống máy chủ có tiến trình bị Quá tải (CPU > 85%) hay không
+cpu_loads = [45, 62, 78, 88, 30, 92]
+threshold = 85
+
+# Bước 1: Khai báo Cờ (Flag) ban đầu là False
+is_overloaded = False
+
+# Bước 2: Duyệt qua từng tiến trình trong danh sách
+for load in cpu_loads:
+    if load > threshold:
+        print(f"⚠️ Cảnh báo: Phát hiện tiến trình chiếm {load}% CPU (vượt ngưỡng {threshold}%)")
+        is_overloaded = True  # Bật cờ!
+
+# Bước 3: Đưa ra kết luận dựa vào Cờ sau khi đã duyệt xong
+if is_overloaded:
+    print("❌ KẾT LUẬN: Hệ thống đang CẢNH BÁO QUÁ TẢI!")
+else:
+    print("✅ KẾT LUẬN: Toàn bộ hệ thống hoạt động an toàn.")
+</textarea>
+                    </div>
+                    <div id="output1" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODULE 2: ĐẾM & TÍNH TỔNG (ACCUMULATOR) -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Kỹ Thuật Đếm (Counting) & Tính Tổng (Accumulator)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #2</span>
+                <h3>2. Biến Tích Lũy Trạng Thái (Accumulator Pattern)</h3>
+                <p class="explanation-text">
+                    Khi xử lý dữ liệu doanh thu hoặc số lượng sinh viên, ta dùng các biến tích lũy để lưu trữ kết quả cộng dồn qua từng vòng lặp.
+                </p>
+
+                <div class="highlight-box">
+                    🎯 <b>Quy tắc thực hành:</b>
+                    <br>• Biến đếm (Counter): Khởi tạo <code>count = 0</code>. Khi gặp phần tử thỏa mãn ➔ <code>count += 1</code>.
+                    <br>• Biến tính tổng (Accumulator): Khởi tạo <code>total = 0</code>. Khi gặp phần tử ➔ <code>total += item["price"]</code>.
+                </div>
+
+                <!-- Interactive Visualizer 2 -->
+                <div class="visualizer-box">
+                    <div class="visualizer-header">
+                        <div class="visualizer-title">📊 Mô Phỏng Tích Lũy Doanh Thu Đơn Hàng</div>
+                        <div class="vis-controls">
+                            <button class="btn-vis btn-vis-primary" onclick="runAccVisualizerStep()">▶ Chạy Từng Bước (Step)</button>
+                            <button class="btn-vis" onclick="resetAccVisualizer()">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="vis2Display" class="vis-display">
+                        <div class="vis-item" id="vis2-0">iPhone (28tr)</div>
+                        <div class="vis-item" id="vis2-1">Tai nghe (1.2tr)</div>
+                        <div class="vis-item" id="vis2-2">S24 (22tr)</div>
+                        <div class="vis-item" id="vis2-3">MacBook (24.5tr)</div>
+                    </div>
+                    <div id="vis2Log" class="vis-status-log">👉 Doanh thu tích lũy: <b>0 VNĐ</b> | Số đơn VIP (>15tr): <b>0 đơn</b></div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python (FULL CODE VIEW - KHÔNG CUỘN):</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 accumulator_demo.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor2', 'output2')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor2-hl" class="live-code-highlight"></div>
+                        <textarea id="editor2" class="code-textarea" oninput="updateLiveSyntax('editor2', 'editor2-hl')">orders = [
+    {"name": "iPhone 15 Pro", "price": 28000000},
+    {"name": "Tai nghe Bluetooth", "price": 1200000},
+    {"name": "Samsung S24", "price": 22000000},
+    {"name": "Sạc dự phòng", "price": 800000},
+    {"name": "MacBook Air M2", "price": 24500000}
+]
+
+total_revenue = 0
+vip_order_count = 0
+
+for order in orders:
+    total_revenue += order["price"]  # Cộng dồn doanh thu
+    if order["price"] > 15000000:
+        vip_order_count += 1        # Tăng biến đếm đơn VIP
+
+print(f"💰 Tổng doanh thu cửa hàng: {total_revenue:,} VNĐ")
+print(f"⭐ Số đơn hàng VIP (>15tr): {vip_order_count} đơn")
+</textarea>
+                    </div>
+                    <div id="output2" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODULE 3: MAX/MIN 1 LẦN DUYỆT (SINGLE PASS O(N)) -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Max / Min 1 Lần Duyệt (Single Pass Pattern $O(N)$)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #3</span>
+                <h3>3. Tối ưu hiệu năng: Tìm Max/Min chỉ với 1 vòng lặp</h3>
+                <p class="explanation-text">
+                    Sắp xếp mảng tốn thời gian $O(N \log N)$. Khi dữ liệu lớn, ta sử dụng thuật toán **Single Pass** chỉ duyệt 1 lần duy nhất ($O(N)$) để xác định giá trị Lớn nhất / Nhỏ nhất.
+                </p>
+
+                <div class="highlight-box">
+                    ⚠️ <b>Tránh lỗi sai phổ biến:</b> Không khởi tạo <code>max_val = 0</code> ban đầu! Nếu danh sách toàn số âm, <code>max_val</code> sẽ bị sai.
+                    <br>✅ <b>Cách khởi tạo chuẩn:</b> Gán <code>max_val = list_data[0]</code> (lấy ngay phần tử đầu tiên làm mốc so sánh).
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python (FULL CODE VIEW - KHÔNG CUỘN):</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 single_pass_max_min.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor3', 'output3')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor3-hl" class="live-code-highlight"></div>
+                        <textarea id="editor3" class="code-textarea" oninput="updateLiveSyntax('editor3', 'editor3-hl')">students = [
+    {"name": "Nguyễn Văn A", "score": 8.5},
+    {"name": "Trần Thị B", "score": 9.2},
+    {"name": "Lê Văn C", "score": 4.5},
+    {"name": "Phạm Minh D", "score": 9.8},
+    {"name": "Hoàng Anh E", "score": 7.0}
+]
+
+# Gán phần tử đầu tiên làm mốc ban đầu
+max_student = students[0]
+min_student = students[0]
+
+# Duyệt từ phần tử thứ 2 (index 1) đến hết danh sách
+for student in students[1:]:
+    if student["score"] > max_student["score"]:
+        max_student = student  # Cập nhật Thủ khoa mới
+    if student["score"] < min_student["score"]:
+        min_student = student  # Cập nhật Điểm thấp nhất
+
+print(f"🏆 THỦ KHOA: {max_student['name']} ({max_student['score']} điểm)")
+print(f"📉 CẦN HỖ TRỢ: {min_student['name']} ({min_student['score']} điểm)")
+</textarea>
+                    </div>
+                    <div id="output3" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODULE 4: VALIDATE DỮ LIỆU CHUỖI (STRING VALIDATION) -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Validate Dữ Liệu Chuỗi Cơ Bản (String Validation)</h2>
+            </div>
+
+            <div class="lesson-card">
+                <span class="concept-badge">Kỹ thuật thuật toán cốt lõi #4</span>
+                <h3>4. Kiểm tra Email & Số Điện Thoại chuẩn xác</h3>
+                <p class="explanation-text">
+                    Sử dụng các phương thức xử lý chuỗi tích hợp của Python để kiểm tra và làm sạch dữ liệu trước khi lưu vào Database/Google Sheet.
+                </p>
+
+                <!-- Real-time Interactive Validator Sandbox (POINT 5 FIX) -->
+                <div class="validator-sandbox">
+                    <h4 style="color:#0f172a; margin-bottom:14px;">🧪 Interactive Sandbox: Kiểm Tra Dữ Liệu Realtime</h4>
+                    
+                    <div class="val-input-group">
+                        <label class="val-label">1. Thử nghiệm Email (Có @, không khoảng trắng, đuôi .com/.edu.vn):</label>
+                        <input type="text" id="sandboxEmail" class="val-input" placeholder="Nhập thử email (ví dụ: student@gmail.com)..." oninput="validateEmailLive()">
+                        <div id="emailFeedback" class="val-feedback"></div>
+                    </div>
+
+                    <div class="val-input-group">
+                        <label class="val-label">2. Thử nghiệm Số Điện Thoại (Đúng 10 chữ số, bắt đầu bằng 0):</label>
+                        <input type="text" id="sandboxPhone" class="val-input" placeholder="Nhập thử SĐT (ví dụ: 0987654321)..." oninput="validatePhoneLive()">
+                        <div id="phoneFeedback" class="val-feedback"></div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">💻 Thực hành Code Python (FULL CODE VIEW - KHÔNG CUỘN):</h4>
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">🐍 string_validation_demo.py</div>
+                        <button class="btn-run" onclick="runPythonEditor('editor4', 'output4')">▶️ Chạy Code</button>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="editor4-hl" class="live-code-highlight"></div>
+                        <textarea id="editor4" class="code-textarea" oninput="updateLiveSyntax('editor4', 'editor4-hl')">def validate_student_info(email, phone):
+    # 1. Chuẩn hóa chuỗi (Xóa khoảng trắng thừa)
+    clean_email = email.strip().lower()
+    clean_phone = phone.strip()
+    
+    # 2. Validate Email
+    is_email_valid = ("@" in clean_email) and (clean_email.count("@") == 1) and (clean_email.endswith(".com") or clean_email.endswith(".edu.vn"))
+    
+    # 3. Validate Số Điện Thoại
+    is_phone_valid = (len(clean_phone) == 10) and clean_phone.startswith("0") and clean_phone.isdigit()
+    
+    return clean_email, is_email_valid, clean_phone, is_phone_valid
+
+# Chạy thử kiểm tra
+sample_email = "   NguyenVanA@Gmail.com  "
+sample_phone = "0987654321"
+
+c_email, email_ok, c_phone, phone_ok = validate_student_info(sample_email, sample_phone)
+
+print(f"Email sau làm sạch: '{c_email}' -> Valid: {email_ok}")
+print(f"SĐT sau làm sạch: '{c_phone}' -> Valid: {phone_ok}")
+</textarea>
+                    </div>
+                    <div id="output4" class="output-box">Bấm "Chạy Code" để xem kết quả thực thi...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 5: BÀI TẬP THỰC HÀNH CẮM CỜ & ACCUMULATOR -->
+        <div class="module-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">Bài Tập Thực Hành Ngày 02 (Cắm Cờ & Validation)</h2>
+            </div>
+
+            <!-- Exercise 1 -->
+            <div class="lesson-card" style="margin-bottom: 24px;">
+                <span class="concept-badge">Bài tập thực hành #1</span>
+                <h3>Bài 1: Kiểm Tra Điều Kiện Đạt Tín Chỉ (Tư duy Cắm Cờ Flag)</h3>
+                <p class="explanation-text">Sinh viên điền các vị trí <code>...</code> để cắm cờ kiểm tra xem tất cả sinh viên có GPA >= 5.0 hay không.</p>
+
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-title">🐍 ex1_flag_pattern.py</span>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn-run" onclick="runPythonEditor('day2_ex1_code', 'day2_ex1_out')">▶️ Chạy Thử</button>
+                            <button class="btn-run" style="background:#dc2626;" onclick="checkDay2Exercise1()">✅ Kiểm Tra Testcase</button>
+                        </div>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="day2_ex1_code-hl" class="live-code-highlight"></div>
+                        <textarea id="day2_ex1_code" class="code-textarea" oninput="updateLiveSyntax('day2_ex1_code', 'day2_ex1_code-hl')">students_score = [
+    {"name": "An", "gpa": 7.5},
+    {"name": "Bình", "gpa": 6.2},
+    {"name": "Cường", "gpa": 4.8},
+    {"name": "Dũng", "gpa": 8.0}
+]
+
+# TODO 1: Khởi tạo cờ all_passed ban đầu là True
+all_passed = ...
+
+# TODO 2: Duyệt danh sách, nếu phát hiện gpa < 5.0 thì đổi cờ thành False
+for s in students_score:
+    if s["gpa"] < ...:
+        all_passed = ...
+
+print("Tất cả sinh viên đều qua môn:", all_passed)</textarea>
+                    </div>
+                    <div id="day2_ex1_out" class="output-box">Console Output...</div>
+                </div>
+
+                <div id="day2_ex1_res" class="test-box"></div>
+
+                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
+                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
+                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
+                    </summary>
+                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
+                        • TODO 1: Ban đầu giả định tất cả qua môn ➔ <code>all_passed = True</code>.<br>
+                        • TODO 2: Kiểm tra <code>s["gpa"] < 5.0</code> ➔ nếu vi phạm điều kiện thì gán <code>all_passed = False</code>.
+                    </div>
+                </details>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="lesson-card">
+                <span class="concept-badge">Bài tập thực hành #2</span>
+                <h3>Bài 2: Tính Doanh Thu Tích Lũy & Số Đơn VIP (Count & Accumulator)</h3>
+                <p class="explanation-text">Sinh viên điền các vị trí <code>...</code> để tính tổng doanh thu và đếm số đơn hàng VIP có giá trị > 10.000.000 VNĐ.</p>
+
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-title">🐍 ex2_accumulator.py</span>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn-run" onclick="runPythonEditor('day2_ex2_code', 'day2_ex2_out')">▶️ Chạy Thử</button>
+                            <button class="btn-run" style="background:#dc2626;" onclick="checkDay2Exercise2()">✅ Kiểm Tra Testcase</button>
+                        </div>
+                    </div>
+                    <div class="live-code-container">
+                        <div id="day2_ex2_code-hl" class="live-code-highlight"></div>
+                        <textarea id="day2_ex2_code" class="code-textarea" oninput="updateLiveSyntax('day2_ex2_code', 'day2_ex2_code-hl')">orders = [15000000, 5000000, 22000000, 800000, 12000000]
+
+# TODO 1: Khởi tạo biến tích lũy tổng doanh thu và biến đếm đơn VIP
+total_revenue = ...
+vip_count = ...
+
+for price in orders:
+    total_revenue += ...
+    if price > ...:
+        vip_count += ...
+
+print(f"Tổng doanh thu: {total_revenue:,} VNĐ")
+print(f"Số đơn VIP: {vip_count} đơn")</textarea>
+                    </div>
+                    <div id="day2_ex2_out" class="output-box">Console Output...</div>
+                </div>
+
+                <div id="day2_ex2_res" class="test-box"></div>
+
+                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
+                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
+                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
+                    </summary>
+                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
+                        • TODO 1: Khởi tạo <code>total_revenue = 0</code> và <code>vip_count = 0</code>.<br>
+                        • TODO 2: Trong vòng lặp: <code>total_revenue += price</code>, nếu <code>price > 10000000</code> thì <code>vip_count += 1</code>.
+                    </div>
+                </details>
+            </div>
+        </div>
+
+
+        <!-- STUDENT SUBMISSION FORM -->
+        <div class="submission-card">
+            <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">📤 Form Nộp Bài Tập Ngày 02 (Python Core 2)</h2>
+            <p style="color:var(--text-muted); margin-bottom:24px;">Sau khi hoàn thành bài tập thực hành, sinh viên điền thông tin và nộp link GitHub Repo để hệ thống ghi nhận.</p>
+
+            <form id="submissionForm" onsubmit="handleStudentSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và Tên Sinh Viên *</label>
+                        <input type="text" id="subName" class="form-control" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã Sinh Viên *</label>
+                        <input type="text" id="subMsv" class="form-control" placeholder="B25DCCN001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lớp Học *</label>
+                        <select id="subClass" class="form-control" required>
+                            <option value="CNTT1">CNTT1</option>
+                            <option value="CNTT2">CNTT2</option>
+                            <option value="CNTT3">CNTT3</option>
+                            <option value="CNTT4">CNTT4</option>
+                            <option value="CNTT5">CNTT5</option>
+                            <option value="CNTT6">CNTT6</option>
+                            <option value="CNTT8">CNTT8</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link GitHub Bài Làm *</label>
+                        <input type="url" id="subLink" class="form-control" placeholder="https://github.com/user/python-day02" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit-main">🚀 NỘP BÀI TẬP NGÀY 02 NGAY</button>
+            </form>
+            <div id="submitStatusMsg" style="margin-top:14px; font-weight:700;"></div>
+        </div>
+
+
+        <!-- RESOURCE DOWNLOAD CARD AT THE BOTTOM (POINT 1) -->
+        <div class="resource-card-bottom">
+            <div class="resource-info">
+                <div class="resource-icon">📄</div>
+                <div>
+                    <h3 style="font-size:1.15rem; font-weight:800; color:#0f172a;">File Word Bài Tập Về Nhà: BT_Day02_PythonCore.docx</h3>
+                    <p style="font-size:0.9rem; color:#64748b;">Gồm 2 Bài tập tổng hợp thực tế (có Input/Output mẫu cụ thể) rèn luyện toàn bộ kiến thức Ngày 02.</p>
+                </div>
+            </div>
+            <a href="BT_Day02_PythonCore.docx" class="btn-download" download>
+                📥 Tải File Bài Tập (.docx)
+            </a>
+        </div>
+
+        <!-- BOTTOM LESSON NAVIGATION BAR (POINT 2) -->
+        <nav style="margin-top: 30px; margin-bottom: 30px; padding: 24px; background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow-sm);">
+            <a href="../day01/day01_python_core.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; transition: all 0.2s;">
+                ⬅️ Bài 1: Cấu Trúc Dữ Liệu
+            </a>
+            <span style="font-weight: 800; color: #64748b; font-size: 0.9rem;">
+                📌 Đang học: Bài 02 / 14
+            </span>
+            <a href="../day03/day03_python_core.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent-red); color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; transition: all 0.2s;">
+                Bài 3: Linear Search & Bubble Sort ➡️
+            </a>
+        </nav>
+
+
+        <!-- TEACHER ADMIN PANEL AREA (FULL 14 LESSONS FILTER - POINT 9 FIX) -->
+        <div id="teacherAdminArea" class="teacher-admin-panel">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <span>👑 BẢNG QUẢN LÝ BÀI NỘP GIẢNG VIÊN (REALTIME 2-WAY SYNC)</span>
+                </div>
+                <button class="btn-vis" onclick="syncWithGoogleSheetLive()" style="background:#0284c7; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer; margin-right:8px;">🔄 Đồng Bộ Google Sheet</button><button class="btn-vis" onclick="teacherLogout()">🔒 Đăng Xuất</button>
+            </div>
+
+            <!-- Sync Notice Bar -->
+            <div id="syncStatusMsg" style="background:#f1f5f9; padding:10px 16px; border-radius:8px; font-weight:700; color:#0f172a; margin-bottom:20px;">
+                ⏳ Đang kiểm tra kết nối Google Sheet...
+            </div>
+
+            <!-- Class Statistics Grid (DYNAMICALLY CALCULATED PER LESSON FILTER) -->
+            <div class="stat-grid">
+                <div class="stat-card"><div id="stat-CNTT1" class="stat-num">0</div><div class="stat-label">CNTT1</div></div>
+                <div class="stat-card"><div id="stat-CNTT2" class="stat-num">0</div><div class="stat-label">CNTT2</div></div>
+                <div class="stat-card"><div id="stat-CNTT3" class="stat-num">0</div><div class="stat-label">CNTT3</div></div>
+                <div class="stat-card"><div id="stat-CNTT4" class="stat-num">0</div><div class="stat-label">CNTT4</div></div>
+                <div class="stat-card"><div id="stat-CNTT5" class="stat-num">0</div><div class="stat-label">CNTT5</div></div>
+                <div class="stat-card"><div id="stat-CNTT6" class="stat-num">0</div><div class="stat-label">CNTT6</div></div>
+                <div class="stat-card"><div id="stat-CNTT8" class="stat-num">0</div><div class="stat-label">CNTT8</div></div>
+            </div>
+
+            <!-- Admin Filters & Excel Export (FULL 14 LESSONS) -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; background:#f8fafc; padding:16px; border-radius:10px; border:1px solid #e2e8f0;">
+                <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+                    <div style="display: none !important;">
+                        <label style="font-weight:700; font-size:0.85rem;">📗 Lọc Theo Bài Học:</label>
+                        <select id="filterLessonSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
+                            <option value="ALL">--- Tất Cả Các Bài (Day 1 -> Day 14) ---</option>
+                            <option value="DAY_01">Ngày 1: Python Core 1</option>
+                            <option value="DAY_02" selected>Ngày 2: Python Core 2</option>
+                            <option value="DAY_03">Ngày 3: Python Core 3</option>
+                            <option value="DAY_04">Ngày 4: Python Core 4</option>
+                            <option value="DAY_05">Ngày 5: FastAPI Basics</option>
+                            <option value="DAY_06">Ngày 6: Pydantic Schemas</option>
+                            <option value="DAY_07">Ngày 7: Mini Project 1</option>
+                            <option value="DAY_08">Ngày 8: MySQL & SQLAlchemy</option>
+                            <option value="DAY_09">Ngày 9: Service CRUD</option>
+                            <option value="DAY_10">Ngày 10: Project Structure</option>
+                            <option value="DAY_11">Ngày 11: Hackathon API</option>
+                            <option value="DAY_12">Ngày 12: API Quan Hệ 1-N</option>
+                            <option value="DAY_13">Ngày 13: Mini Project 2</option>
+                            <option value="DAY_14">Ngày 14: Thi Thử Mock Exam</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight:700; font-size:0.85rem;">🎯 Lọc Theo Lớp Học:</label>
+                        <select id="filterClassSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
+                            <option value="ALL">--- Tất Cả Các Lớp ---</option>
+                            <option value="CNTT1">CNTT1</option>
+                            <option value="CNTT2">CNTT2</option>
+                            <option value="CNTT3">CNTT3</option>
+                            <option value="CNTT4">CNTT4</option>
+                            <option value="CNTT5">CNTT5</option>
+                            <option value="CNTT6">CNTT6</option>
+                            <option value="CNTT8">CNTT8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="exportSubmissionsToFormattedExcel()" class="btn-vis btn-vis-primary" style="padding:10px 20px; font-size:0.9rem;">
+                    📊 Xuất File Excel Chuẩn Format
+                </button>
+            </div>
+
+            <!-- Submissions Table -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bài Học</th>
+                            <th>Mã SV</th>
+                            <th>Họ và Tên</th>
+                            <th>Lớp</th>
+                            <th>Link Bài Làm (Github)</th>
+                            <th>Thời Gian Nộp</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <!-- TEACHER AUTH MODAL (POINT 8 FIX - REMOVED PASSWORD HINT) -->
+    <div id="teacherAuthModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.7); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:32px; border-radius:16px; width:90%; max-width:400px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
+            <h3 style="font-size:1.3rem; font-weight:800; color:#0f172a; margin-bottom:12px;">🔑 Xác Thực Giảng Viên</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-bottom:16px;">Vui lòng nhập mật khẩu Giảng viên để mở Bảng Quản Lý Bài Nộp:</p>
+            <input type="password" id="teacherPassInput" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-size:1rem; margin-bottom:16px;" placeholder="Nhập mật khẩu Giảng viên..." onkeyup="if(event.key==='Enter') submitTeacherAuth()">
+            <div id="authErrMsg" style="color:#dc2626; font-weight:700; font-size:0.85rem; margin-bottom:12px; display:none;"></div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn-vis" onclick="closeTeacherAuthModal()">Hủy</button>
+                <button class="btn-vis btn-vis-primary" onclick="submitTeacherAuth()">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script>
+        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyr6zSiUA7ygY3c2_oo5XfIL7hZDvrysQaIPhZrNzGEczTYFSVwNajqdji_cvHMRaRm/exec";
+
+        function getWebhookUrl() {
+            return localStorage.getItem('gsheet_webhook_url') || DEFAULT_GSHEET_WEBHOOK_URL;
+        }
+
+        const CURRENT_LESSON_ID = "DAY_02";
+
+        // INFINITE SEAMLESS NAVIGATION HELPER
+        function navigateToLesson(val) {
+            if (!val) return;
+            const currentPath = window.location.pathname;
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/');
+            const prefix = isInSubfolder ? '../' : './';
+
+            if (val === "DAY_01") {
+                window.location.href = prefix + "day01/day01_python_core.html";
+            } else if (val === "DAY_02") {
+                window.location.href = prefix + "day02/day02_python_core.html";
+            } else {
+                alert("📌 Bài học " + val + " đang trong tiến trình chuẩn bị!");
+            }
+        }
+
+        // LIVE SYNTAX HIGHLIGHTING OVERLAY LOGIC
+        function highlightVsCodePython(code) {
+            if (!code) return '';
+            if (window.Prism && Prism.languages && Prism.languages.python) {
+                try {
+                    return Prism.highlight(code, Prism.languages.python, 'python');
+                } catch(e) {}
+            }
+            return escapeHtml(code);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function autoResizeTextarea(el) {
+            if (!el) return;
+            el.style.height = 'auto';
+            el.style.height = Math.max(180, el.scrollHeight) + 'px';
+        }
+
+        function updateLiveSyntax(textareaId, highlightId) {
+            const txta = document.getElementById(textareaId);
+            let hl = document.getElementById(highlightId);
+
+            if (!hl && highlightId.endsWith('-hl')) {
+                hl = document.getElementById(textareaId + '-hl');
+            }
+            if (!txta || !hl) return;
+
+            hl.innerHTML = highlightVsCodePython(txta.value) + '\n';
+            autoResizeTextarea(txta);
+            hl.style.height = txta.style.height;
+        }
+
+        function initAllLiveEditors() {
+            document.querySelectorAll('.code-textarea').forEach(txt => {
+                const hlId = txt.id + '-hl';
+                updateLiveSyntax(txt.id, hlId);
+            });
+        }
+
+        let pyEngine = null;
+        let pyodidePromise = null;
+        let day2_ex1Passed = false;
+        let day2_ex2Passed = false;
+
+        // CODELEARN TESTCASES RENDERERS
+        function initTestcaseListDay2Ex1() {
+            const res = document.getElementById('day2_ex1_res');
+            if (!res) return;
+            res.style.display = 'block';
+            res.innerHTML = `
+                <div class="testcases-list" style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                    <div style="font-weight:700; margin-bottom:8px; color:#1e293b; font-size:0.95rem; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">📋 DANH SÁCH TESTCASE (CODELEARN STYLE):</div>
+                    <div class="testcase-item" id="day2_ex1_tc1" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 1: Khởi tạo biến cờ all_passed</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex1_tc2" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 2: Duyệt danh sách và kiểm tra điểm GPA < 5</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex1_tc3" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 3: Đổi cờ all_passed = False khi gặp điều kiện thi lại</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex1_tc4" style="display:flex; align-items:center; padding:6px 0;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 4: Kiểm tra định dạng đầu ra (Console Output) chính xác</span>
+                    </div>
+                </div>
+                <div id="day2_ex1_summary-msg" style="margin-top:10px; font-weight:700; font-size:0.95rem;"></div>
+            `;
+        }
+
+        function initTestcaseListDay2Ex2() {
+            const res = document.getElementById('day2_ex2_res');
+            if (!res) return;
+            res.style.display = 'block';
+            res.innerHTML = `
+                <div class="testcases-list" style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                    <div style="font-weight:700; margin-bottom:8px; color:#1e293b; font-size:0.95rem; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">📋 DANH SÁCH TESTCASE (CODELEARN STYLE):</div>
+                    <div class="testcase-item" id="day2_ex2_tc1" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 1: Khởi tạo total_revenue và vip_count</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex2_tc2" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 2: Tích lũy doanh thu chính xác (total_revenue = 54,800,000)</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex2_tc3" style="display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 3: Đếm số đơn VIP > 10 triệu chính xác (vip_count = 3 đơn)</span>
+                    </div>
+                    <div class="testcase-item" id="day2_ex2_tc4" style="display:flex; align-items:center; padding:6px 0;">
+                        <span class="tc-status" style="margin-right:10px; font-weight:800; color:#64748b; font-size:1.1rem; width:100px; display:inline-block;">⚪ PENDING</span>
+                        <span class="tc-desc" style="font-size:0.9rem; color:#475569;">Testcase 4: Kiểm tra định dạng đầu ra (Console Output) chính xác</span>
+                    </div>
+                </div>
+                <div id="day2_ex2_summary-msg" style="margin-top:10px; font-weight:700; font-size:0.95rem;"></div>
+            `;
+        }
+
+        // MULTI-CDN FALLBACK LOADER DATA
+        const PYODIDE_CDNS = [
+            {
+                script: "https://cdnjs.cloudflare.com/ajax/libs/pyodide/0.25.0/pyodide.js",
+                index: "https://cdnjs.cloudflare.com/ajax/libs/pyodide/0.25.0/"
+            },
+            {
+                script: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js",
+                index: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+            },
+            {
+                script: "https://unpkg.com/pyodide@0.25.0/pyodide.js",
+                index: "https://unpkg.com/pyodide@0.25.0/"
+            }
+        ];
+
+        async function loadScript(url) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = url;
+                script.onload = () => resolve();
+                script.onerror = (e) => reject(new Error("Lỗi mạng script"));
+                document.head.appendChild(script);
+            });
+        }
+
+        // BULLETPROOF PYODIDE ENGINE INITIALIZER
+        async function ensurePyodide() {
+            if (pyEngine) return pyEngine;
+            
+            if (pyodidePromise) {
+                return await pyodidePromise;
+            }
+
+            pyodidePromise = (async () => {
+                let lastErr = null;
+                for (let i = 0; i < PYODIDE_CDNS.length; i++) {
+                    const cdn = PYODIDE_CDNS[i];
+                    try {
+                        if (!window.loadPyodide) {
+                            await loadScript(cdn.script);
+                        }
+                        if (window.loadPyodide) {
+                            const engine = await window.loadPyodide({
+                                indexURL: cdn.index
+                            });
+                            pyEngine = engine;
+                            
+                            return engine;
+                        }
+                    } catch(e) {
+                        lastErr = e;
+                        window.loadPyodide = undefined;
+                    }
+                }
+                throw lastErr || new Error("Mất kết nối mạng");
+            })();
+
+            try {
+                return await pyodidePromise;
+            } catch(e) {
+                pyodidePromise = null;
+                throw e;
+            }
+        }
+
+        async function initPyodide() {
+            const dot = document.getElementById('statusDot');
+            const txt = document.getElementById('statusText');
+
+            const setReady = (msg) => {
+                if (dot) {
+                    dot.classList.add('ready');
+                    dot.style.background = '#22c55e';
+                }
+                if (txt) txt.innerText = msg || '🟢 Môi trường ảo Python: Sẵn sàng';
+            };
+
+            try {
+                await ensurePyodide();
+                setReady('🟢 Môi trường ảo Python: Sẵn sàng');
+            } catch(e) {
+                if (txt) txt.innerText = '🔴 Môi trường ảo Python: Lỗi kết nối';
+            }
+        }
+
+        function stringifyError(err) {
+            if (!err) return "Lỗi không xác định";
+            if (typeof err === 'string') return err;
+            if (err.stack) return err.stack;
+            if (err.message) return err.message;
+            try {
+                return JSON.stringify(err);
+            } catch(e) {
+                return String(err);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            initAllLiveEditors();
+            setTimeout(initAllLiveEditors, 50);
+            setTimeout(initAllLiveEditors, 200);
+            setTimeout(initAllLiveEditors, 600);
+            initPyodide();
+            initTestcaseListDay2Ex1();
+            initTestcaseListDay2Ex2();
+            if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                showTeacherAdminArea(false);
+            }
+        });
+
+        // RUN PYTHON EDITOR IN REAL VIRTUAL ENVIRONMENT ONLY
+        async function runPythonEditor(codeId, outId) {
+            const txta = document.getElementById(codeId);
+            const outEl = document.getElementById(outId);
+            if (!txta || !outEl) return;
+
+            const code = txta.value;
+            outEl.innerText = "⏳ Đang chuẩn bị môi trường ảo Python...";
+
+            // Check placeholders first
+            if (hasUnfilledPlaceholders(code)) {
+                outEl.innerText = "❌ Lỗi thực thi Python:\nSyntaxError: invalid syntax (Vui lòng điền vào các vị trí trống '...' trước khi chạy code)";
+                return;
+            }
+
+            try {
+                const activeEngine = await ensurePyodide();
+                outEl.innerText = "⏳ Đang thực thi...";
+                await activeEngine.runPythonAsync(`
+import sys
+import io
+sys.stdout = io.StringIO()
+`);
+                await activeEngine.runPythonAsync(code);
+                const res = activeEngine.runPython("sys.stdout.getvalue()");
+                outEl.innerText = res ? res : "✅ Code đã chạy thành công (Không có output in ra).";
+            } catch(err) {
+                outEl.innerText = "❌ Lỗi thực thi Python:\n" + stringifyError(err);
+            }
+        }
+
+        function runPythonCode(codeId, outId) {
+            return runPythonEditor(codeId, outId);
+        }
+
+        // REAL-TIME INTERACTIVE VALIDATOR SANDBOX
+        function validateEmailLive() {
+            const val = document.getElementById('sandboxEmail').value.trim();
+            const fb = document.getElementById('emailFeedback');
+            if (!val) {
+                fb.style.display = 'none';
+                fb.innerHTML = '';
+                return;
+            }
+            const clean_email = val.toLowerCase();
+            const is_email_valid = (clean_email.includes('@')) && (clean_email.split('@').length - 1 === 1) && (clean_email.endsWith(".com") || clean_email.endsWith(".edu.vn"));
+            
+            fb.style.display = 'block';
+            if (is_email_valid) {
+                fb.className = 'val-feedback valid';
+                fb.innerHTML = '✅ Email hợp lệ!';
+            } else {
+                fb.className = 'val-feedback invalid';
+                let reason = 'Email không hợp lệ';
+                if (!clean_email.includes('@')) reason = 'Thiếu ký tự @';
+                else if (clean_email.split('@').length - 1 !== 1) reason = 'Có nhiều hơn 1 ký tự @';
+                else if (!clean_email.endsWith('.com') && !clean_email.endsWith('.edu.vn')) reason = 'Phải kết thúc bằng .com hoặc .edu.vn';
+                fb.innerHTML = '❌ ' + reason;
+            }
+        }
+
+        function validatePhoneLive() {
+            const val = document.getElementById('sandboxPhone').value.trim();
+            const fb = document.getElementById('phoneFeedback');
+            if (!val) {
+                fb.style.display = 'none';
+                fb.innerHTML = '';
+                return;
+            }
+            const clean_phone = val;
+            const is_phone_valid = (clean_phone.length === 10) && clean_phone.startsWith("0") && /^\d+$/.test(clean_phone);
+            
+            fb.style.display = 'block';
+            if (is_phone_valid) {
+                fb.className = 'val-feedback valid';
+                fb.innerHTML = '✅ Số điện thoại hợp lệ!';
+            } else {
+                fb.className = 'val-feedback invalid';
+                let reason = 'SĐT không hợp lệ';
+                if (clean_phone.length !== 10) reason = 'Độ dài phải đúng 10 số (hiện tại: ' + clean_phone.length + ' số)';
+                else if (!clean_phone.startsWith('0')) reason = 'Phải bắt đầu bằng số 0';
+                else if (!/^\d+$/.test(clean_phone)) reason = 'Phải chứa toàn bộ chữ số';
+                fb.innerHTML = '❌ ' + reason;
+            }
+        }
+
+        // STEP-BY-STEP CONCEPT VISUALIZERS
+        let flagStep = 0;
+        let is_overloaded = false;
+        const cpu_loads = [45, 62, 78, 88, 30, 92];
+
+        function runFlagVisualizerStep() {
+            const log = document.getElementById('vis1Log');
+            if (!log) return;
+
+            if (flagStep === 0) {
+                for (let i = 0; i < 6; i++) {
+                    const el = document.getElementById('vis1-' + i);
+                    if (el) el.className = 'vis-item';
+                }
+                is_overloaded = false;
+                log.innerHTML = '👉 Khởi tạo cờ <b>is_overloaded = False</b>. Bắt đầu duyệt danh sách máy chủ...';
+                flagStep++;
+            } else if (flagStep <= 6) {
+                let idx = flagStep - 1;
+                const currentEl = document.getElementById('vis1-' + idx);
+                if (currentEl) currentEl.classList.add('active');
+
+                if (idx > 0) {
+                    const prevEl = document.getElementById('vis1-' + (idx - 1));
+                    if (prevEl) {
+                        prevEl.classList.remove('active');
+                        prevEl.classList.add('passed');
+                    }
+                }
+
+                let load = cpu_loads[idx];
+                if (load > 85) {
+                    is_overloaded = true;
+                    log.innerHTML = `🔍 Kiểm tra máy chủ ${idx + 1} (CPU: ${load}%): vượt ngưỡng 85%! Cắm cờ <b>is_overloaded = True</b> và Dừng vòng lặp (break)!`;
+                    if (currentEl) {
+                        currentEl.classList.remove('active');
+                        currentEl.classList.add('flag-warning');
+                    }
+                    flagStep = 7;
+                } else {
+                    log.innerHTML = `🔍 Kiểm tra máy chủ ${idx + 1} (CPU: ${load}%): bình thường. Cờ <b>is_overloaded</b> vẫn là False.`;
+                    flagStep++;
+                }
+            } else if (flagStep === 7) {
+                for (let i = 0; i < 6; i++) {
+                    const el = document.getElementById('vis1-' + i);
+                    if (el && !el.classList.contains('flag-warning') && !el.classList.contains('passed')) {
+                        el.classList.add('passed');
+                    }
+                }
+                const activeEl = document.querySelector('#vis1Display .vis-item.active');
+                if (activeEl) {
+                    activeEl.classList.remove('active');
+                    activeEl.classList.add('passed');
+                }
+                log.innerHTML = `🏁 Kết luận cắm cờ: <b>is_overloaded = ${is_overloaded}</b> (Có máy chủ bị quá tải!).`;
+                flagStep = 8;
+            } else {
+                log.innerHTML = '🏁 Mô phỏng đã hoàn thành. Hãy bấm Reset để chạy lại.';
+            }
+        }
+
+        function resetFlagVisualizer() {
+            flagStep = 0;
+            is_overloaded = false;
+            const log = document.getElementById('vis1Log');
+            if (log) log.innerHTML = '👉 Bấm "Chạy Từng Bước" để bắt đầu mô phỏng thuật toán Cắm Cờ.';
+            for (let i = 0; i < 6; i++) {
+                const el = document.getElementById('vis1-' + i);
+                if (el) el.className = 'vis-item';
+            }
+        }
+
+        let accStep = 0;
+        let total_revenue_acc = 0;
+        let vip_order_count_acc = 0;
+        const orders_acc = [
+            { name: "iPhone", price: 28000000 },
+            { name: "Tai nghe", price: 1200000 },
+            { name: "S24", price: 22000000 },
+            { name: "MacBook", price: 24500000 }
+        ];
+
+        function runAccVisualizerStep() {
+            const log = document.getElementById('vis2Log');
+            if (!log) return;
+
+            if (accStep === 0) {
+                for (let i = 0; i < 4; i++) {
+                    const el = document.getElementById('vis2-' + i);
+                    if (el) el.className = 'vis-item';
+                }
+                total_revenue_acc = 0;
+                vip_order_count_acc = 0;
+                log.innerHTML = '👉 Khởi tạo <b>total_revenue = 0 VNĐ</b>, <b>vip_count = 0</b>. Bắt đầu duyệt đơn hàng...';
+                accStep++;
+            } else if (accStep <= 4) {
+                let idx = accStep - 1;
+                const currentEl = document.getElementById('vis2-' + idx);
+                if (currentEl) currentEl.classList.add('active');
+
+                if (idx > 0) {
+                    const prevEl = document.getElementById('vis2-' + (idx - 1));
+                    if (prevEl) {
+                        prevEl.classList.remove('active');
+                        let prevOrder = orders_acc[idx - 1];
+                        if (prevOrder.price > 15000000) {
+                            prevEl.classList.add('flag-warning');
+                        } else {
+                            prevEl.classList.add('passed');
+                        }
+                    }
+                }
+
+                let order = orders_acc[idx];
+                total_revenue_acc += order.price;
+                let isVip = order.price > 15000000;
+                if (isVip) vip_order_count_acc++;
+
+                log.innerHTML = `🔍 Đơn hàng ${idx + 1} (${order.name}): Giá trị ${order.price.toLocaleString()} VNĐ.<br>➕ Doanh thu lũy kế: <b>${total_revenue_acc.toLocaleString()} VNĐ</b>.<br>⭐ ${isVip ? `Giá > 15tr ➔ Tăng đơn VIP: <b>${vip_order_count_acc} đơn</b>.` : `Giá <= 15tr ➔ Không tăng đơn VIP.`}`;
+                accStep++;
+            } else if (accStep === 5) {
+                const activeEl = document.querySelector('#vis2Display .vis-item.active');
+                if (activeEl) {
+                    activeEl.classList.remove('active');
+                    let lastOrder = orders_acc[3];
+                    if (lastOrder.price > 15000000) {
+                        activeEl.classList.add('flag-warning');
+                    } else {
+                        activeEl.classList.add('passed');
+                    }
+                }
+                log.innerHTML = `🏁 Kết quả tổng hợp:<br>💰 Tổng doanh thu: <b>${total_revenue_acc.toLocaleString()} VNĐ</b>.<br>⭐ Số đơn hàng VIP: <b>${vip_order_count_acc} đơn</b>.`;
+                accStep = 6;
+            } else {
+                log.innerHTML = '🏁 Mô phỏng đã hoàn thành. Hãy bấm Reset để chạy lại.';
+            }
+        }
+
+        function resetAccVisualizer() {
+            accStep = 0;
+            total_revenue_acc = 0;
+            vip_order_count_acc = 0;
+            const log = document.getElementById('vis2Log');
+            if (log) log.innerHTML = '👉 Doanh thu tích lũy: <b>0 VNĐ</b><br>👉 Số đơn VIP: <b>0 đơn</b>';
+            for (let i = 0; i < 4; i++) {
+                const el = document.getElementById('vis2-' + i);
+                if (el) el.className = 'vis-item';
+            }
+        }
+
+        function checkDay2WordDownloadUnlock() {
+            const btn = document.getElementById('resourceFileBtn');
+            if (!btn) return;
+            const isUnlocked = day2_ex1Passed && day2_ex2Passed;
+            if (isUnlocked) {
+                btn.setAttribute('href', 'BT_Day02_PythonCore.docx');
+                btn.setAttribute('download', 'BT_Day02_PythonCore.docx');
+                btn.style.background = '#dc2626';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btn.style.cursor = 'pointer';
+                btn.innerHTML = '📥 Tải File Word Bài Tập (.docx)';
+            } else {
+                btn.removeAttribute('href');
+                btn.removeAttribute('download');
+                btn.style.background = '#cbd5e1';
+                btn.style.opacity = '0.6';
+                btn.style.pointerEvents = 'none';
+                btn.style.cursor = 'not-allowed';
+                btn.innerHTML = '🔒 Hoàn thành bài tập để mở khóa';
+            }
+        }
+
+        function hasUnfilledPlaceholders(code) {
+            if (!code) return true;
+            const codeNoComments = code.split('\n').map(line => {
+                const idx = line.indexOf('#');
+                return idx !== -1 ? line.substring(0, idx) : line;
+            }).join('\n');
+            return codeNoComments.includes('...');
+        }
+
+        function updateTcUi(tcId, isPassed) {
+            const el = document.getElementById(tcId);
+            if (!el) return;
+            const statusEl = el.querySelector('.tc-status');
+            if (isPassed) {
+                statusEl.innerText = '✅ PASSED';
+                statusEl.style.color = '#16a34a';
+            } else {
+                statusEl.innerText = '❌ FAILED';
+                statusEl.style.color = '#dc2626';
+            }
+        }
+
+        // STRICT DYNAMIC TESTCASE CHECKING LINKED TO VIRTUAL ENV
+        async function checkDay2Exercise1() {
+            const code = document.getElementById('day2_ex1_code').value;
+            const resBox = document.getElementById('day2_ex1_res');
+            const outEl = document.getElementById('day2_ex1_out');
+            if (!resBox) return;
+
+            // Re-render baseline testcases
+            initTestcaseListDay2Ex1();
+            const summaryEl = document.getElementById('day2_ex1_summary-msg');
+            summaryEl.style.color = '#0284c7';
+            summaryEl.innerHTML = '⏳ Đang biên dịch và thực thi Python...';
+
+            await runPythonEditor('day2_ex1_code', 'day2_ex1_out');
+
+            let tc1 = false, tc2 = false, tc3 = false, tc4 = false;
+            
+            // If output contains an error (❌), immediately fail
+            if (outEl && outEl.innerText.includes('❌')) {
+                tc1 = tc2 = tc3 = tc4 = false;
+            } else if (hasUnfilledPlaceholders(code)) {
+                tc1 = tc2 = tc3 = tc4 = false;
+            } else {
+                try {
+                    const activeEngine = await ensurePyodide();
+                    
+                    // TC1: check all_passed exists in globals
+                    let py1 = activeEngine.runPython("1 if 'all_passed' in globals() else 0");
+                    tc1 = (py1 === 1);
+
+                    // TC2: check student GPA checking logic
+                    let py2 = activeEngine.runPython("1 if ('students_score' in globals() and any(s['gpa'] < 5 for s in students_score)) else 0");
+                    tc2 = (py2 === 1);
+
+                    // TC3: check all_passed gets flipped to False
+                    let py3 = activeEngine.runPython("1 if ('all_passed' in globals() and all_passed == False) else 0");
+                    tc3 = (py3 === 1);
+
+                    // TC4: check Output matches 'Tất cả sinh viên đều qua môn: False'
+                    const txt = outEl.innerText;
+                    if (txt.includes('Tất cả sinh viên đều qua môn') && txt.includes('False')) {
+                        tc4 = true;
+                    }
+
+                } catch(e) {
+                    console.error("Test validation failed:", e);
+                }
+            }
+
+            // Update UI
+            updateTcUi('day2_ex1_tc1', tc1);
+            updateTcUi('day2_ex1_tc2', tc2);
+            updateTcUi('day2_ex1_tc3', tc3);
+            updateTcUi('day2_ex1_tc4', tc4);
+
+            const allPassed = tc1 && tc2 && tc3 && tc4;
+            if (allPassed) {
+                day2_ex1Passed = true;
+                checkDay2WordDownloadUnlock();
+                summaryEl.style.color = '#16a34a';
+                summaryEl.innerHTML = '🎉 CHÚC MỪNG: Bạn đã vượt qua 4/4 testcase của Bài tập 1!';
+            } else {
+                day2_ex1Passed = false;
+                checkDay2WordDownloadUnlock();
+                summaryEl.style.color = '#dc2626';
+                summaryEl.innerHTML = '❌ THẤT BẠI: Vui lòng sửa lại code để vượt qua toàn bộ các testcase.';
+            }
+        }
+
+        async function checkDay2Exercise2() {
+            const code = document.getElementById('day2_ex2_code').value;
+            const resBox = document.getElementById('day2_ex2_res');
+            const outEl = document.getElementById('day2_ex2_out');
+            if (!resBox) return;
+
+            // Re-render baseline testcases
+            initTestcaseListDay2Ex2();
+            const summaryEl = document.getElementById('day2_ex2_summary-msg');
+            summaryEl.style.color = '#0284c7';
+            summaryEl.innerHTML = '⏳ Đang biên dịch và thực thi Python...';
+
+            await runPythonEditor('day2_ex2_code', 'day2_ex2_out');
+
+            let tc1 = false, tc2 = false, tc3 = false, tc4 = false;
+            
+            // If output contains an error (❌), immediately fail
+            if (outEl && outEl.innerText.includes('❌')) {
+                tc1 = tc2 = tc3 = tc4 = false;
+            } else if (hasUnfilledPlaceholders(code)) {
+                tc1 = tc2 = tc3 = tc4 = false;
+            } else {
+                try {
+                    const activeEngine = await ensurePyodide();
+                    
+                    // TC1: check variables defined
+                    let py1 = activeEngine.runPython("1 if ('total_revenue' in globals() and 'vip_count' in globals()) else 0");
+                    tc1 = (py1 === 1);
+
+                    // TC2: check revenue sum
+                    let py2 = activeEngine.runPython("1 if ('total_revenue' in globals() and total_revenue == 54800000) else 0");
+                    tc2 = (py2 === 1);
+
+                    // TC3: check vip count sum
+                    let py3 = activeEngine.runPython("1 if ('vip_count' in globals() and vip_count == 3) else 0");
+                    tc3 = (py3 === 1);
+
+                    // TC4: check Output matches expected values
+                    const txt = outEl.innerText;
+                    if ((txt.includes('54800000') || txt.includes('54,800,000')) && txt.includes('3')) {
+                        tc4 = true;
+                    }
+
+                } catch(e) {
+                    console.error("Test validation failed:", e);
+                }
+            }
+
+            // Update UI
+            updateTcUi('day2_ex2_tc1', tc1);
+            updateTcUi('day2_ex2_tc2', tc2);
+            updateTcUi('day2_ex2_tc3', tc3);
+            updateTcUi('day2_ex2_tc4', tc4);
+
+            const allPassed = tc1 && tc2 && tc3 && tc4;
+            if (allPassed) {
+                day2_ex2Passed = true;
+                checkDay2WordDownloadUnlock();
+                summaryEl.style.color = '#16a34a';
+                summaryEl.innerHTML = '🎉 CHÚC MỪNG: Bạn đã vượt qua 4/4 testcase của Bài tập 2!';
+            } else {
+                day2_ex2Passed = false;
+                checkDay2WordDownloadUnlock();
+                summaryEl.style.color = '#dc2626';
+                summaryEl.innerHTML = '❌ THẤT BẠI: Vui lòng sửa lại code để vượt qua toàn bộ các testcase.';
+            }
+        }
+
+        // TEACHER AUTHENTICATION LOGIC
+        function openTeacherAuthModal() {
+            if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                showTeacherAdminArea(true);
+                return;
+            }
+            const modal = document.getElementById('teacherAuthModal');
+            if (modal) {
+                const err = document.getElementById('authErrMsg');
+                if (err) err.style.display = 'none';
+                const passIn = document.getElementById('teacherPassInput');
+                if (passIn) passIn.value = '';
+                modal.style.display = 'flex';
+                setTimeout(() => { if (passIn) passIn.focus(); }, 100);
+            }
+        }
+
+        function closeTeacherAuthModal() {
+            const modal = document.getElementById('teacherAuthModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function submitTeacherAuth() {
+            const passIn = document.getElementById('teacherPassInput');
+            const pass = passIn ? passIn.value.trim() : '';
+            const errEl = document.getElementById('authErrMsg');
+
+            if (pass === "rikkeiedu") {
+                sessionStorage.setItem('isTeacherAuth', 'true');
+                closeTeacherAuthModal();
+                showTeacherAdminArea(true);
+            } else {
+                if (errEl) {
+                    errEl.innerText = "❌ Mật khẩu Giảng viên không chính xác! Vui lòng thử lại.";
+                    errEl.style.display = 'block';
+                }
+            }
+        }
+
+        // STUDENT FORM SUBMISSION WITH SUCCESS NOTIFICATION
+        async function handleStudentSubmit(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const name = document.getElementById('subName').value.trim();
+            const msv = document.getElementById('subMsv').value.trim();
+            const className = document.getElementById('subClass').value;
+            const github = document.getElementById('subLink').value.trim();
+            const msgEl = document.getElementById('submitStatusMsg');
+
+            // Find submit button and disable it during request
+            const btnSubmit = document.querySelector('#submissionForm button[type="submit"]');
+            if (btnSubmit) {
+                btnSubmit.disabled = true;
+                btnSubmit.style.opacity = '0.5';
+                btnSubmit.style.cursor = 'not-allowed';
+                btnSubmit.style.filter = 'grayscale(100%)';
+                btnSubmit.innerText = '⏳ Đang gửi bài nộp...';
+            }
+
+            if (msgEl) {
+                msgEl.style.display = 'block';
+                msgEl.style.background = '#e0f2fe';
+                msgEl.style.color = '#0284c7';
+                msgEl.innerText = '⏳ Đang gửi bài nộp về hệ thống Giảng viên...';
+            }
+
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN');
+
+            const payload = {
+                id: Date.now(),
+                action: 'add',
+                time: timeStr,
+                timestamp: timeStr,
+                lessonId: CURRENT_LESSON_ID,
+                lesson: CURRENT_LESSON_ID,
+                className: className,
+                class: className,
+                lop: className,
+                msv: msv,
+                name: name,
+                ho_ten: name,
+                link: github,
+                github: github,
+                status: 'Đã nộp'
+            };
+
+            let existing = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            existing.unshift(payload);
+            localStorage.setItem('python_day1_submissions', JSON.stringify(existing));
+
+            const webhookUrl = getWebhookUrl();
+            if (webhookUrl && webhookUrl.length > 10) {
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                } catch(err) {
+                    console.log('Webhook push error:', err);
+                }
+            }
+
+            if (msgEl) {
+                msgEl.style.background = '#dcfce7';
+                msgEl.style.color = '#15803d';
+                msgEl.innerText = '🎉 TẢI BÀI NỘP THÀNH CÔNG! Đã ghi nhận thông tin sinh viên ' + name + ' (' + msv + ').';
+            }
+
+            // Restore submit button state
+            if (btnSubmit) {
+                btnSubmit.disabled = false;
+                btnSubmit.style.opacity = '1';
+                btnSubmit.style.cursor = 'pointer';
+                btnSubmit.style.filter = 'none';
+                btnSubmit.innerText = '🚀 NỘP BÀI TẬP NGÀY 02 NGAY';
+            }
+
+            const form = document.getElementById('submissionForm');
+            if (form) form.reset();
+            loadSubmissionsTable();
+            return false;
+        }
+
+        function showTeacherAdminArea(shouldScroll = false) {
+            const area = document.getElementById('teacherAdminArea');
+            if (!area) return;
+            area.style.display = 'block';
+            const savedWebhook = localStorage.getItem('gsheet_webhook_url') || '';
+            const inputEl = document.getElementById('googleSheetWebhookInput');
+            if (inputEl) inputEl.value = savedWebhook;
+            syncWithGoogleSheetLive();
+            if (shouldScroll) {
+                area.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function teacherLogout() {
+            sessionStorage.removeItem('isTeacherAuth');
+            document.getElementById('teacherAdminArea').style.display = 'none';
+            alert('🔒 Đã đăng xuất quyền Giảng viên.');
+        }
+
+        function saveGoogleSheetWebhook(url) {
+            localStorage.setItem('gsheet_webhook_url', url.trim());
+            alert('✅ Đã lưu URL Webhook Google Sheet!');
+            syncWithGoogleSheetLive();
+        }
+
+        async function syncWithGoogleSheetLive() {
+            const statusMsg = document.getElementById('syncStatusMsg');
+            if (statusMsg) statusMsg.innerText = '⏳ Đang kết nối & lấy dữ liệu từ Google Sheet...';
+
+            const webhookUrl = getWebhookUrl();
+            if (webhookUrl && webhookUrl.length > 10) {
+                try {
+                    let fetchUrl = webhookUrl + (webhookUrl.includes('?') ? '&' : '?') + 'action=get_all';
+                    let res = await fetch(fetchUrl);
+                    if (res.ok) {
+                        let data = await res.json();
+                        if (Array.isArray(data)) {
+                            let normalizedData = data.map((item, idx) => ({
+                                id: item.id || (Date.now() + idx),
+                                time: item.time || item.timestamp || '',
+                                timestamp: item.time || item.timestamp || '',
+                                lessonId: item.lessonId || item.bai_hoc || item.lesson || 'DAY_02',
+                                lesson: item.lessonId || item.bai_hoc || item.lesson || 'DAY_02',
+                                bai_hoc: item.lessonId || item.bai_hoc || item.lesson || 'DAY_02',
+                                className: item.className || item.class || item.lop || '',
+                                class: item.className || item.class || item.lop || '',
+                                lop: item.className || item.class || item.lop || '',
+                                msv: item.msv || '',
+                                name: item.name || item.ho_ten || '',
+                                ho_ten: item.name || item.ho_ten || '',
+                                link: item.link || item.github || '',
+                                github: item.link || item.github || '',
+                                status: item.status || 'Đã nộp'
+                            }));
+
+                            localStorage.setItem('python_day1_submissions', JSON.stringify(normalizedData));
+                            if (statusMsg) {
+                                statusMsg.style.background = '#dcfce7';
+                                statusMsg.style.color = '#15803d';
+                                statusMsg.innerText = '✅ Đã kết nối & đồng bộ dữ liệu mới nhất từ Google Sheet thành công!';
+                            }
+                        }
+                    } else {
+                        if (statusMsg) {
+                            statusMsg.style.background = '#fffbeb';
+                            statusMsg.style.color = '#b45309';
+                            statusMsg.innerText = '💡 Đang hiển thị dữ liệu bài nộp lưu trữ cục bộ (Google Sheet chưa phản hồi).';
+                        }
+                    }
+                } catch(e) {
+                    if (statusMsg) {
+                        statusMsg.style.background = '#fffbeb';
+                        statusMsg.style.color = '#b45309';
+                        statusMsg.innerText = '💡 Đang hiển thị dữ liệu bài nộp lưu trữ cục bộ.';
+                    }
+                }
+            }
+            loadSubmissionsTable();
+        }
+
+        function loadSubmissionsTable() {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            
+            // Flexible matching for current lesson submissions
+            let dayList = list.filter(row => {
+                const les = String(row.bai_hoc || row.lessonId || row.lesson || row['Bài Học'] || row['Mã Bài'] || '');
+                if (CURRENT_LESSON_ID === 'DAY_01') return les.includes('01') || les.includes('1') || les === '' || les === 'DAY_01';
+                if (CURRENT_LESSON_ID === 'DAY_02') return les.includes('02') || les.includes('2') || les === 'DAY_02';
+                if (CURRENT_LESSON_ID === 'DAY_03') return les.includes('03') || les.includes('3') || les === 'DAY_03';
+                return les.includes(CURRENT_LESSON_ID);
+            });
+
+            // If dayList is empty but list has data, fallback to show all list items
+            if (dayList.length === 0 && list.length > 0) {
+                dayList = list;
+            }
+
+            // Calculate class stat breakdown
+            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            dayList.forEach(row => {
+                const cName = row.className || row.class || row.lop || row['Lớp'] || 'CNTT1';
+                if (stats[cName] !== undefined) stats[cName]++;
+            });
+
+            // Update stats labels in UI
+            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
+            classKeys.forEach(ck => {
+                let el = document.getElementById(`stat-${ck}`);
+                if (el) el.innerText = stats[ck];
+            });
+
+            // Filter by selected Class
+            const filterClassEl = document.getElementById('filterClassSelect');
+            const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
+            if (filterClass !== 'ALL') {
+                dayList = dayList.filter(row => (row.className || row.class || row.lop || row['Lớp']) === filterClass);
+            }
+
+            const tbody = document.getElementById('adminTableBody');
+            if (!tbody) return;
+
+            if (dayList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">Chưa có dữ liệu bài nộp nào trong hệ thống.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            dayList.forEach((sub, i) => {
+                const tr = document.createElement('tr');
+                const cName = sub.className || sub.class || sub.lop || sub['Lớp'] || 'CNTT1';
+                const link = sub.link || sub.github || sub['Link Github'] || '#';
+                const sName = sub.name || sub.ho_ten || sub['Họ và Tên'] || '';
+                const sMsv = sub.msv || sub['Mã Sinh Viên'] || '';
+                const sTime = sub.time || sub.timestamp || sub['Thời Gian Nộp'] || 'Vừa xong';
+                const lesCode = sub.bai_hoc || sub.lessonId || CURRENT_LESSON_ID;
+
+                tr.innerHTML = `
+                    <td class="center"><b>${i + 1}</b></td>
+                    <td class="center"><b>${escapeHtml(lesCode)}</b></td>
+                    <td class="center"><code>${escapeHtml(sMsv)}</code></td>
+                    <td><b>${escapeHtml(sName)}</b></td>
+                    <td class="center"><span class="status-badge" style="background:#fef2f2; color:#dc2626; font-weight:800; padding:2px 8px; border-radius:4px;">${escapeHtml(cName)}</span></td>
+                    <td><a href="${escapeHtml(link)}" target="_blank" style="color:var(--accent-red); font-weight:700;">👉 Link Github Repo</a></td>
+                    <td class="center">${escapeHtml(sTime)}</td>
+                    <td class="center"><span class="status-badge" style="background:#dcfce7; color:#15803d; font-weight:bold;">Đã nộp</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function exportSubmissionsToFormattedExcel() {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            const filterClassEl = document.getElementById('filterClassSelect');
+            const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
+
+            let filteredList = list.filter(sub => (sub.lessonId || sub.lesson || 'DAY_02') === 'DAY_02');
+            if (filterClass !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.className || sub.class || sub.lop) === filterClass);
+            }
+            if (filteredList.length === 0) { alert('Chưa có dữ liệu bài nộp để xuất Excel!'); return; }
+
+            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6, "CNTT8": 8 };
+            filteredList.sort((a, b) => {
+                let cA = classOrder[a.className || a.class || a.lop] || 99;
+                let cB = classOrder[b.className || b.class || b.lop] || 99;
+                return cA - cB;
+            });
+
+            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_02`;
+            let excelHTML = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        .title { font-size: 16pt; font-weight: bold; color: #dc2626; text-align: center; height: 35px; vertical-align: middle; }
+                        .subtitle { font-size: 10pt; font-style: italic; color: #555555; text-align: center; height: 20px; }
+                        th { background-color: #dc2626; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #b91c1c; height: 30px; vertical-align: middle; }
+                        td { border: 1px solid #d4d4d8; height: 25px; vertical-align: middle; padding: 4px 8px; }
+                        .center { text-align: center; }
+                        .class-badge { background-color: #fef2f2; color: #dc2626; font-weight: bold; text-align: center; }
+                        .status-ok { background-color: #f0fdf4; color: #15803d; font-weight: bold; text-align: center; }
+                        .class-header-row { background-color: #e4e4e7; font-weight: bold; color: #18181b; }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <tr>
+                            <td colspan="8" class="title">${titleText}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class="subtitle">Xuất ngày: ${new Date().toLocaleDateString('vi-VN')} | Đơn vị: Rikkei Education</td>
+                        </tr>
+                        <tr><td colspan="8"></td></tr>
+                        <tr>
+                            <th style="width: 50px;">STT</th>
+                            <th style="width: 100px;">MÃ BÀI</th>
+                            <th style="width: 120px;">MÃ SINH VIÊN</th>
+                            <th style="width: 220px;">HỌ VÀ TÊN</th>
+                            <th style="width: 100px;">LỚP HỌC</th>
+                            <th style="width: 350px;">LINK GITHUB REPO</th>
+                            <th style="width: 180px;">THỜI GIAN NỘP</th>
+                            <th style="width: 120px;">TRẠNG THÁI</th>
+                        </tr>
+            `;
+
+            let currentGroup = '';
+            let stt = 1;
+            filteredList.forEach(sub => {
+                const cName = sub.className || sub.class || sub.lop || 'CHƯA PHÂN LỚP';
+                const link = sub.link || sub.github || '';
+
+                if (cName !== currentGroup) {
+                    currentGroup = cName;
+                    excelHTML += `
+                        <tr class="class-header-row">
+                            <td colspan="8" style="font-weight: bold; padding: 8px;">🏫 LỚP: ${currentGroup}</td>
+                        </tr>
+                    `;
+                }
+
+                excelHTML += `
+                    <tr>
+                        <td class="center">${stt++}</td>
+                        <td class="center">DAY_02</td>
+                        <td class="center">${sub.msv || ''}</td>
+                        <td>${sub.name || sub.ho_ten || ''}</td>
+                        <td class="class-badge">${cName}</td>
+                        <td><a href="${link}">${link}</a></td>
+                        <td class="center">${sub.time || ''}</td>
+                        <td class="status-ok">Đã nộp</td>
+                    </tr>
+                `;
+            });
+
+            excelHTML += `
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff' + excelHTML], { type: 'application/vnd.ms-excel;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `BaoCao_NopBai_DAY_02_${filterClass}_${new Date().toISOString().slice(0,10)}.xls`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Immediate execution to guarantee initialization regardless of browser event timing
+        try {
+            initTestcaseListDay2Ex1();
+            initTestcaseListDay2Ex2();
+        } catch(e) {
+            console.error("Immediate init failed:", e);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+            initTestcaseListDay2Ex1();
+            initTestcaseListDay2Ex2();
+        });
+    
+        
+
+</script>
+
+</html>

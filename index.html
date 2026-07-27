@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Portal | Rikkei Academy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --accent-red: #dc2626;
+            --accent-red-hover: #b91c1c;
+            --accent-red-light: #fef2f2;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-dark); line-height: 1.6; padding-bottom: 80px; }
+
+        /* HEADER NAVIGATION */
+        header {
+            background: var(--bg-card);
+            border-bottom: 3px solid var(--accent-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.2rem; color: var(--text-dark); }
+        .logo-badge { background: var(--accent-red); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .curriculum-select-wrapper { display: flex; align-items: center; gap: 10px; }
+        .curriculum-select {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--accent-red);
+            background: #ffffff;
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(220,38,38,0.1);
+            transition: all 0.2s;
+        }
+        .curriculum-select:hover { background: var(--accent-red-light); }
+
+        .btn-teacher-auth {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-teacher-auth:hover { background: #334155; }
+
+        .container { max-width: 1280px; margin: 30px auto; padding: 0 24px; }
+
+        /* HERO BANNER - HIGH VISUAL POLISH */
+        .hero-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: white;
+            padding: 48px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid rgba(220, 38, 38, 0.3);
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+        .banner-tag { display: inline-block; background: linear-gradient(90deg, #dc2626, #b91c1c); color: white; font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(220,38,38,0.3); }
+        .hero-banner h1 { font-size: 2.35rem; font-weight: 900; margin-bottom: 14px; line-height: 1.3; background: linear-gradient(90deg, #ffffff, #f1f5f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-banner p { color: #cbd5e1; font-size: 1.1rem; max-width: 900px; line-height: 1.75; font-weight: 400; }
+
+        /* 14-DAY SYLLABUS GRID SYSTEM */
+        .section-title-wrap { margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .section-title { font-size: 1.6rem; font-weight: 800; color: #0f172a; }
+        
+        .syllabus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .day-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .day-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.12);
+            border-color: #fca5a5;
+        }
+        .day-card.active-lesson {
+            border: 2px solid var(--accent-red);
+            background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+        }
+
+        .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .day-badge { background: #f1f5f9; color: #334155; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
+        .day-card.active-lesson .day-badge { background: var(--accent-red-light); color: var(--accent-red); }
+
+        .status-pill { font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
+        .status-pill.ready { background: #dcfce7; color: #15803d; }
+        .status-pill.upcoming { background: #f1f5f9; color: #64748b; }
+
+        .card-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 8px; line-height: 1.4; }
+        .card-desc { font-size: 0.92rem; color: #64748b; margin-bottom: 20px; line-height: 1.6; }
+
+        .btn-enter-lesson {
+            background: var(--accent-red);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-enter-lesson:hover { background: var(--accent-red-hover); }
+        .btn-disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; text-decoration: none; }
+
+        /* TEACHER ADMIN PANEL */
+        .teacher-admin-panel {
+            display: none; background: #ffffff; border: 2px solid #0f172a; border-radius: var(--radius-lg); padding: 32px; margin-top: 40px; box-shadow: var(--shadow-lg);
+        }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 16px; }
+        .admin-title { font-size: 1.4rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 10px; text-align: center; }
+        .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent-red); }
+        .stat-label { font-size: 0.78rem; color: #64748b; font-weight: 700; }
+
+        .table-responsive { overflow-x: auto; margin-top: 16px; }
+        table.admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+        table.admin-table th { background: #0f172a; color: white; padding: 12px 14px; font-weight: 700; }
+        table.admin-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        table.admin-table tr:hover { background: #f8fafc; }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: #e2e8f0; color: #475569; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER NAVIGATION -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-badge">Rikkei Academy</span>
+                <span>Python Core & FastAPI Portal</span>
+            </div>
+
+
+
+            <div style="display:flex; align-items:center; gap:14px;">
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>System Status: Online</span>
+                </div>
+                <button class="btn-teacher-auth" onclick="openTeacherAuthModal()">🔑 Đăng Nhập Quản Lý</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <span class="banner-tag">Rikkei Academy</span>
+            <h1>HỆ THỐNG ÔN LUYỆN KIẾN THỨC</h1>
+            <p>Hệ thống học tập tương tác trực quan 14 Ngày. Học viên lựa chọn bài học bên dưới để thực hành code Python trực tiếp trên trình duyệt web.</p>
+        </div>
+        <!-- 14-DAY SYLLABUS GRID SECTION -->
+        <div class="section-title-wrap">
+            <h2 class="section-title">🗺️ Lộ Trình 14 Ngày Học Chuyên Sâu</h2>
+            <span style="font-weight:700; color:var(--text-muted); font-size:0.9rem;">Tổng số 14 Bài Học</span>
+        </div>
+
+        <div class="syllabus-grid">
+
+            <!-- Day 1 Card -->
+            <div class="day-card active-lesson">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 01</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
+                    </div>
+                    <h3 class="card-title">Ngày 1: Python Core 1 — Cấu Trúc Dữ Liệu & List Comp</h3>
+                    <p class="card-desc">Nắm vững List, Dictionary, Set, Tuple, hiệu năng bộ nhớ CPython và kỹ thuật List Comprehension 1 dòng.</p>
+                </div>
+                <a href="day01/day01_python_core.html" class="btn-enter-lesson">🚀 VÀO HỌC BÀI 01 NGAY</a>
+            </div>
+
+            <!-- Day 2 Card -->
+            <div class="day-card active-lesson">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 02</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
+                    </div>
+                    <h3 class="card-title">Ngày 2: Python Core 2 — Flag, Count, Max/Min & Validation</h3>
+                    <p class="card-desc">Tư duy Cắm Cờ (Flag Pattern), Đếm & Tính Tổng Tích Lũy, Max/Min 1 lần duyệt Single Pass $O(N)$ và Validate Email/SĐT.</p>
+                </div>
+                <a href="day02/day02_python_core.html" class="btn-enter-lesson">⚡ VÀO HỌC BÀI 02 NGAY</a>
+            </div>
+
+            <!-- Day 3 Card -->
+            <div class="day-card active-lesson">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 03</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
+                    </div>
+                    <h3 class="card-title">Ngày 3: Python Core 3 — Linear Search & Bubble Sort</h3>
+                    <p class="card-desc">Thuật toán Tìm kiếm tuyến tính $O(N)$, Nổi bọt Bubble Sort $O(N^2)$, Swap & Tối ưu cờ dừng sớm.</p>
+                </div>
+                <a href="day03/day03_python_core.html" class="btn-enter-lesson">⚡ VÀO HỌC BÀI 03 NGAY</a>
+            </div>
+
+            <!-- Day 4 Card -->
+            <div class="day-card active-lesson">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 04</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
+                    </div>
+                    <h3 class="card-title">Ngày 4: Python Core 4 — Logic Nghiệp Vụ & Try-Except</h3>
+                    <p class="card-desc">Bắt ngoại lệ Exception Handling, Validate đầu vào dữ liệu chuẩn nghiệp vụ ứng dụng thực tế.</p>
+                </div>
+                <a href="day04/day04_python_core.html" class="btn-enter-lesson">⚡ VÀO HỌC BÀI 04 NGAY</a>
+            </div>
+
+            <!-- Day 5 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 05</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 5: FastAPI Basics — Architecture & Uvicorn</h3>
+                    <p class="card-desc">Khởi tạo RESTful API với FastAPI framework, Uvicorn server và tài liệu tự động Swagger UI.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 6 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 06</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 6: FastAPI — Pydantic Schemas & Parameters</h3>
+                    <p class="card-desc">Validate Request Body bằng Pydantic BaseModel, Path parameters và Query parameters.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 7 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 1 • Bài 07</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 7: Mini Project 1 — CRUD API Quản Lý Thư Viện (RAM)</h3>
+                    <p class="card-desc">Xây dựng ứng dụng RESTful API hoàn chỉnh lưu trữ trên bộ nhớ RAM.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 8 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 08</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 8: MySQL Workbench & SQLAlchemy ORM</h3>
+                    <p class="card-desc">Kết nối cơ sở dữ liệu quan hệ MySQL, định nghĩa ORM Models và thao tác với Database.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 9 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 09</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 9: Service CRUD Nâng Cao & Dependency Injection</h3>
+                    <p class="card-desc">Tách biệt logic nghiệp vụ Service layer và áp dụng Dependency Injection `Depends()`.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 10 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 10</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 10: Refactoring Project Structure 4 Lớp</h3>
+                    <p class="card-desc">Tái cấu trúc thư mục dự án theo chuẩn Doanh nghiệp: Routers, Services, Schemas, Models.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 11 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 11</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 11: Hackathon API RESTful & Thống kê Tồn kho</h3>
+                    <p class="card-desc">Thực hành Hackathon 3 tiếng xây dựng hệ thống API quản lý và báo cáo tồn kho.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 12 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 12</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 12: Tích hợp Quan hệ 1-N trong SQLAlchemy</h3>
+                    <p class="card-desc">Định nghĩa ForeignKey, relationship() giữa bảng Danh mục và Sản phẩm trong SQLAlchemy.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 13 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 13</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 13: Mini Project 2 — RESTful API Quan hệ 1-N</h3>
+                    <p class="card-desc">Xây dựng ứng dụng hoàn chỉnh tích hợp Database MySQL và quan hệ 1-N nâng cao.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+            <!-- Day 14 Card -->
+            <div class="day-card">
+                <div>
+                    <div class="card-head">
+                        <span class="day-badge">Tuần 2 • Bài 14</span>
+                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                    </div>
+                    <h3 class="card-title">Ngày 14: Thi Thử Mock Exam 90 phút</h3>
+                    <p class="card-desc">Đề thi thử tổng hợp 100 điểm đánh giá toàn bộ kiến thức Python Core + FastAPI + Database.</p>
+                </div>
+                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+            </div>
+
+        </div>
+
+        <!-- TEACHER ADMIN PANEL AREA (FULL 14 LESSONS FILTER) -->
+        <div id="teacherAdminArea" class="teacher-admin-panel">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <span>👑 BẢNG QUẢN LÝ BÀI NỘP GIẢNG VIÊN (REALTIME 2-WAY SYNC)</span>
+                </div>
+                <button class="btn-teacher-auth" onclick="teacherLogout()">🔒 Đăng Xuất</button>
+            </div>
+
+            <div id="syncStatusMsg" style="background:#f1f5f9; padding:10px 16px; border-radius:8px; font-weight:700; color:#0f172a; margin-bottom:20px;">
+                ⏳ Đang kiểm tra kết nối Google Sheet...
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card"><div id="stat-CNTT1" class="stat-num">0</div><div class="stat-label">CNTT1</div></div>
+                <div class="stat-card"><div id="stat-CNTT2" class="stat-num">0</div><div class="stat-label">CNTT2</div></div>
+                <div class="stat-card"><div id="stat-CNTT3" class="stat-num">0</div><div class="stat-label">CNTT3</div></div>
+                <div class="stat-card"><div id="stat-CNTT4" class="stat-num">0</div><div class="stat-label">CNTT4</div></div>
+                <div class="stat-card"><div id="stat-CNTT5" class="stat-num">0</div><div class="stat-label">CNTT5</div></div>
+                <div class="stat-card"><div id="stat-CNTT6" class="stat-num">0</div><div class="stat-label">CNTT6</div></div>
+                <div class="stat-card"><div id="stat-CNTT8" class="stat-num">0</div><div class="stat-label">CNTT8</div></div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; background:#f8fafc; padding:16px; border-radius:10px; border:1px solid #e2e8f0;">
+                <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+                    <div>
+                        <label style="font-weight:700; font-size:0.85rem;">📗 Lọc Theo Bài Học:</label>
+                        <select id="filterLessonSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
+                            <option value="ALL">--- Tất Cả Các Bài (Day 1 -> Day 14) ---</option>
+                            <option value="DAY_01">Ngày 1: Python Core 1</option>
+                            <option value="DAY_02">Ngày 2: Python Core 2</option>
+                            <option value="DAY_03">Ngày 3: Python Core 3</option>
+                            <option value="DAY_04">Ngày 4: Python Core 4</option>
+                            <option value="DAY_05">Ngày 5: FastAPI Basics</option>
+                            <option value="DAY_06">Ngày 6: Pydantic Schemas</option>
+                            <option value="DAY_07">Ngày 7: Mini Project 1</option>
+                            <option value="DAY_08">Ngày 8: MySQL & SQLAlchemy</option>
+                            <option value="DAY_09">Ngày 9: Service CRUD</option>
+                            <option value="DAY_10">Ngày 10: Project Structure</option>
+                            <option value="DAY_11">Ngày 11: Hackathon API</option>
+                            <option value="DAY_12">Ngày 12: API Quan Hệ 1-N</option>
+                            <option value="DAY_13">Ngày 13: Mini Project 2</option>
+                            <option value="DAY_14">Ngày 14: Thi Thử Mock Exam</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight:700; font-size:0.85rem;">🎯 Lọc Theo Lớp Học:</label>
+                        <select id="filterClassSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
+                            <option value="ALL">--- Tất Cả Các Lớp (CNTT1 - CNTT8) ---</option>
+                            <option value="CNTT1">CNTT1</option>
+                            <option value="CNTT2">CNTT2</option>
+                            <option value="CNTT3">CNTT3</option>
+                            <option value="CNTT4">CNTT4</option>
+                            <option value="CNTT5">CNTT5</option>
+                            <option value="CNTT6">CNTT6</option>
+                            <option value="CNTT8">CNTT8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="exportSubmissionsToFormattedExcel()" class="btn-teacher-auth" style="background:var(--accent-red); padding:10px 20px; font-size:0.9rem;">
+                    📊 Xuất File Excel Chuẩn Format
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bài Học</th>
+                            <th>Mã SV</th>
+                            <th>Họ và Tên</th>
+                            <th>Lớp</th>
+                            <th>Link Bài Làm (Github)</th>
+                            <th>Thời Gian Nộp</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- LARK TECHNICAL SUPPORT FOOTER (POINT 1 & IMAGE 2) -->
+        <footer style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-lg); padding: 32px; margin-top: 50px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+            <div style="max-width: 650px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <span style="background: var(--accent-red-light); color: var(--accent-red); font-weight: 800; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">💬 Hỗ Trợ Kỹ Thuật</span>
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Liên Hệ Giảng Viên Qua Lark</h3>
+                <p style="font-size: 1rem; color: #475569; line-height: 1.7;">
+                    Nếu có bất kỳ vấn đề hoặc sự cố nào về trang web, vui lòng quét mã QR bên cạnh để liên hệ trực tiếp với thầy <b>Lại Trung Lâm</b> qua Lark.
+                </p>
+                <div style="margin-top: 14px; font-weight: 700; color: #64748b; font-size: 0.9rem;">
+                    🏢 Rikkei Education 10 • Giảng viên: <b>Lại Trung Lâm</b>
+                </div>
+            </div>
+            <div style="text-align: center; background: #f8fafc; padding: 16px; border-radius: 14px; border: 1px solid #cbd5e1;">
+                <img src="lark_qr.png" alt="Lark QR Code - Lại Trung Lâm" style="width: 180px; height: 180px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: block; margin: 0 auto 10px auto;">
+                <span style="font-size: 0.82rem; font-weight: 800; color: var(--accent-red);">📲 Quét mã QR để mở Lark</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TEACHER AUTH MODAL -->
+    <div id="teacherAuthModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.7); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:32px; border-radius:16px; width:90%; max-width:400px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
+            <h3 style="font-size:1.3rem; font-weight:800; color:#0f172a; margin-bottom:12px;">🔑 Xác Thực Giảng Viên</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-bottom:16px;">Vui lòng nhập mật khẩu Giảng viên để mở Bảng Quản Lý Bài Nộp:</p>
+            <input type="password" id="teacherPassInput" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-size:1rem; margin-bottom:16px;" placeholder="Nhập mật khẩu Giảng viên..." onkeyup="if(event.key==='Enter') submitTeacherAuth()">
+            <div id="authErrMsg" style="color:#dc2626; font-weight:700; font-size:0.85rem; margin-bottom:12px; display:none;"></div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn-teacher-auth" style="background:#64748b;" onclick="closeTeacherAuthModal()">Hủy</button>
+                <button class="btn-teacher-auth" style="background:var(--accent-red);" onclick="submitTeacherAuth()">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyr6zSiUA7ygY3c2_oo5XfIL7hZDvrysQaIPhZrNzGEczTYFSVwNajqdji_cvHMRaRm/exec";
+        const PORTAL_RESOURCE_MAP = {
+            "DAY_01": {
+                file: "BT_Day01_PythonCore.docx",
+                path: "day01/BT_Day01_PythonCore.docx",
+                title: "📄 File Word Bài Tập: BT_Day01_PythonCore.docx",
+                desc: "Phiếu bài tập Word tổng hợp hoàn chỉnh (30 - 40 phút), chứa đầy đủ đề bài CRUD List/Dict/Set, List Comprehension, Kết quả đầu ra kỳ vọng và hướng dẫn nộp bài lên GitHub."
+            },
+            "DAY_02": {
+                file: "BT_Day02_PythonCore.docx",
+                path: "day02/BT_Day02_PythonCore.docx",
+                title: "📄 File Word Bài Tập: BT_Day02_PythonCore.docx",
+                desc: "Kỹ thuật cắm cờ Flag kiểm tra điều kiện tín chỉ, Single Pass đếm/tổng/Max-Min và Validate Email/SĐT."
+            },
+            "DAY_03": {
+                file: "BT_Day03_PythonCore.docx",
+                path: "day03/BT_Day03_PythonCore.docx",
+                title: "📄 File Word Bài Tập: BT_Day03_PythonCore.docx",
+                desc: "Tự cài đặt thuật toán Linear Search và Bubble Sort sắp xếp sản phẩm/sách không dùng hàm có sẵn."
+            },
+            "DAY_04": {
+                file: "BT_Day04_PythonCore.docx",
+                path: "day04/BT_Day04_PythonCore.docx",
+                title: "📄 File Word Bài Tập: BT_Day04_PythonCore.docx",
+                desc: "Tính toán hóa đơn Shopee/GrabFood, chiết khấu và xử lý lỗi chia cho 0/sai định dạng."
+            }
+        };
+
+        function updatePortalResourceFile() {
+            const select = document.getElementById('resourceLessonSelect');
+            if (!select) return;
+            const data = PORTAL_RESOURCE_MAP[select.value];
+            if (!data) return;
+
+            const titleEl = document.getElementById('portalResourceTitle');
+            const descEl = document.getElementById('portalResourceDesc');
+            const btnEl = document.getElementById('portalResourceBtn');
+
+            if (titleEl) titleEl.innerHTML = data.title;
+            if (descEl) descEl.innerText = data.desc;
+            if (btnEl) {
+                btnEl.setAttribute('href', data.path);
+                btnEl.setAttribute('download', data.file);
+            }
+        }
+
+
+        function getWebhookUrl() {
+            return localStorage.getItem('gsheet_webhook_url') || DEFAULT_GSHEET_WEBHOOK_URL;
+        }
+
+        // INFINITE SEAMLESS NAVIGATION HELPER
+        function navigateToLesson(val) {
+            if (!val) return;
+            const currentPath = window.location.pathname.replace(/\\/g, '/');
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/');
+            const prefix = isInSubfolder ? '../' : './';
+
+            if (val === "DAY_01") {
+                window.location.href = prefix + "day01/day01_python_core.html";
+            } else if (val === "DAY_02") {
+                window.location.href = prefix + "day02/day02_python_core.html";
+            } else {
+                alert("📌 Bài học " + val + " đang trong tiến trình chuẩn bị!");
+            }
+        }
+
+        const TEACHER_PASSWORD_KEY = "rikkeiedu";
+        function openTeacherAuthModal() {
+            if (sessionStorage.getItem('isTeacherAuth') === 'true') {
+                showTeacherAdminArea(true);
+                return;
+            }
+            document.getElementById('authErrMsg').style.display = 'none';
+            document.getElementById('teacherPassInput').value = '';
+            document.getElementById('teacherAuthModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('teacherPassInput').focus(), 100);
+        }
+        function closeTeacherAuthModal() { document.getElementById('teacherAuthModal').style.display = 'none'; }
+
+        function submitTeacherAuth() {
+            const pass = document.getElementById('teacherPassInput').value.trim();
+            const errEl = document.getElementById('authErrMsg');
+            if (pass === TEACHER_PASSWORD_KEY) {
+                sessionStorage.setItem('isTeacherAuth', 'true');
+                closeTeacherAuthModal();
+                showTeacherAdminArea(true);
+            } else {
+                errEl.innerText = "❌ Mật khẩu Giảng viên không chính xác!";
+                errEl.style.display = 'block';
+            }
+        }
+
+        function showTeacherAdminArea(shouldScroll = false) {
+            const area = document.getElementById('teacherAdminArea');
+            if (!area) return;
+            area.style.display = 'block';
+            syncWithGoogleSheetLive();
+            if (shouldScroll) {
+                area.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function teacherLogout() {
+            sessionStorage.removeItem('isTeacherAuth');
+            document.getElementById('teacherAdminArea').style.display = 'none';
+            alert('🔒 Đã đăng xuất quyền Giảng viên.');
+        }
+
+        async function syncWithGoogleSheetLive() {
+            const webhookUrl = getWebhookUrl();
+            const msgEl = document.getElementById('syncStatusMsg');
+            if (msgEl) msgEl.innerText = "⏳ Đang kết nối lấy dữ liệu mới nhất từ Google Sheet...";
+
+            if (webhookUrl && webhookUrl.length > 10) {
+                let data = null;
+                try {
+                    let res = await fetch(webhookUrl);
+                    if (res.ok) data = await res.json();
+                } catch(e) {}
+
+                if (!data || !Array.isArray(data)) {
+                    try {
+                        let postRes = await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                            body: JSON.stringify({ action: 'get_all' })
+                        });
+                        if (postRes.ok) data = await postRes.json();
+                    } catch(e) {}
+                }
+
+                if (Array.isArray(data)) {
+                    localStorage.setItem('python_day1_submissions', JSON.stringify(data));
+                    if (msgEl) msgEl.innerText = `✅ Đã đồng bộ thành công ${data.length} bài nộp realtime từ Google Sheet!`;
+                } else {
+                    if (msgEl) msgEl.innerText = `⚠️ Chưa thể đọc dữ liệu từ Google Sheet. Vui lòng cấp quyền "Anyone" khi triển khai!`;
+                }
+            }
+            loadSubmissionsTable();
+        }
+
+        function loadSubmissionsTable() {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            const filterLesson = document.getElementById('filterLessonSelect').value;
+            const filterClass = document.getElementById('filterClassSelect').value;
+            const tbody = document.getElementById('adminTableBody');
+
+            let filteredList = list;
+
+            if (filterLesson !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.lessonId || 'DAY_01') === filterLesson);
+            }
+
+            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            filteredList.forEach(sub => {
+                if (stats[sub.className] !== undefined) stats[sub.className]++;
+            });
+            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
+            classKeys.forEach(ck => {
+                let el = document.getElementById(`stat-${ck}`);
+                if (el) el.innerText = stats[ck];
+            });
+
+            if (filterClass !== 'ALL') {
+                filteredList = filteredList.filter(sub => sub.className === filterClass);
+            }
+
+            if (filteredList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;"><i>Chưa có bài nộp nào phù hợp với bộ lọc.</i></td></tr>`;
+                return;
+            }
+
+            let html = '';
+            filteredList.forEach((sub, idx) => {
+                html += `
+                    <tr>
+                        <td><b>${idx + 1}</b></td>
+                        <td><span style="background:#fef2f2; color:#dc2626; font-weight:800; padding:2px 8px; border-radius:4px; font-size:0.8rem;">${sub.lessonId || 'DAY_01'}</span></td>
+                        <td><code>${sub.msv}</code></td>
+                        <td><b>${sub.name}</b></td>
+                        <td><span style="background:#fef2f2; color:#dc2626; font-weight:800; padding:2px 8px; border-radius:4px;">${sub.className}</span></td>
+                        <td><a href="${sub.link}" target="_blank" style="color: var(--accent-red); font-weight:700;">👉 Link Github Repo</a></td>
+                        <td><small>${sub.time}</small></td>
+                        <td>
+                            <button class="btn-teacher-auth" style="background:#dc2626; padding:4px 10px; font-size:0.85rem;" onclick="deleteSingleSubmission('${sub.name}', '${sub.msv}', '${sub.className}', '${sub.lessonId || 'DAY_01'}')">🗑️ Xóa</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function deleteSingleSubmission(studentName, studentMsv, studentClass, lessonId) {
+            if (confirm(`⚠️ Bạn có chắc chắn muốn xóa bài nộp của SV ${studentName} (${studentMsv})?`)) {
+                let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+                const targetItem = list.find(item => item.msv === studentMsv && (item.lessonId || 'DAY_01') === lessonId && item.name === studentName);
+                list = list.filter(item => !(item.msv === studentMsv && (item.lessonId || 'DAY_01') === lessonId && item.name === studentName));
+                localStorage.setItem('python_day1_submissions', JSON.stringify(list));
+
+                const webhookUrl = getWebhookUrl();
+                if (webhookUrl && webhookUrl.length > 10 && targetItem) {
+                    try {
+                        fetch(webhookUrl, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                            body: JSON.stringify({ action: 'delete', msv: studentMsv, time: targetItem.time, name: studentName, className: studentClass, lessonId: lessonId })
+                        });
+                    } catch(e) {}
+                }
+                loadSubmissionsTable();
+            }
+        }
+
+        function exportSubmissionsToFormattedExcel() {
+            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            const filterLesson = document.getElementById('filterLessonSelect').value;
+            const filterClass = document.getElementById('filterClassSelect').value;
+
+            let filteredList = list;
+            if (filterLesson !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.lessonId || sub.lesson || 'DAY_01') === filterLesson);
+            }
+            if (filterClass !== 'ALL') {
+                filteredList = filteredList.filter(sub => (sub.className || sub.class || sub.lop) === filterClass);
+            }
+            if (filteredList.length === 0) { alert('Chưa có dữ liệu bài nộp để xuất Excel!'); return; }
+
+            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6, "CNTT8": 8 };
+            filteredList.sort((a, b) => {
+                let cA = classOrder[a.className || a.class || a.lop] || 99;
+                let cB = classOrder[b.className || b.class || b.lop] || 99;
+                return cA - cB;
+            });
+
+            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - PORTAL`;
+            let excelHTML = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        .title { font-size: 16pt; font-weight: bold; color: #dc2626; text-align: center; height: 35px; vertical-align: middle; }
+                        .subtitle { font-size: 10pt; font-style: italic; color: #555555; text-align: center; height: 20px; }
+                        th { background-color: #dc2626; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #b91c1c; height: 30px; vertical-align: middle; }
+                        td { border: 1px solid #d4d4d8; height: 25px; vertical-align: middle; padding: 4px 8px; }
+                        .center { text-align: center; }
+                        .class-badge { background-color: #fef2f2; color: #dc2626; font-weight: bold; text-align: center; }
+                        .status-ok { background-color: #f0fdf4; color: #15803d; font-weight: bold; text-align: center; }
+                        .class-header-row { background-color: #e4e4e7; font-weight: bold; color: #18181b; }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <tr>
+                            <td colspan="8" class="title">${titleText}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class="subtitle">Xuất ngày: ${new Date().toLocaleDateString('vi-VN')} | Đơn vị: Rikkei Education | Bộ lọc: ${filterLesson}</td>
+                        </tr>
+                        <tr><td colspan="8"></td></tr>
+                        <tr>
+                            <th style="width: 50px;">STT</th>
+                            <th style="width: 100px;">MÃ BÀI</th>
+                            <th style="width: 120px;">MÃ SINH VIÊN</th>
+                            <th style="width: 220px;">HỌ VÀ TÊN</th>
+                            <th style="width: 100px;">LỚP HỌC</th>
+                            <th style="width: 350px;">LINK GITHUB REPO</th>
+                            <th style="width: 180px;">THỜI GIAN NỘP</th>
+                            <th style="width: 120px;">TRẠNG THÁI</th>
+                        </tr>
+            `;
+
+            let currentGroup = '';
+            let stt = 1;
+            filteredList.forEach(sub => {
+                const cName = sub.className || sub.class || sub.lop || 'CHƯA PHÂN LỚP';
+                const link = sub.link || sub.github || '';
+
+                if (cName !== currentGroup) {
+                    currentGroup = cName;
+                    excelHTML += `
+                        <tr class="class-header-row">
+                            <td colspan="8" style="font-weight: bold; padding: 8px;">🏫 LỚP: ${currentGroup}</td>
+                        </tr>
+                    `;
+                }
+
+                excelHTML += `
+                    <tr>
+                        <td class="center">${stt++}</td>
+                        <td class="center">${sub.lessonId || sub.lesson || 'DAY_01'}</td>
+                        <td class="center">${sub.msv || ''}</td>
+                        <td>${sub.name || sub.ho_ten || ''}</td>
+                        <td class="class-badge">${cName}</td>
+                        <td><a href="${link}">${link}</a></td>
+                        <td class="center">${sub.time || ''}</td>
+                        <td class="status-ok">Đã nộp</td>
+                    </tr>
+                `;
+            });
+
+            excelHTML += `
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff' + excelHTML], { type: 'application/vnd.ms-excel;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `BaoCao_NopBai_Portal_${filterLesson}_${new Date().toISOString().slice(0,10)}.xls`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
