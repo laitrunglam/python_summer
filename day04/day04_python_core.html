@@ -1016,11 +1016,11 @@ for o in orders:
                 </div>
             </div>
 
-            <!-- FILTER BY CLASS -->
+            <!-- FILTER BY CLASS & EXPORT EXCEL -->
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <label style="font-weight:700; font-size:0.9rem;">Lọc theo Lớp Học:</label>
-                    <select id="filterClassSelect" class="form-control" style="width:180px; padding:6px 12px;" onchange="loadSubmissionsTable()">
+                    <select id="filterClassSelect" class="form-control" style="width:200px; padding:6px 12px; font-weight:700;" onchange="loadSubmissionsTable()">
                         <option value="ALL">Tất cả các lớp</option>
                         <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
                         <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
@@ -1033,30 +1033,11 @@ for o in orders:
                         <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
                         <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
                         <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
-                    </select>v style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT8</div>
-                    <div id="stat-CNTT8" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
-                </div>
-            </div>
-
-            <!-- FILTER BY CLASS -->
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <label style="font-weight:700; font-size:0.9rem;">Lọc theo Lớp Học:</label>
-                    <select id="filterClassSelect" class="form-control" style="width:160px; padding:6px 12px;" onchange="loadSubmissionsTable()">
-                        <option value="ALL">Tất cả các lớp</option>
-                        <option value="CNTT1">Lớp CNTT1</option>
-                        <option value="CNTT2">Lớp CNTT2</option>
-                        <option value="CNTT3">Lớp CNTT3</option>
-                        <option value="CNTT4">Lớp CNTT4</option>
-                        <option value="CNTT5">Lớp CNTT5</option>
-                        <option value="CNTT6">Lớp CNTT6</option>
-                        <option value="CNTT8">Lớp CNTT8</option>
                     </select>
                 </div>
 
                 <div style="display:flex; gap:10px;">
-                    <button class="btn-vis" onclick="exportSubmissionsToFormattedExcel('DAY_04')" style="background:#16a34a; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer;">📥 Xuất Báo Cáo Excel (.xls)</button>
+                    <button class="btn-vis" onclick="exportSubmissionsToFormattedExcel('DAY_04')" style="background:#16a34a; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer;">📊 Xuất Báo Cáo Excel (.xls)</button>
                 </div>
             </div>
 
