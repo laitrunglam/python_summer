@@ -913,37 +913,19 @@ for o in orders:
                 <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">📥 Tài Liệu Bài Tập Đầy Đủ (File Word .docx)</h3>
                 <p style="color: var(--text-muted); font-size: 0.92rem;">Tải file Word phiếu bài tập thực hành Ngày 04 (chứa đầy đủ Input, Output mẫu và bài tập nâng cao).</p>
             </div>
-            <a id="resourceFileBtn" class="btn-download" style="background: #94a3b8; opacity: 0.7; pointer-events: none; cursor: not-allowed; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;">
-                🔒 Hoàn Thành Đúng 2 Bài Tập Code Trên Để Mở Khóa Tải File Word (.docx)
-            </a>
-        </div>
-
-        <!-- STUDENT SUBMISSION FORM (MATCHING DAY 1, 2, 3) -->
-        <div class="submission-card" id="sec-submit">
-            <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">📤 Form Nộp Bài Tập Ngày 04 (Python Core 4)</h2>
-            <p style="color:var(--text-muted); margin-bottom:24px;">Sau khi hoàn thành bài tập thực hành, sinh viên điền thông tin và nộp link GitHub Repo để hệ thống ghi nhận.</p>
-
-            <form id="submissionForm" onsubmit="handleStudentSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Họ và Tên Sinh Viên *</label>
-                        <input type="text" id="subName" class="form-control" placeholder="Nguyễn Văn A" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Mã Sinh Viên *</label>
-                        <input type="text" id="subMsv" class="form-control" placeholder="B25DCCN001" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Lớp Học *</label>
-                        <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
+            <a id="resourceFileBtn" class="btn-download" style="background: #94a3b8; opacity: 0.7; pointer-events: none; cursor: not-allowed; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap:                         <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
                             <option value="">-- Chọn Lớp --</option>
-                            <option value="CNTT1">CNTT1</option>
-                            <option value="CNTT2">CNTT2</option>
-                            <option value="CNTT3">CNTT3</option>
-                            <option value="CNTT4">CNTT4</option>
-                            <option value="CNTT5">CNTT5</option>
-                            <option value="CNTT6">CNTT6</option>
-                            <option value="CNTT8">CNTT8</option>
+                            <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
+                            <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
+                            <option value="HN-KS25-CNTT3">HN-KS25-CNTT3</option>
+                            <option value="HN-KS25-CNTT4">HN-KS25-CNTT4</option>
+                            <option value="HN-KS25-CNTT5">HN-KS25-CNTT5</option>
+                            <option value="HN-KS25-CNTT6">HN-KS25-CNTT6</option>
+                            <option value="HN-KS25-CNTT8">HN-KS25-CNTT8</option>
+                            <option value="HCM-KS25-CNTT5">HCM-KS25-CNTT5</option>
+                            <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
+                            <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
+                            <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -964,33 +946,72 @@ for o in orders:
                 <button class="btn-vis" onclick="teacherLogout()" style="background:#dc2626;">🔒 Đăng Xuất</button>
             </div>
 
-            <!-- 7 CLASS STAT CARDS -->
+            <!-- 11 CLASS STAT CARDS -->
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:20px;">
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT1</div>
-                    <div id="stat-CNTT1" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT1</div>
+                    <div id="stat-HN-KS25-CNTT1" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT2</div>
-                    <div id="stat-CNTT2" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT2</div>
+                    <div id="stat-HN-KS25-CNTT2" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT3</div>
-                    <div id="stat-CNTT3" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT3</div>
+                    <div id="stat-HN-KS25-CNTT3" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT4</div>
-                    <div id="stat-CNTT4" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT4</div>
+                    <div id="stat-HN-KS25-CNTT4" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT5</div>
-                    <div id="stat-CNTT5" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT5</div>
+                    <div id="stat-HN-KS25-CNTT5" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT6</div>
-                    <div id="stat-CNTT6" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT6</div>
+                    <div id="stat-HN-KS25-CNTT6" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HN-KS25-CNTT8</div>
+                    <div id="stat-HN-KS25-CNTT8" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HCM-KS25-CNTT5</div>
+                    <div id="stat-HCM-KS25-CNTT5" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HCM-KS25-CNTT6</div>
+                    <div id="stat-HCM-KS25-CNTT6" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HCM-KS25-CNTT7</div>
+                    <div id="stat-HCM-KS25-CNTT7" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:0.75rem; font-weight:700; color:#64748b;">HCM-KS25-CNTT8</div>
+                    <div id="stat-HCM-KS25-CNTT8" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
+                </div>
+            </div>
+
+            <!-- FILTER BY CLASS -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <label style="font-weight:700; font-size:0.9rem;">Lọc theo Lớp Học:</label>
+                    <select id="filterClassSelect" class="form-control" style="width:180px; padding:6px 12px;" onchange="loadSubmissionsTable()">
+                        <option value="ALL">Tất cả các lớp</option>
+                        <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
+                        <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
+                        <option value="HN-KS25-CNTT3">HN-KS25-CNTT3</option>
+                        <option value="HN-KS25-CNTT4">HN-KS25-CNTT4</option>
+                        <option value="HN-KS25-CNTT5">HN-KS25-CNTT5</option>
+                        <option value="HN-KS25-CNTT6">HN-KS25-CNTT6</option>
+                        <option value="HN-KS25-CNTT8">HN-KS25-CNTT8</option>
+                        <option value="HCM-KS25-CNTT5">HCM-KS25-CNTT5</option>
+                        <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
+                        <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
+                        <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
+                    </select>v style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
                     <div style="font-size:0.8rem; font-weight:700; color:#64748b;">CNTT8</div>
                     <div id="stat-CNTT8" style="font-size:1.6rem; font-weight:800; color:#dc2626;">0</div>
                 </div>
@@ -1608,14 +1629,18 @@ sys.stdout = io.StringIO()
             });
 
             // Class breakdown stats for DAY_04
-            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            const ALL_CLASSES = [
+                'HN-KS25-CNTT1', 'HN-KS25-CNTT2', 'HN-KS25-CNTT3', 'HN-KS25-CNTT4', 'HN-KS25-CNTT5', 'HN-KS25-CNTT6', 'HN-KS25-CNTT8',
+                'HCM-KS25-CNTT5', 'HCM-KS25-CNTT6', 'HCM-KS25-CNTT7', 'HCM-KS25-CNTT8'
+            ];
+            const stats = {};
+            ALL_CLASSES.forEach(c => stats[c] = 0);
             dayList.forEach(sub => {
                 const cName = sub.className || sub.class;
                 if (stats[cName] !== undefined) stats[cName]++;
             });
 
-            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
-            classKeys.forEach(ck => {
+            ALL_CLASSES.forEach(ck => {
                 let el = document.getElementById(`stat-${ck}`);
                 if (el) el.innerText = stats[ck];
             });

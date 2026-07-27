@@ -868,14 +868,19 @@ print(f"Số đơn VIP: {vip_count} đơn")</textarea>
                     </div>
                     <div class="form-group">
                         <label>Lớp Học *</label>
-                        <select id="subClass" class="form-control" required>
-                            <option value="CNTT1">CNTT1</option>
-                            <option value="CNTT2">CNTT2</option>
-                            <option value="CNTT3">CNTT3</option>
-                            <option value="CNTT4">CNTT4</option>
-                            <option value="CNTT5">CNTT5</option>
-                            <option value="CNTT6">CNTT6</option>
-                            <option value="CNTT8">CNTT8</option>
+                        <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
+                            <option value="">-- Chọn Lớp --</option>
+                            <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
+                            <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
+                            <option value="HN-KS25-CNTT3">HN-KS25-CNTT3</option>
+                            <option value="HN-KS25-CNTT4">HN-KS25-CNTT4</option>
+                            <option value="HN-KS25-CNTT5">HN-KS25-CNTT5</option>
+                            <option value="HN-KS25-CNTT6">HN-KS25-CNTT6</option>
+                            <option value="HN-KS25-CNTT8">HN-KS25-CNTT8</option>
+                            <option value="HCM-KS25-CNTT5">HCM-KS25-CNTT5</option>
+                            <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
+                            <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
+                            <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -932,14 +937,18 @@ print(f"Số đơn VIP: {vip_count} đơn")</textarea>
             </div>
 
             <!-- Class Statistics Grid (DYNAMICALLY CALCULATED PER LESSON FILTER) -->
-            <div class="stat-grid">
-                <div class="stat-card"><div id="stat-CNTT1" class="stat-num">0</div><div class="stat-label">CNTT1</div></div>
-                <div class="stat-card"><div id="stat-CNTT2" class="stat-num">0</div><div class="stat-label">CNTT2</div></div>
-                <div class="stat-card"><div id="stat-CNTT3" class="stat-num">0</div><div class="stat-label">CNTT3</div></div>
-                <div class="stat-card"><div id="stat-CNTT4" class="stat-num">0</div><div class="stat-label">CNTT4</div></div>
-                <div class="stat-card"><div id="stat-CNTT5" class="stat-num">0</div><div class="stat-label">CNTT5</div></div>
-                <div class="stat-card"><div id="stat-CNTT6" class="stat-num">0</div><div class="stat-label">CNTT6</div></div>
-                <div class="stat-card"><div id="stat-CNTT8" class="stat-num">0</div><div class="stat-label">CNTT8</div></div>
+            <div class="stat-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT1" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT1</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT2" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT2</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT3" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT3</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT4" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT4</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT5" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT5</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT6" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT6</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT8" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT8</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT5" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT5</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT6" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT6</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT7" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT7</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT8" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT8</div></div>
             </div>
 
             <!-- Admin Filters & Excel Export (FULL 14 LESSONS) -->
@@ -969,13 +978,17 @@ print(f"Số đơn VIP: {vip_count} đơn")</textarea>
                         <label style="font-weight:700; font-size:0.85rem;">🎯 Lọc Theo Lớp Học:</label>
                         <select id="filterClassSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
                             <option value="ALL">--- Tất Cả Các Lớp ---</option>
-                            <option value="CNTT1">CNTT1</option>
-                            <option value="CNTT2">CNTT2</option>
-                            <option value="CNTT3">CNTT3</option>
-                            <option value="CNTT4">CNTT4</option>
-                            <option value="CNTT5">CNTT5</option>
-                            <option value="CNTT6">CNTT6</option>
-                            <option value="CNTT8">CNTT8</option>
+                            <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
+                            <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
+                            <option value="HN-KS25-CNTT3">HN-KS25-CNTT3</option>
+                            <option value="HN-KS25-CNTT4">HN-KS25-CNTT4</option>
+                            <option value="HN-KS25-CNTT5">HN-KS25-CNTT5</option>
+                            <option value="HN-KS25-CNTT6">HN-KS25-CNTT6</option>
+                            <option value="HN-KS25-CNTT8">HN-KS25-CNTT8</option>
+                            <option value="HCM-KS25-CNTT5">HCM-KS25-CNTT5</option>
+                            <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
+                            <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
+                            <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
                         </select>
                     </div>
                 </div>
@@ -1910,15 +1923,19 @@ sys.stdout = io.StringIO()
             }
 
             // Calculate class stat breakdown
-            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            const ALL_CLASSES = [
+                'HN-KS25-CNTT1', 'HN-KS25-CNTT2', 'HN-KS25-CNTT3', 'HN-KS25-CNTT4', 'HN-KS25-CNTT5', 'HN-KS25-CNTT6', 'HN-KS25-CNTT8',
+                'HCM-KS25-CNTT5', 'HCM-KS25-CNTT6', 'HCM-KS25-CNTT7', 'HCM-KS25-CNTT8'
+            ];
+            const stats = {};
+            ALL_CLASSES.forEach(c => stats[c] = 0);
             dayList.forEach(row => {
-                const cName = row.className || row.class || row.lop || row['Lớp'] || 'CNTT1';
+                const cName = row.className || row.class || row.lop || row['Lớp'] || 'HN-KS25-CNTT1';
                 if (stats[cName] !== undefined) stats[cName]++;
             });
 
             // Update stats labels in UI
-            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
-            classKeys.forEach(ck => {
+            ALL_CLASSES.forEach(ck => {
                 let el = document.getElementById(`stat-${ck}`);
                 if (el) el.innerText = stats[ck];
             });
@@ -1941,7 +1958,7 @@ sys.stdout = io.StringIO()
             tbody.innerHTML = '';
             dayList.forEach((sub, i) => {
                 const tr = document.createElement('tr');
-                const cName = sub.className || sub.class || sub.lop || sub['Lớp'] || 'CNTT1';
+                const cName = sub.className || sub.class || sub.lop || sub['Lớp'] || 'HN-KS25-CNTT1';
                 const link = sub.link || sub.github || sub['Link Github'] || '#';
                 const sName = sub.name || sub.ho_ten || sub['Họ và Tên'] || '';
                 const sMsv = sub.msv || sub['Mã Sinh Viên'] || '';
@@ -1973,7 +1990,10 @@ sys.stdout = io.StringIO()
             }
             if (filteredList.length === 0) { alert('Chưa có dữ liệu bài nộp để xuất Excel!'); return; }
 
-            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6, "CNTT8": 8 };
+            const classOrder = {
+                "HN-KS25-CNTT1": 1, "HN-KS25-CNTT2": 2, "HN-KS25-CNTT3": 3, "HN-KS25-CNTT4": 4, "HN-KS25-CNTT5": 5, "HN-KS25-CNTT6": 6, "HN-KS25-CNTT8": 7,
+                "HCM-KS25-CNTT5": 8, "HCM-KS25-CNTT6": 9, "HCM-KS25-CNTT7": 10, "HCM-KS25-CNTT8": 11
+            };
             filteredList.sort((a, b) => {
                 let cA = classOrder[a.className || a.class || a.lop] || 99;
                 let cB = classOrder[b.className || b.class || b.lop] || 99;

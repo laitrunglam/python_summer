@@ -426,14 +426,18 @@
                 ⏳ Đang kiểm tra kết nối Google Sheet...
             </div>
 
-            <div class="stat-grid">
-                <div class="stat-card"><div id="stat-CNTT1" class="stat-num">0</div><div class="stat-label">CNTT1</div></div>
-                <div class="stat-card"><div id="stat-CNTT2" class="stat-num">0</div><div class="stat-label">CNTT2</div></div>
-                <div class="stat-card"><div id="stat-CNTT3" class="stat-num">0</div><div class="stat-label">CNTT3</div></div>
-                <div class="stat-card"><div id="stat-CNTT4" class="stat-num">0</div><div class="stat-label">CNTT4</div></div>
-                <div class="stat-card"><div id="stat-CNTT5" class="stat-num">0</div><div class="stat-label">CNTT5</div></div>
-                <div class="stat-card"><div id="stat-CNTT6" class="stat-num">0</div><div class="stat-label">CNTT6</div></div>
-                <div class="stat-card"><div id="stat-CNTT8" class="stat-num">0</div><div class="stat-label">CNTT8</div></div>
+            <div class="stat-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT1" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT1</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT2" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT2</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT3" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT3</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT4" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT4</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT5" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT5</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT6" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT6</div></div>
+                <div class="stat-card"><div id="stat-HN-KS25-CNTT8" class="stat-num">0</div><div class="stat-label">HN-KS25-CNTT8</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT5" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT5</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT6" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT6</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT7" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT7</div></div>
+                <div class="stat-card"><div id="stat-HCM-KS25-CNTT8" class="stat-num">0</div><div class="stat-label">HCM-KS25-CNTT8</div></div>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; background:#f8fafc; padding:16px; border-radius:10px; border:1px solid #e2e8f0;">
@@ -461,14 +465,18 @@
                     <div>
                         <label style="font-weight:700; font-size:0.85rem;">🎯 Lọc Theo Lớp Học:</label>
                         <select id="filterClassSelect" onchange="loadSubmissionsTable()" style="padding:6px 12px; border-radius:6px; font-weight:700;">
-                            <option value="ALL">--- Tất Cả Các Lớp (CNTT1 - CNTT8) ---</option>
-                            <option value="CNTT1">CNTT1</option>
-                            <option value="CNTT2">CNTT2</option>
-                            <option value="CNTT3">CNTT3</option>
-                            <option value="CNTT4">CNTT4</option>
-                            <option value="CNTT5">CNTT5</option>
-                            <option value="CNTT6">CNTT6</option>
-                            <option value="CNTT8">CNTT8</option>
+                            <option value="ALL">--- Tất Cả Các Lớp ---</option>
+                            <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
+                            <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
+                            <option value="HN-KS25-CNTT3">HN-KS25-CNTT3</option>
+                            <option value="HN-KS25-CNTT4">HN-KS25-CNTT4</option>
+                            <option value="HN-KS25-CNTT5">HN-KS25-CNTT5</option>
+                            <option value="HN-KS25-CNTT6">HN-KS25-CNTT6</option>
+                            <option value="HN-KS25-CNTT8">HN-KS25-CNTT8</option>
+                            <option value="HCM-KS25-CNTT5">HCM-KS25-CNTT5</option>
+                            <option value="HCM-KS25-CNTT6">HCM-KS25-CNTT6</option>
+                            <option value="HCM-KS25-CNTT7">HCM-KS25-CNTT7</option>
+                            <option value="HCM-KS25-CNTT8">HCM-KS25-CNTT8</option>
                         </select>
                     </div>
                 </div>
@@ -687,12 +695,16 @@
                 filteredList = filteredList.filter(sub => (sub.lessonId || 'DAY_01') === filterLesson);
             }
 
-            const stats = { CNTT1: 0, CNTT2: 0, CNTT3: 0, CNTT4: 0, CNTT5: 0, CNTT6: 0, CNTT8: 0 };
+            const ALL_CLASSES = [
+                'HN-KS25-CNTT1', 'HN-KS25-CNTT2', 'HN-KS25-CNTT3', 'HN-KS25-CNTT4', 'HN-KS25-CNTT5', 'HN-KS25-CNTT6', 'HN-KS25-CNTT8',
+                'HCM-KS25-CNTT5', 'HCM-KS25-CNTT6', 'HCM-KS25-CNTT7', 'HCM-KS25-CNTT8'
+            ];
+            const stats = {};
+            ALL_CLASSES.forEach(c => stats[c] = 0);
             filteredList.forEach(sub => {
                 if (stats[sub.className] !== undefined) stats[sub.className]++;
             });
-            const classKeys = ['CNTT1', 'CNTT2', 'CNTT3', 'CNTT4', 'CNTT5', 'CNTT6', 'CNTT8'];
-            classKeys.forEach(ck => {
+            ALL_CLASSES.forEach(ck => {
                 let el = document.getElementById(`stat-${ck}`);
                 if (el) el.innerText = stats[ck];
             });
@@ -762,7 +774,10 @@
             }
             if (filteredList.length === 0) { alert('Chưa có dữ liệu bài nộp để xuất Excel!'); return; }
 
-            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6, "CNTT8": 8 };
+            const classOrder = {
+                "HN-KS25-CNTT1": 1, "HN-KS25-CNTT2": 2, "HN-KS25-CNTT3": 3, "HN-KS25-CNTT4": 4, "HN-KS25-CNTT5": 5, "HN-KS25-CNTT6": 6, "HN-KS25-CNTT8": 7,
+                "HCM-KS25-CNTT5": 8, "HCM-KS25-CNTT6": 9, "HCM-KS25-CNTT7": 10, "HCM-KS25-CNTT8": 11
+            };
             filteredList.sort((a, b) => {
                 let cA = classOrder[a.className || a.class || a.lop] || 99;
                 let cB = classOrder[b.className || b.class || b.lop] || 99;
