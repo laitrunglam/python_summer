@@ -913,7 +913,29 @@ for o in orders:
                 <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">📥 Tài Liệu Bài Tập Đầy Đủ (File Word .docx)</h3>
                 <p style="color: var(--text-muted); font-size: 0.92rem;">Tải file Word phiếu bài tập thực hành Ngày 04 (chứa đầy đủ Input, Output mẫu và bài tập nâng cao).</p>
             </div>
-            <a id="resourceFileBtn" class="btn-download" style="background: #94a3b8; opacity: 0.7; pointer-events: none; cursor: not-allowed; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap:                         <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
+            <a id="resourceFileBtn" class="btn-download" href="BT_Day04_PythonCore.docx" download style="background: #94a3b8; opacity: 0.7; pointer-events: none; cursor: not-allowed; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;">
+                🔒 Hoàn Thành Đúng 2 Bài Tập Code Trên Để Mở Khóa Tải File Word (.docx)
+            </a>
+        </div>
+
+        <!-- STUDENT SUBMISSION FORM (MATCHING DAY 1, 2, 3) -->
+        <div class="submission-card" id="sec-submit">
+            <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">📤 Form Nộp Bài Tập Ngày 04 (Python Core 4)</h2>
+            <p style="color:var(--text-muted); margin-bottom:24px;">Sau khi hoàn thành bài tập thực hành, sinh viên điền thông tin và nộp link GitHub Repo để hệ thống ghi nhận.</p>
+
+            <form id="submissionForm" onsubmit="handleStudentSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và Tên Sinh Viên *</label>
+                        <input type="text" id="subName" class="form-control" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã Sinh Viên *</label>
+                        <input type="text" id="subMsv" class="form-control" placeholder="B25DCCN001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lớp Học *</label>
+                        <select id="subClass" class="form-control" required style="cursor:pointer; font-weight:600;">
                             <option value="">-- Chọn Lớp --</option>
                             <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
                             <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
