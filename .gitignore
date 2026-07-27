@@ -1,0 +1,6 @@
+# Local pyodide WASM binaries (using CDN fallback automatically)
+pyodide/
+scratch/
+.idea/
+.vscode/
+*.tmp
