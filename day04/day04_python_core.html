@@ -1037,6 +1037,7 @@ for o in orders:
                 </div>
 
                 <div style="display:flex; gap:10px;">
+                    <button class="btn-vis" onclick="syncWithGoogleSheetLive()" style="background:#0284c7; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">🔄 Đồng Bộ Với Google Sheet</button>
                     <button class="btn-vis" onclick="exportSubmissionsToFormattedExcel('DAY_04')" style="background:#16a34a; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer;">📊 Xuất Báo Cáo Excel (.xls)</button>
                 </div>
             </div>
@@ -1046,11 +1047,13 @@ for o in orders:
                 <div style="display:flex; gap:10px; margin-top:6px;">
                     <input type="text" id="googleSheetWebhookInput" class="form-control" style="flex:1;" placeholder="Dán URL Apps Script Webhook vào đây...">
                     <button class="btn-vis btn-vis-primary" onclick="saveGoogleSheetWebhook(document.getElementById('googleSheetWebhookInput').value)">Lưu URL</button>
+                    <button class="btn-vis" onclick="syncWithGoogleSheetLive()" style="background:#0284c7; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">⚡ Đồng Bộ Ngay</button>
                 </div>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <div id="syncStatusMsg" style="font-size:0.9rem; font-weight:700; color:#0284c7;">⏳ Đang đồng bộ dữ liệu live...</div>
+                <button class="btn-vis" onclick="syncWithGoogleSheetLive()" style="background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; padding:6px 14px; border-radius:6px; font-weight:800; font-size:0.85rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">🔄 Tải Lại Dữ Liệu Live</button>
             </div>
 
             <table class="admin-table" id="submissionsTable">
@@ -1082,7 +1085,7 @@ for o in orders:
                 📌 Ngày 04: Logic Nghiệp Vụ & Try-Except
             </span>
 
-            <a href="#" onclick="alert('Bài 05 (FastAPI Basics) sắp ra mắt!'); return false;" style="display: inline-flex; align-items: center; gap: 8px; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; background: var(--accent-red); padding: 10px 18px; border-radius: 8px; transition: all 0.2s;">
+            <a href="../day05/BT_Day05_FastAPI.html" style="display: inline-flex; align-items: center; gap: 8px; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; background: var(--accent-red); padding: 10px 18px; border-radius: 8px; transition: all 0.2s;">
                 Bài Tiếp Theo: Ngày 05 (FastAPI Basics) ⏭️
             </a>
         </nav>

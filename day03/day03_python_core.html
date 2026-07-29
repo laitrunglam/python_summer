@@ -1200,14 +1200,22 @@ for s in students:
         // INFINITE SEAMLESS NAVIGATION HELPER
         function navigateToLesson(val) {
             if (!val) return;
-            const currentPath = window.location.pathname;
-            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/');
+            const currentPath = window.location.pathname.replace(/\\/g, '/');
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/');
             const prefix = isInSubfolder ? '../' : './';
 
-            if (val === "DAY_01") {
-                window.location.href = prefix + "day01/day01_python_core.html";
-            } else if (val === "DAY_03") {
-                window.location.href = prefix + "day02/day02_python_core.html";
+            const routes = {
+                "DAY_01": "day01/day01_python_core.html",
+                "DAY_02": "day02/day02_python_core.html",
+                "DAY_03": "day03/day03_python_core.html",
+                "DAY_04": "day04/day04_python_core.html",
+                "DAY_05": "day05/BT_Day05_FastAPI.html",
+                "DAY_06": "day06/BT_Day06_FastAPI.html",
+                "DAY_07": "day07/BT_Day07_FastAPI.html"
+            };
+
+            if (routes[val]) {
+                window.location.href = prefix + routes[val];
             } else {
                 alert("📌 Bài học " + val + " đang trong tiến trình chuẩn bị!");
             }

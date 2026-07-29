@@ -282,42 +282,42 @@
             </div>
 
             <!-- Day 5 Card -->
-            <div class="day-card">
+            <div class="day-card active-lesson">
                 <div>
                     <div class="card-head">
                         <span class="day-badge">Tuần 1 • Bài 05</span>
-                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
                     </div>
                     <h3 class="card-title">Ngày 5: FastAPI Basics — Architecture & Uvicorn</h3>
                     <p class="card-desc">Khởi tạo RESTful API với FastAPI framework, Uvicorn server và tài liệu tự động Swagger UI.</p>
                 </div>
-                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+                <a href="day05/BT_Day05_FastAPI.html" class="btn-enter-lesson">🚀 VÀO HỌC BÀI 05 NGAY</a>
             </div>
 
             <!-- Day 6 Card -->
-            <div class="day-card">
+            <div class="day-card active-lesson">
                 <div>
                     <div class="card-head">
                         <span class="day-badge">Tuần 1 • Bài 06</span>
-                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
                     </div>
                     <h3 class="card-title">Ngày 6: FastAPI — Pydantic Schemas & Parameters</h3>
                     <p class="card-desc">Validate Request Body bằng Pydantic BaseModel, Path parameters và Query parameters.</p>
                 </div>
-                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+                <a href="day06/BT_Day06_FastAPI.html" class="btn-enter-lesson">🚀 VÀO HỌC BÀI 06 NGAY</a>
             </div>
 
             <!-- Day 7 Card -->
-            <div class="day-card">
+            <div class="day-card active-lesson">
                 <div>
                     <div class="card-head">
                         <span class="day-badge">Tuần 1 • Bài 07</span>
-                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
                     </div>
                     <h3 class="card-title">Ngày 7: Mini Project 1 — CRUD API Quản Lý Thư Viện (RAM)</h3>
                     <p class="card-desc">Xây dựng ứng dụng RESTful API hoàn chỉnh lưu trữ trên bộ nhớ RAM.</p>
                 </div>
-                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+                <a href="day07/BT_Day07_FastAPI.html" class="btn-enter-lesson">🚀 VÀO HỌC BÀI 07 NGAY</a>
             </div>
 
             <!-- Day 8 Card -->
@@ -541,7 +541,7 @@
     </div>
 
     <script>
-        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyr6zSiUA7ygY3c2_oo5XfIL7hZDvrysQaIPhZrNzGEczTYFSVwNajqdji_cvHMRaRm/exec";
+        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzUxkJRNnxeCczQONQ_Uhr2pu3tmzKmxS4HTvMBpsuW3WJwNY4vcnmDuWPw36aenOqF/exec";
         const PORTAL_RESOURCE_MAP = {
             "DAY_01": {
                 file: "BT_Day01_PythonCore.docx",
@@ -566,6 +566,24 @@
                 path: "day04/BT_Day04_PythonCore.docx",
                 title: "📄 File Word Bài Tập: BT_Day04_PythonCore.docx",
                 desc: "Tính toán hóa đơn Shopee/GrabFood, chiết khấu và xử lý lỗi chia cho 0/sai định dạng."
+            },
+            "DAY_05": {
+                file: "BT_Day05_PythonWeb.docx",
+                path: "day05/BT_Day05_PythonWeb.docx",
+                title: "📄 File Word Bài Tập: BT_Day05_PythonWeb.docx",
+                desc: "FastAPI Architecture, Uvicorn Server, RESTful Endpoints & Swagger UI auto-documentation."
+            },
+            "DAY_06": {
+                file: "BT_Day06_PythonWeb.docx",
+                path: "day06/BT_Day06_PythonWeb.docx",
+                title: "📄 File Word Bài Tập: BT_Day06_PythonWeb.docx",
+                desc: "Validate Request Body với Pydantic BaseModel, Path & Query parameters."
+            },
+            "DAY_07": {
+                file: "BT_Day07_PythonWeb.docx",
+                path: "day07/BT_Day07_PythonWeb.docx",
+                title: "📄 File Word Bài Tập: BT_Day07_PythonWeb.docx",
+                desc: "Mini Project 1: RESTful API CRUD Quản lý Thư viện lưu trữ trên RAM."
             }
         };
 
@@ -596,13 +614,21 @@
         function navigateToLesson(val) {
             if (!val) return;
             const currentPath = window.location.pathname.replace(/\\/g, '/');
-            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/');
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/');
             const prefix = isInSubfolder ? '../' : './';
 
-            if (val === "DAY_01") {
-                window.location.href = prefix + "day01/day01_python_core.html";
-            } else if (val === "DAY_02") {
-                window.location.href = prefix + "day02/day02_python_core.html";
+            const routes = {
+                "DAY_01": "day01/day01_python_core.html",
+                "DAY_02": "day02/day02_python_core.html",
+                "DAY_03": "day03/day03_python_core.html",
+                "DAY_04": "day04/day04_python_core.html",
+                "DAY_05": "day05/BT_Day05_FastAPI.html",
+                "DAY_06": "day06/BT_Day06_FastAPI.html",
+                "DAY_07": "day07/BT_Day07_FastAPI.html"
+            };
+
+            if (routes[val]) {
+                window.location.href = prefix + routes[val];
             } else {
                 alert("📌 Bài học " + val + " đang trong tiến trình chuẩn bị!");
             }

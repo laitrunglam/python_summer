@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Day 1 | Rikkei Education</title>
+    <title>Python Day 6 | Rikkei Education</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Prism.js Syntax Highlighting for Python -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -20,34 +23,53 @@
     <style>
         :root {
             /* Palette: STRICTLY White background, Vivid Red accents, Dark Gray / Black elements */
-            --bg-body: #ffffff;          /* Pure White Background */
-            --bg-card: #ffffff;          /* White Cards */
-            --bg-subtle: #f4f4f5;        /* Light Gray */
-            
+            --bg-body: #ffffff;
+            /* Pure White Background */
+            --bg-card: #ffffff;
+            /* White Cards */
+            --bg-subtle: #f4f4f5;
+            /* Light Gray */
+
             /* EXACT VS CODE DARK PLUS THEME PALETTE */
-            --vscode-bg: #1e1e1e;        /* VS Code Background Dark */
-            --vscode-topbar: #252526;    /* VS Code Header Bar */
-            --vscode-border: #3c3c3c;    /* VS Code Border */
-            --vscode-text: #d4d4d4;      /* VS Code Primary Plain Text */
-            --vscode-keyword: #569cd6;   /* VS Code Blue (def, for, in, if, else, import) */
-            --vscode-string: #ce9178;    /* VS Code Terracotta Pink ("SV01", "Nguyễn Văn An") */
-            --vscode-function: #dcdcaa;  /* VS Code Gold Yellow (print, append, strip) */
-            --vscode-type: #4ec9b0;      /* VS Code Teal Type (list, set, dict, int) */
-            --vscode-variable: #9cdcfe;  /* VS Code Cyan Variable */
-            --vscode-comment: #6a9955;   /* VS Code Green Comment (# ...) */
-            --vscode-number: #b5cea8;    /* VS Code Light Sage Number (4.2, 5.0, 150000) */
-            
-            --accent-red: #dc2626;       /* Primary Red */
+            --vscode-bg: #1e1e1e;
+            /* VS Code Background Dark */
+            --vscode-topbar: #252526;
+            /* VS Code Header Bar */
+            --vscode-border: #3c3c3c;
+            /* VS Code Border */
+            --vscode-text: #d4d4d4;
+            /* VS Code Primary Plain Text */
+            --vscode-keyword: #569cd6;
+            /* VS Code Blue (def, for, in, if, else, import) */
+            --vscode-string: #ce9178;
+            /* VS Code Terracotta Pink ("SV01", "Nguyễn Văn An") */
+            --vscode-function: #dcdcaa;
+            /* VS Code Gold Yellow (print, append, strip) */
+            --vscode-type: #4ec9b0;
+            /* VS Code Teal Type (list, set, dict, int) */
+            --vscode-variable: #9cdcfe;
+            /* VS Code Cyan Variable */
+            --vscode-comment: #6a9955;
+            /* VS Code Green Comment (# ...) */
+            --vscode-number: #b5cea8;
+            /* VS Code Light Sage Number (4.2, 5.0, 150000) */
+
+            --accent-red: #dc2626;
+            /* Primary Red */
             --accent-red-dark: #b91c1c;
             --accent-red-light: #fef2f2;
-            
-            --text-primary: #09090b;     /* Black */
-            --text-secondary: #27272a;   /* Dark Slate */
-            --text-muted: #616167;       /* Muted Text */
-            
-            --border-color: #e4e4e7;     /* Border Light Gray */
+
+            --text-primary: #09090b;
+            /* Black */
+            --text-secondary: #27272a;
+            /* Dark Slate */
+            --text-muted: #616167;
+            /* Muted Text */
+
+            --border-color: #e4e4e7;
+            /* Border Light Gray */
             --border-dark: #a1a1aa;
-            
+
             --radius-lg: 12px;
             --radius-md: 8px;
             --radius-sm: 4px;
@@ -190,7 +212,8 @@
             transition: all 0.2s ease;
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover,
+        .nav-link.active {
             color: #ffffff;
             background: var(--accent-red);
             border-color: var(--accent-red);
@@ -493,7 +516,9 @@
         }
 
         /* STRICT VS CODE DARK PLUS SYNTAX HIGHLIGHTING OVERRIDES FOR PRISM */
-        pre[class*="language-"], code[class*="language-"], .vscode-highlight-area {
+        pre[class*="language-"],
+        code[class*="language-"],
+        .vscode-highlight-area {
             margin: 0 !important;
             padding: 22px !important;
             background: var(--vscode-bg) !important;
@@ -506,24 +531,67 @@
         }
 
         /* CODE BLOCK DARK THEME (ONLY FOR PRE & CODE INSIDE PRE) */
-        pre, pre code, pre[class*="language-"], code[class*="language-"], .live-code-highlight {
+        pre,
+        pre code,
+        pre[class*="language-"],
+        code[class*="language-"],
+        .live-code-highlight {
             background-color: #1e1e1e !important;
             color: #f8fafc !important;
         }
-        pre span:not([class*="token"]), pre code span:not([class*="token"]) {
+
+        pre span:not([class*="token"]),
+        pre code span:not([class*="token"]) {
             color: #f8fafc !important;
         }
-        .token.keyword, .keyword-blue { color: #569cd6 !important; font-weight: bold; }
-        .token.string, .string-pink { color: #ce9178 !important; }
-        .token.function, .function-gold { color: #dcdcaa !important; }
-        .token.builtin, .type-teal { color: #4ec9b0 !important; }
-        .token.variable, .var-cyan { color: #9cdcfe !important; }
-        .token.comment, .comment-green { color: #6a9955 !important; font-style: italic; }
-        .token.number, .token.boolean, .num-sage { color: #b5cea8 !important; }
-        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
+
+        .token.keyword,
+        .keyword-blue {
+            color: #569cd6 !important;
+            font-weight: bold;
+        }
+
+        .token.string,
+        .string-pink {
+            color: #ce9178 !important;
+        }
+
+        .token.function,
+        .function-gold {
+            color: #dcdcaa !important;
+        }
+
+        .token.builtin,
+        .type-teal {
+            color: #4ec9b0 !important;
+        }
+
+        .token.variable,
+        .var-cyan {
+            color: #9cdcfe !important;
+        }
+
+        .token.comment,
+        .comment-green {
+            color: #6a9955 !important;
+            font-style: italic;
+        }
+
+        .token.number,
+        .token.boolean,
+        .num-sage {
+            color: #b5cea8 !important;
+        }
+
+        .token.operator,
+        .token.punctuation {
+            color: #d4d4d4 !important;
+        }
 
         /* ISOLATE CODE SPANS FROM GLOBAL PAGE CSS CLASS CORRUPTION (POINT 5 FIX) */
-        .live-code-highlight span, pre span, code span {
+        .live-code-highlight span,
+        pre span,
+        code span {
             display: inline !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -536,7 +604,7 @@
         }
 
         /* CLEAN LIGHT MODE INLINE CODE STYLING (IMAGE 3 BUG FIX) */
-        :not(pre) > code {
+        :not(pre)>code {
             background: #f1f5f9 !important;
             color: #dc2626 !important;
             padding: 2px 7px !important;
@@ -827,7 +895,7 @@
             font-size: 0.88rem;
             color: #15803d;
         }
-    
+
         /* VS CODE DARK THEME & AUTO-EXPANDING LIVE CODE CONTAINER */
         .live-code-container {
             position: relative !important;
@@ -838,7 +906,9 @@
             border: 1px solid #2d2d2d !important;
             margin-top: 10px !important;
         }
-        .live-code-highlight, .code-textarea {
+
+        .live-code-highlight,
+        .code-textarea {
             margin: 0 !important;
             padding: 18px 20px !important;
             font-family: Consolas, 'Fira Code', 'Courier New', monospace !important;
@@ -857,6 +927,7 @@
             -webkit-font-variant-ligatures: none !important;
             font-feature-settings: "liga" 0, "calt" 0 !important;
         }
+
         .live-code-highlight {
             position: absolute !important;
             top: 0 !important;
@@ -869,6 +940,7 @@
             overflow: hidden !important;
             z-index: 1 !important;
         }
+
         .code-textarea {
             position: relative !important;
             width: 100% !important;
@@ -881,7 +953,9 @@
             z-index: 2 !important;
         }
 
-        .live-code-highlight span, pre span, code span {
+        .live-code-highlight span,
+        pre span,
+        code span {
             display: inline !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -895,13 +969,40 @@
             font-size: inherit !important;
             line-height: inherit !important;
         }
-        .token.keyword { color: #569cd6 !important; font-weight: bold !important; }
-        .token.string { color: #ce9178 !important; }
-        .token.function, .token.builtin { color: #dcdcaa !important; font-weight: 600 !important; }
-        .token.comment { color: #6a9955 !important; font-style: italic !important; }
-        .token.number, .token.boolean { color: #b5cea8 !important; }
-        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
-        .token.variable { color: #9cdcfe !important; }
+
+        .token.keyword {
+            color: #569cd6 !important;
+            font-weight: bold !important;
+        }
+
+        .token.string {
+            color: #ce9178 !important;
+        }
+
+        .token.function,
+        .token.builtin {
+            color: #dcdcaa !important;
+            font-weight: 600 !important;
+        }
+
+        .token.comment {
+            color: #6a9955 !important;
+            font-style: italic !important;
+        }
+
+        .token.number,
+        .token.boolean {
+            color: #b5cea8 !important;
+        }
+
+        .token.operator,
+        .token.punctuation {
+            color: #d4d4d4 !important;
+        }
+
+        .token.variable {
+            color: #9cdcfe !important;
+        }
 
         .terminal-box {
             background: #18181b !important;
@@ -917,16 +1018,19 @@
 
 
         /* PERFECT VS CODE DARK THEME EDITOR & CODE VISIBILITY FIX */
-        .editor-container, .editor-wrapper {
+        .editor-container,
+        .editor-wrapper {
             background: #1e1e1e !important;
             border-radius: 8px !important;
             border: 1px solid #333333 !important;
             overflow: hidden !important;
             margin-top: 14px !important;
             margin-bottom: 20px !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         }
-        .editor-topbar, .editor-header {
+
+        .editor-topbar,
+        .editor-header {
             background: #252526 !important;
             padding: 10px 18px !important;
             display: flex !important;
@@ -934,12 +1038,15 @@
             align-items: center !important;
             border-bottom: 1px solid #333333 !important;
         }
-        .editor-file-title, .editor-title {
+
+        .editor-file-title,
+        .editor-title {
             color: #cccccc !important;
             font-family: 'Fira Code', Consolas, monospace !important;
             font-size: 0.9rem !important;
             font-weight: 600 !important;
         }
+
         .live-code-container {
             position: relative !important;
             width: 100% !important;
@@ -947,7 +1054,9 @@
             min-height: 160px !important;
             overflow: hidden !important;
         }
-        .live-code-highlight, .code-textarea {
+
+        .live-code-highlight,
+        .code-textarea {
             margin: 0 !important;
             padding: 18px 20px !important;
             font-family: Consolas, 'Fira Code', 'Courier New', monospace !important;
@@ -964,6 +1073,7 @@
             box-sizing: border-box !important;
             min-height: 160px !important;
         }
+
         .live-code-highlight {
             position: absolute !important;
             top: 0 !important;
@@ -976,6 +1086,7 @@
             overflow: hidden !important;
             z-index: 1 !important;
         }
+
         .code-textarea {
             position: relative !important;
             width: 100% !important;
@@ -989,7 +1100,9 @@
         }
 
         /* PRISM VS CODE TOKEN COLORS (GUARANTEED HIGH PRIORITY) */
-        .live-code-highlight span, pre span, code span {
+        .live-code-highlight span,
+        pre span,
+        code span {
             display: inline !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -1003,15 +1116,43 @@
             font-size: inherit !important;
             line-height: inherit !important;
         }
-        .token.keyword { color: #569cd6 !important; font-weight: bold !important; }
-        .token.string { color: #ce9178 !important; }
-        .token.function, .token.builtin { color: #dcdcaa !important; font-weight: 600 !important; }
-        .token.comment { color: #6a9955 !important; font-style: italic !important; }
-        .token.number, .token.boolean { color: #b5cea8 !important; }
-        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
-        .token.variable { color: #9cdcfe !important; }
 
-        .terminal-box, .output-box {
+        .token.keyword {
+            color: #569cd6 !important;
+            font-weight: bold !important;
+        }
+
+        .token.string {
+            color: #ce9178 !important;
+        }
+
+        .token.function,
+        .token.builtin {
+            color: #dcdcaa !important;
+            font-weight: 600 !important;
+        }
+
+        .token.comment {
+            color: #6a9955 !important;
+            font-style: italic !important;
+        }
+
+        .token.number,
+        .token.boolean {
+            color: #b5cea8 !important;
+        }
+
+        .token.operator,
+        .token.punctuation {
+            color: #d4d4d4 !important;
+        }
+
+        .token.variable {
+            color: #9cdcfe !important;
+        }
+
+        .terminal-box,
+        .output-box {
             background: #18181b !important;
             color: #4ade80 !important;
             font-family: 'Fira Code', Consolas, monospace !important;
@@ -1021,20 +1162,33 @@
             min-height: 70px !important;
             white-space: pre-wrap !important;
         }
-        .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block; transition: background 0.3s; }
-        .status-dot.ready { background: #22c55e !important; }
-    
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ef4444;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .status-dot.ready {
+            background: #22c55e !important;
+        }
+
 
         /* BULLETPROOF LIVE CODE CONTAINER & VISIBILITY FIX */
-        .editor-container, .editor-wrapper {
+        .editor-container,
+        .editor-wrapper {
             background: #1e1e1e !important;
             border-radius: 8px !important;
             border: 1px solid #333333 !important;
             overflow: hidden !important;
             margin-top: 14px !important;
             margin-bottom: 20px !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         }
+
         .live-code-container {
             position: relative !important;
             width: 100% !important;
@@ -1042,7 +1196,9 @@
             min-height: 180px !important;
             overflow: hidden !important;
         }
-        .live-code-highlight, .code-textarea {
+
+        .live-code-highlight,
+        .code-textarea {
             margin: 0 !important;
             padding: 18px 20px !important;
             font-family: Consolas, 'Fira Code', 'Courier New', monospace !important;
@@ -1058,6 +1214,7 @@
             box-sizing: border-box !important;
             min-height: 180px !important;
         }
+
         .live-code-highlight {
             position: absolute !important;
             top: 0 !important;
@@ -1070,6 +1227,7 @@
             overflow: hidden !important;
             z-index: 1 !important;
         }
+
         .code-textarea {
             position: relative !important;
             width: 100% !important;
@@ -1081,7 +1239,10 @@
             display: block !important;
             z-index: 2 !important;
         }
-        .live-code-highlight span, pre span, code span {
+
+        .live-code-highlight span,
+        pre span,
+        code span {
             display: inline !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -1090,14 +1251,41 @@
             font-size: inherit !important;
             line-height: inherit !important;
         }
-        .token.keyword { color: #569cd6 !important; font-weight: bold !important; }
-        .token.string { color: #ce9178 !important; }
-        .token.function, .token.builtin { color: #dcdcaa !important; font-weight: 600 !important; }
-        .token.comment { color: #6a9955 !important; font-style: italic !important; }
-        .token.number, .token.boolean { color: #b5cea8 !important; }
-        .token.operator, .token.punctuation { color: #d4d4d4 !important; }
-        .token.variable { color: #9cdcfe !important; }
-    
+
+        .token.keyword {
+            color: #569cd6 !important;
+            font-weight: bold !important;
+        }
+
+        .token.string {
+            color: #ce9178 !important;
+        }
+
+        .token.function,
+        .token.builtin {
+            color: #dcdcaa !important;
+            font-weight: 600 !important;
+        }
+
+        .token.comment {
+            color: #6a9955 !important;
+            font-style: italic !important;
+        }
+
+        .token.number,
+        .token.boolean {
+            color: #b5cea8 !important;
+        }
+
+        .token.operator,
+        .token.punctuation {
+            color: #d4d4d4 !important;
+        }
+
+        .token.variable {
+            color: #9cdcfe !important;
+        }
+
 
         /* TEST BOX RESULTS */
         .test-box {
@@ -1107,35 +1295,46 @@
             font-size: 0.95rem;
             font-weight: 600;
         }
+
         .test-box.pass {
             display: block !important;
             background: #f0fdf4 !important;
             border: 1px solid #bbf7d0 !important;
             color: #16a34a !important;
         }
+
         .test-box.fail {
             display: block !important;
             background: #fef2f2 !important;
             border: 1px solid #fecaca !important;
             color: #dc2626 !important;
         }
-
-</style>
+    </style>
 </head>
+
 <body>
-<header style="background:#ffffff; border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
-        <div class="nav-container" style="max-width:1200px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; align-items:center;">
+    <header
+        style="background:#ffffff; border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+        <div class="nav-container"
+            style="max-width:1200px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; align-items:center;">
             <div class="logo" style="display:flex; align-items:center; gap:12px;">
-                <span class="logo-badge" style="background:#dc2626; color:white; font-weight:800; font-size:0.85rem; padding:6px 12px; border-radius:6px;">Rikkei Edu • Python & FastAPI</span>
-                <a href="../index.html" style="background:#0f172a; color:#fff; text-decoration:none; font-weight:800; font-size:0.85rem; padding:6px 14px; border-radius:6px; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s;">🏠 Trang Chủ Portal</a>
+                <span class="logo-badge"
+                    style="background:#dc2626; color:white; font-weight:800; font-size:0.85rem; padding:6px 12px; border-radius:6px;">Rikkei
+                    Edu • Python & FastAPI</span>
+                <a href="../index.html"
+                    style="background:#0f172a; color:#fff; text-decoration:none; font-weight:800; font-size:0.85rem; padding:6px 14px; border-radius:6px; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s;">🏠
+                    Trang Chủ Portal</a>
             </div>
 
             <div style="display:flex; align-items:center; gap:14px;">
-                <div id="pyodideStatus" class="status-badge" style="display:inline-flex; align-items:center; gap:6px; background:#f1f5f9; padding:6px 12px; border-radius:20px; font-size:0.85rem; font-weight:600;">
-                    <span id="statusDot" class="status-dot ready" style="width:10px; height:10px; border-radius:50%; background:#22c55e;"></span>
+                <div id="pyodideStatus" class="status-badge"
+                    style="display:inline-flex; align-items:center; gap:6px; background:#f1f5f9; padding:6px 12px; border-radius:20px; font-size:0.85rem; font-weight:600;">
+                    <span id="statusDot" class="status-dot ready"
+                        style="width:10px; height:10px; border-radius:50%; background:#22c55e;"></span>
                     <span id="statusText" style="color:#334155;">🟢 Python Engine: Sẵn sàng</span>
                 </div>
-                <button class="btn-teacher-auth" onclick="openTeacherAuthModal()" style="background:#dc2626; color:#ffffff; border:none; padding:8px 16px; border-radius:6px; font-weight:700; font-size:0.88rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(220,38,38,0.2); transition:all 0.2s;">
+                <button class="btn-teacher-auth" onclick="openTeacherAuthModal()"
+                    style="background:#dc2626; color:#ffffff; border:none; padding:8px 16px; border-radius:6px; font-weight:700; font-size:0.88rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(220,38,38,0.2); transition:all 0.2s;">
                     🔑 Đăng Nhập Quản Lý (Giảng Viên)
                 </button>
             </div>
@@ -1144,15 +1343,21 @@
 
 
     <!-- Header with Master Curriculum Dropdown (ACCURATE 14-DAY SYLLABUS TITLES) -->
-    <header class="master-header" style="background: var(--card-bg, #ffffff); border-bottom: 1px solid var(--border-color, #e2e8f0); padding: 14px 24px; margin-bottom: 20px;">
-        <div class="master-header-container" style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <header class="master-header"
+        style="background: var(--card-bg, #ffffff); border-bottom: 1px solid var(--border-color, #e2e8f0); padding: 14px 24px; margin-bottom: 20px;">
+        <div class="master-header-container"
+            style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
             <div style="flex:1; min-width:320px;">
-                <span class="banner-badge" id="bannerBadge" style="background:var(--accent-red, #dc2626); color:white; font-weight:800; font-size:0.8rem; padding:4px 10px; border-radius:4px; text-transform:uppercase;">Tuần 1 • Ngày 1</span>
-                <h1 class="banner-title" id="bannerTitle" style="font-size:1.6rem; font-weight:800; color:var(--text-primary, #0f172a); margin-top:8px;">Python Core 1 — Cấu Trúc Dữ Liệu & Tư Duy Phân Tích Mảng</h1>
+                <span class="banner-badge" id="bannerBadge"
+                    style="background:var(--accent-red, #dc2626); color:white; font-weight:800; font-size:0.8rem; padding:4px 10px; border-radius:4px; text-transform:uppercase;">Tuần
+                    1 • Ngày 6</span>
+                <h1 class="banner-title" id="bannerTitle"
+                    style="font-size:1.6rem; font-weight:800; color:var(--text-primary, #0f172a); margin-top:8px;">
+                    Python Web 2 — FASTAPI PYDANTIC SCHEMAS & CRUD ENDPOINTS (IN-MEMORY)</h1>
             </div>
         </div>
     </header>
-    
+
 
     <!-- Compact Navigation Bar -->
     <nav class="top-nav">
@@ -1167,10 +1372,15 @@
     <div class="main-wrapper">
 
         <!-- Dynamic Lesson Header Banner -->
-        <div style="background: var(--accent-red-light); border: 2px solid var(--accent-red); padding: 18px 24px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div
+            style="background: var(--accent-red-light); border: 2px solid var(--accent-red); padding: 18px 24px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
-                <span id="bannerBadge" style="background: var(--accent-red); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase;">Tuần 1 • Ngày 1</span>
-                <h2 id="bannerTitle" style="color: var(--accent-red-dark); font-weight: 800; font-size: 1.25rem; margin-top: 4px;">Python Core 1 — Cấu Trúc Dữ Liệu & Tư Duy Phân Tích Mảng</h2>
+                <span id="bannerBadge"
+                    style="background: var(--accent-red); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase;">Tuần
+                    1 • Ngày 6</span>
+                <h2 id="bannerTitle"
+                    style="color: var(--accent-red-dark); font-weight: 800; font-size: 1.25rem; margin-top: 4px;">Python
+                    Web 2 — FASTAPI PYDANTIC SCHEMAS & CRUD ENDPOINTS (IN-MEMORY)</h2>
             </div>
             <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">
                 ⏱️ Thời lượng học: <b>60 - 90 phút</b> | 🎯 Mức độ: <b>Cơ bản ➔ Nâng cao</b>
@@ -1178,393 +1388,861 @@
         </div>
 
         <!-- Section 1: Lý Thuyết Ôn Tập Chuyên Sâu -->
-        <section id="sec-theory" class="card-panel">
+        <style>
+            /* ============ CSS fallback cho toàn bộ section lý thuyết ============ */
+            .theory-quote {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                margin: 16px 0;
+                padding: 14px 16px;
+                background: #f0f6ff;
+                border-left: 4px solid #4285f4;
+                border-radius: 6px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .theory-quote .quote-icon {
+                font-size: 18px;
+                line-height: 1;
+            }
+
+            .theory-figure {
+                margin: 18px 0;
+                text-align: center;
+            }
+
+            .theory-figure svg {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .figure-caption {
+                margin-top: 6px;
+                font-size: 12px;
+                font-style: italic;
+                color: #666;
+            }
+
+            /* Thanh nút chuyển tab kiến thức */
+            .tab-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin: 4px 0 18px 0;
+                border-bottom: 2px solid #eef0f3;
+                padding-bottom: 12px;
+            }
+
+            .tab-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 9px 16px;
+                border: 1px solid #dfe3e8;
+                background: #f7f8fa;
+                color: #444;
+                border-radius: 999px;
+                font-size: 13.5px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+
+            .tab-btn .tab-btn-icon {
+                font-size: 15px;
+            }
+
+            .tab-btn:hover {
+                background: #eef3ff;
+                border-color: #a9c4f5;
+                color: #1a56d6;
+                transform: translateY(-1px);
+            }
+
+            .tab-btn.active {
+                background: linear-gradient(135deg, #4285f4, #1a56d6);
+                border-color: #1a56d6;
+                color: #fff;
+                box-shadow: 0 4px 10px rgba(26, 86, 214, 0.25);
+            }
+
+            .tab-pane {
+                animation: fadeInTab 0.25s ease;
+            }
+
+            @keyframes fadeInTab {
+                from {
+                    opacity: 0;
+                    transform: translateY(4px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Bảng lý thuyết */
+            .theory-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 14px 0 20px 0;
+                font-size: 13.5px;
+            }
+
+            .theory-table th,
+            .theory-table td {
+                border: 1px solid #e3e6ea;
+                padding: 9px 12px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            .theory-table th {
+                background: #f4f7fd;
+                font-weight: 700;
+                color: #223;
+            }
+
+            .theory-table tr:nth-child(even) td {
+                background: #fafbfd;
+            }
+
+            .theory-table code {
+                background: #eef1f6;
+                padding: 1px 6px;
+                border-radius: 4px;
+            }
+
+            /* Khối code/JSON */
+            .code-block {
+                background: #1e1e2e;
+                color: #d4d4dc;
+                border-radius: 8px;
+                padding: 14px 16px;
+                font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.45;
+                overflow-x: auto;
+                margin: 14px 0;
+            }
+
+            .code-block .k {
+                color: #7dcfff;
+            }
+
+            .code-block .s {
+                color: #9ece6a;
+            }
+
+            /* Badge nhóm status code / method */
+            .badge {
+                display: inline-block;
+                padding: 2px 9px;
+                border-radius: 999px;
+                font-size: 12px;
+                font-weight: 700;
+                color: #fff;
+            }
+
+            .badge-get {
+                background: #34a853;
+            }
+
+            .badge-post {
+                background: #4285f4;
+            }
+
+            .badge-put {
+                background: #f9ab00;
+            }
+
+            .badge-delete {
+                background: #ea4335;
+            }
+
+            .badge-2xx {
+                background: #34a853;
+            }
+
+            .badge-3xx {
+                background: #4285f4;
+            }
+
+            .badge-4xx {
+                background: #f9ab00;
+            }
+
+            .badge-5xx {
+                background: #ea4335;
+            }
+        </style>
+
+        <section id="sec-theory-2" class="card-panel">
             <div class="section-header">
                 <div class="section-num">1</div>
-                <div class="section-title">Lý Thuyết Ôn Tập Chuyên Sâu: 4 Cấu Trúc Dữ Liệu & List Comprehension</div>
+                <div class="section-title">Pydantic Schema &amp; Router trong FastAPI</div>
             </div>
 
-            <!-- Theory Block 1: Phân tích 4 Cấu trúc dữ liệu -->
-            <div class="theory-block">
-                <h3 class="theory-h3">📌 1. Phân Tích Kỹ Thuật 4 Cấu Trúc Dữ Liệu Cốt Lõi</h3>
-                <p class="theory-p">
-                    Trong Python, việc lựa chọn đúng cấu trúc dữ liệu không chỉ giúp mã nguồn sạch mà còn quyết định trực tiếp hiệu năng thực thi của hệ thống khi xử lý mảng dữ liệu lớn.
-                </p>
-
-                <!-- Interactive Tabs -->
-                <div class="tabs-header">
-                    <button class="tab-btn active" onclick="openTab('list')">1. List (Mảng động)</button>
-                    <button class="tab-btn" onclick="openTab('dict')">2. Dictionary (Hash Map)</button>
-                    <button class="tab-btn" onclick="openTab('tuple')">3. Tuple (Immutable Sequence)</button>
-                    <button class="tab-btn" onclick="openTab('set')">4. Set (Hash Set)</button>
-                </div>
-
-                <!-- Tab 1: List -->
-                <div id="tab-list" class="tab-pane active">
-                    <p class="theory-p"><b>List</b> là chuỗi phần tử có thứ tự (ordered), hỗ trợ thay đổi (mutable) và cho phép lưu trữ các giá trị trùng lặp.</p>
-                    <h4 class="theory-h4">Cơ chế bộ nhớ CPython:</h4>
-                    <p class="theory-p">
-                        List trong CPython thực chất là một <b>Mảng động các con trỏ (Array of Pointers)</b>. Khi bạn thêm phần tử bằng <code>append()</code>, Python sẽ cấp phát thừa bộ nhớ (Over-allocation) để đạt độ phức tạp <b>O(1) amortized</b>.
-                    </p>
-                    <h4 class="theory-h4">Độ phức tạp các thao tác phổ biến:</h4>
-                    <ul class="theory-list">
-                        <li><code>lst[i]</code> (Truy xuất index): <b>O(1)</b> - Siêu tốc do tính toán địa chỉ ô nhớ trực tiếp.</li>
-                        <li><code>lst.append(x)</code> (Thêm cuối): <b>O(1) amortized</b>.</li>
-                        <li><code>lst.insert(0, x)</code> / <code>lst.pop(0)</code> (Chèn/Xóa đầu): <b>O(n)</b> - Tốn chi phí vì phải dịch chuyển toàn bộ phần tử phía sau.</li>
-                        <li><code>x in lst</code> (Tìm kiếm): <b>O(n)</b> - Duyệt tuyến tính từ đầu tới cuối mảng.</li>
-                    </ul>
-                </div>
-
-                <!-- Tab 2: Dict -->
-                <div id="tab-dict" class="tab-pane">
-                    <p class="theory-p"><b>Dictionary</b> là cấu trúc dữ liệu lưu trữ theo cặp <b>Key-Value</b>, tối ưu hóa cho việc tìm kiếm theo Key.</p>
-                    <h4 class="theory-h4">Quy tắc Hash Table & Key Immutability:</h4>
-                    <p class="theory-p">
-                        Key trong Dict bắt buộc phải là đối tượng <b>Hashable</b> (Immutable như <code>int</code>, <code>str</code>, <code>tuple</code>). Không thể dùng <code>List</code> hoặc <code>Dict</code> làm Key do chúng có thể bị thay đổi giá trị.
-                    </p>
-                    <h4 class="theory-h4">Độ phức tạp & Kỹ thuật truy xuất an toàn:</h4>
-                    <ul class="theory-list">
-                        <li><code>d[key]</code> / <code>d[key] = val</code>: <b>O(1) average</b> nhờ hàm băm Hash Function.</li>
-                        <li>Tránh crash <code>KeyError</code>: Sử dụng <code>dict.get('key', default_value)</code> thay vì truy xuất trực tiếp.</li>
-                        <li>Duyệt nhanh: <code>for key, val in d.items():</code> lấy đồng thời Key và Value.</li>
-                    </ul>
-                </div>
-
-                <!-- Tab 3: Tuple -->
-                <div id="tab-tuple" class="tab-pane">
-                    <p class="theory-p"><b>Tuple</b> là chuỗi phần tử cố định (Immutable). Sau khi được tạo ra, không thể thêm, sửa, xóa bất kỳ phần tử nào.</p>
-                    <h4 class="theory-h4">Tại sao nên dùng Tuple thay vì List?</h4>
-                    <ul class="theory-list">
-                        <li><b>Hiệu năng & Bộ nhớ:</b> Tuple tốn ít dung lượng RAM hơn và khởi tạo nhanh hơn List.</li>
-                        <li><b>Tính An Toàn Dữ Liệu:</b> Đảm bảo dữ liệu cấu hình (ví dụ: tọa độ, DB credentials) không bị vô tình chỉnh sửa.</li>
-                        <li><b>Dùng làm Key trong Dict:</b> Do Tuple là Immutable (hashable) nên có thể làm Key cho Dictionary.</li>
-                    </ul>
-                </div>
-
-                <!-- Tab 4: Set -->
-                <div id="tab-set" class="tab-pane">
-                    <p class="theory-p"><b>Set</b> là tập hợp chứa các phần tử <b>Duy nhất (Unique)</b> và <b>Không bảo toàn thứ tự</b>.</p>
-                    <h4 class="theory-h4">Ứng dụng đại số tập hợp & Tìm kiếm siêu tốc:</h4>
-                    <ul class="theory-list">
-                        <li><code>x in set</code>: <b>O(1)</b> - Nhanh gấp hàng ngàn lần so với <code>x in list</code> khi tập dữ liệu lớn.</li>
-                        <li>Loại bỏ phần tử trùng lặp: <code>unique_items = list(set(raw_list))</code>.</li>
-                        <li>Phép toán tập hợp: Hợp <code>A | B</code>, Giao <code>A & B</code>, Hiệu <code>A - B</code>.</li>
-                    </ul>
-                </div>
+            <!-- Thanh nút chuyển tab kiến thức -->
+            <div class="tab-nav" role="tablist" aria-label="Chuyển kiến thức Pydantic Schema và Router">
+                <button class="tab-btn active" data-target="tab-pydantic" role="tab" aria-selected="true">
+                    <span class="tab-btn-icon">📦</span> Pydantic Schema
+                </button>
+                <button class="tab-btn" data-target="tab-validation" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">✅</span> Validation
+                </button>
+                <button class="tab-btn" data-target="tab-separate" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🔀</span> Model vs Schema
+                </button>
+                <button class="tab-btn" data-target="tab-router" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🧭</span> APIRouter
+                </button>
+                <button class="tab-btn" data-target="tab-crud" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🛠️</span> POST &amp; GET /products
+                </button>
+                <button class="tab-btn" data-target="tab-summary2" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🔁</span> Tổng kết luồng
+                </button>
             </div>
 
-            <!-- Theory Block 2: Hướng dẫn List Comprehension (POINT 2 ENRICHMENT) -->
             <div class="theory-block">
-                <h3 class="theory-h3">⚡ 2. Hướng Dẫn List Comprehension Chi Tiết & Dễ Hiểu</h3>
-                <p class="theory-p">
-                    <b>List Comprehension</b> là kỹ thuật tạo danh sách (List) ngắn gọn, mượt mà và tối ưu hiệu năng của Python. Giúp bạn thay thế toàn bộ vòng lặp <code>for</code> rườm rà 4-5 dòng thành <b>chỉ 1 dòng duy nhất</b>!
-                </p>
 
-                <h4 class="theory-h4">📌 Cấu trúc 3 thành phần cốt lõi:</h4>
-                <div style="background:#f8fafc; border:2px dashed #cbd5e1; padding:18px; border-radius:10px; margin:16px 0; font-family:'Fira Code', monospace; font-size:1.05rem; color:#0f172a; text-align:center;">
-                    new_list = [ <span style="color:#dc2626; font-weight:800;">[1. Expression]</span> <span style="color:#2563eb; font-weight:800;">for item in iterable</span> <span style="color:#16a34a; font-weight:800;">if [3. Condition]</span> ]
-                </div>
+                <!-- ============ Tab 1: Pydantic Schema là gì ============ -->
+                <div id="tab-pydantic" class="tab-pane active">
+                    <p class="theory-p"><b>Pydantic</b> là thư viện Python dùng để định nghĩa và kiểm tra kiểu dữ liệu
+                        (type-safe) thông qua các lớp kế thừa từ <code>BaseModel</code>. FastAPI dùng Pydantic làm "lớp
+                        hợp đồng dữ liệu" (data contract) giữa Client và Server.</p>
 
-                <ul class="theory-list" style="margin-bottom:20px;">
-                    <li><b style="color:#dc2626;">1. Expression (Giá trị đầu ra):</b> Biểu thức tính toán hoặc biến bạn muốn đưa vào List mới (Ví dụ: <code>x * 2</code>, <code>x.upper()</code>, <code>x["ten"]</code>).</li>
-                    <li><b style="color:#2563eb;">2. For Loop (Vòng lặp):</b> Duyệt qua từng phần tử <code>item</code> từ tập dữ liệu ban đầu <code>iterable</code>.</li>
-                    <li><b style="color:#16a34a;">3. Condition (Điều kiện lọc - Tùy chọn):</b> Chỉ cho phép phần tử thỏa mãn điều kiện mới được thêm vào List mới.</li>
-                </ul>
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">💡</span>
+                        <span class="quote-text"><b>Điểm mấu chốt:</b> Schema không lưu trữ dữ liệu — nó chỉ mô tả
+                            <b>hình dạng (shape)</b> dữ liệu hợp lệ. Việc lưu trữ thật sự là nhiệm vụ của <b>Model</b>
+                            (SQLAlchemy ORM).</span>
+                    </blockquote>
 
-                <h4 class="theory-h4">🔄 So Sánh Trực Quan: Vòng Lặp For Thường vs List Comprehension</h4>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-top:14px;">
-                    <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:16px;">
-                        <span style="background:#fee2e2; color:#dc2626; font-weight:800; padding:4px 10px; border-radius:4px; font-size:0.82rem;">Cách 1: Vòng lặp For truyền thống (5 dòng)</span>
-                        <pre style="background:#1e1e1e; color:#d4d4d4; padding:16px; border-radius:8px; margin-top:12px; font-family:'Fira Code',monospace; font-size:0.95rem; line-height:1.6; border:1px solid #334155; overflow-x:auto;"><code>kq = []
-for x in numbers:
-    if x % 2 == 0:
-        kq.append(x * 2)</code></pre>
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img"
+                            aria-label="Sơ đồ vai trò Pydantic Schema trong FastAPI">
+                            <rect x="15" y="70" width="150" height="80" rx="10" fill="#e8f0fe" stroke="#4285f4"
+                                stroke-width="2" />
+                            <text x="90" y="100" text-anchor="middle" font-size="15" font-weight="700"
+                                fill="#1a1a1a">CLIENT</text>
+                            <text x="90" y="120" text-anchor="middle" font-size="11" fill="#555">Gửi JSON Body</text>
+
+                            <line x1="165" y1="95" x2="290" y2="95" stroke="#34a853" stroke-width="2"
+                                marker-end="url(#arrG2)" />
+                            <text x="228" y="85" text-anchor="middle" font-size="10.5" fill="#34a853">POST
+                                /products</text>
+
+                            <rect x="290" y="70" width="150" height="80" rx="10" fill="#f3e8fd" stroke="#8b5cf6"
+                                stroke-width="2" />
+                            <text x="365" y="95" text-anchor="middle" font-size="13" font-weight="700"
+                                fill="#1a1a1a">ProductCreate</text>
+                            <text x="365" y="112" text-anchor="middle" font-size="10.5" fill="#555">(Pydantic
+                                Schema)</text>
+                            <text x="365" y="127" text-anchor="middle" font-size="10.5" fill="#555">validate dữ liệu
+                                vào</text>
+
+                            <line x1="440" y1="110" x2="565" y2="110" stroke="#f9ab00" stroke-width="2"
+                                marker-end="url(#arrY2)" />
+                            <text x="502" y="100" text-anchor="middle" font-size="10.5"
+                                fill="#f9ab00">model_dump()</text>
+
+                            <rect x="565" y="70" width="140" height="80" rx="10" fill="#fef7e0" stroke="#f9ab00"
+                                stroke-width="2" />
+                            <text x="635" y="95" text-anchor="middle" font-size="13" font-weight="700"
+                                fill="#1a1a1a">Product</text>
+                            <text x="635" y="112" text-anchor="middle" font-size="10.5" fill="#555">(SQLAlchemy
+                                Model)</text>
+                            <text x="635" y="127" text-anchor="middle" font-size="10.5" fill="#555">ghi xuống DB</text>
+
+                            <line x1="365" y1="150" x2="365" y2="180" stroke="#5f6368" stroke-width="2"
+                                marker-end="url(#arrGray2)" />
+                            <text x="365" y="198" text-anchor="middle" font-size="10.5" fill="#555">Nếu sai kiểu / thiếu
+                                field → lỗi 422</text>
+
+                            <defs>
+                                <marker id="arrG2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#34a853" />
+                                </marker>
+                                <marker id="arrY2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#f9ab00" />
+                                </marker>
+                                <marker id="arrGray2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#5f6368" />
+                                </marker>
+                            </defs>
+                        </svg>
+                        <p class="figure-caption">Hình 1. Pydantic Schema đóng vai trò "cổng kiểm soát" dữ liệu trước
+                            khi chạm tới Model/Database.</p>
                     </div>
-                    <div style="background:#ffffff; border:1px solid #bbf7d0; border-radius:10px; padding:16px;">
-                        <span style="background:#dcfce7; color:#15803d; font-weight:800; padding:4px 10px; border-radius:4px; font-size:0.82rem;">Cách 2: List Comprehension (1 dòng siêu tốc)</span>
-                        <pre style="background:#1e1e1e; color:#d4d4d4; padding:16px; border-radius:8px; margin-top:12px; font-family:'Fira Code',monospace; font-size:0.95rem; line-height:1.6; border:1px solid #334155; overflow-x:auto;"><code>kq = [x * 2 for x in numbers if x % 2 == 0]</code></pre>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Theory Block 3: Bảng tổng hợp -->
-            <div class="theory-block">
-                <h3 class="theory-h3">📊 3. Bảng So Sánh Tổng Hợp 4 Cấu Trúc Dữ Liệu</h3>
-                <div class="ds-table-wrapper">
-                    <table class="ds-table">
-                        <thead>
-                            <tr>
-                                <th>Cấu Trúc</th>
-                                <th>Cú Pháp Mẫu</th>
-                                <th>Thay Đổi (Mutable)</th>
-                                <th>Thứ Tự (Ordered)</th>
-                                <th>Trùng Lặp (Duplicates)</th>
-                                <th>Tra Cứu Phần Tử (Search)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><b>List</b></td>
-                                <td><code>[1, 2, 3]</code></td>
-                                <td>✅ Có</td>
-                                <td>✅ Bảo toàn Index</td>
-                                <td>✅ Cho phép</td>
-                                <td>O(n) linear search</td>
-                            </tr>
-                            <tr>
-                                <td><b>Dictionary</b></td>
-                                <td><code>{"k": "v"}</code></td>
-                                <td>✅ Có</td>
-                                <td>✅ Thứ tự chèn (3.7+)</td>
-                                <td>❌ Key duy nhất</td>
-                                <td><b>O(1)</b> Hash search</td>
-                            </tr>
-                            <tr>
-                                <td><b>Tuple</b></td>
-                                <td><code>(1, 2, 3)</code></td>
-                                <td>❌ Không (Immutable)</td>
-                                <td>✅ Bảo toàn Index</td>
-                                <td>✅ Cho phép</td>
-                                <td>O(n) linear search</td>
-                            </tr>
-                            <tr>
-                                <td><b>Set</b></td>
-                                <td><code>{1, 2, 3}</code></td>
-                                <td>✅ Có</td>
-                                <td>❌ Không thứ tự</td>
-                                <td>❌ Không trùng lặp</td>
-                                <td><b>O(1)</b> Hash search</td>
-                            </tr>
-                        </tbody>
+                    <h4 class="theory-h4">3 nhóm Schema thường gặp trong một resource:</h4>
+                    <table class="theory-table">
+                        <tr>
+                            <th>Schema</th>
+                            <th>Dùng khi</th>
+                            <th>Đặc điểm</th>
+                        </tr>
+                        <tr>
+                            <td><code>ProductCreate</code></td>
+                            <td>Client gửi lên để tạo mới</td>
+                            <td>Không có <code>id</code>, các field bắt buộc theo nghiệp vụ</td>
+                        </tr>
+                        <tr>
+                            <td><code>ProductUpdate</code></td>
+                            <td>Client gửi lên để cập nhật</td>
+                            <td>Thường tất cả field <code>Optional</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>ProductResponse</code></td>
+                            <td>Server trả về cho Client</td>
+                            <td>Có thêm <code>id</code>, đọc được từ ORM object</td>
+                        </tr>
                     </table>
                 </div>
-            </div>
 
-            </section>
+                <!-- ============ Tab 2: Validation ============ -->
+                <div id="tab-validation" class="tab-pane">
+                    <p class="theory-p">Pydantic tự động <b>validate</b> dữ liệu đầu vào dựa trên kiểu dữ liệu (type
+                        hint) và các ràng buộc khai báo qua <code>Field()</code>. Nếu dữ liệu không hợp lệ, FastAPI tự
+                        trả về lỗi <span class="badge badge-4xx">422</span> <b>trước khi</b> code trong hàm xử lý
+                        (endpoint function) được chạy.</p>
+
+                    <h4 class="theory-h4">Schema <code>ProductCreate</code> cho resource "product":</h4>
+                    <div class="code-block"><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel, Field<br><br>
+<span class="kw">class</span> <span class="cls">ProductCreate</span>(BaseModel):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name: <span class="k">str</span> = Field(min_length=<span class="k">1</span>, max_length=<span class="k">100</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;price: <span class="k">float</span> = Field(gt=<span class="k">0</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stock: <span class="k">int</span> = Field(ge=<span class="k">0</span>)
+                    </div>
+
+                    <h4 class="theory-h4">Ý nghĩa từng ràng buộc:</h4>
+                    <table class="theory-table">
+                        <tr>
+                            <th>Khai báo</th>
+                            <th>Ý nghĩa</th>
+                        </tr>
+                        <tr>
+                            <td><code>min_length</code> / <code>max_length</code></td>
+                            <td>Giới hạn độ dài chuỗi</td>
+                        </tr>
+                        <tr>
+                            <td><code>gt=0</code></td>
+                            <td>Giá trị phải <b>lớn hơn</b> 0 (greater than)</td>
+                        </tr>
+                        <tr>
+                            <td><code>ge=0</code></td>
+                            <td>Giá trị phải <b>lớn hơn hoặc bằng</b> 0 (greater or equal)</td>
+                        </tr>
+                    </table>
+
+                    <h4 class="theory-h4">Ví dụ request gây lỗi 422:</h4>
+                    <div class="code-block">{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"name"</span>: <span class="s">""</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"price"</span>: <span class="s">-100</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"stock"</span>: <span class="s">"abc"</span><br>
+}<br>
+<span class="c">// → 422 Unprocessable Entity: name rỗng, price âm, stock sai kiểu</span></div>
+
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">📌</span>
+                        <span class="quote-text">Validation xảy ra <b>tự động</b>, sinh viên không cần viết
+                            <code>if</code>/<code>else</code> kiểm tra thủ công cho những ràng buộc cơ bản như bắt buộc
+                            nhập, kiểu dữ liệu, khoảng giá trị.</span>
+                    </blockquote>
+                </div>
+
+                <!-- ============ Tab 3: Model vs Schema ============ -->
+                <div id="tab-separate" class="tab-pane">
+                    <p class="theory-p">Một lỗi phổ biến của người mới là dùng <b>chung một lớp</b> cho cả ORM Model và
+                        Schema. Cần tách biệt rõ vì hai lớp phục vụ hai mục đích khác nhau.</p>
+
+                    <table class="theory-table">
+                        <tr>
+                            <th></th>
+                            <th><code>Product</code> (SQLAlchemy Model)</th>
+                            <th><code>ProductCreate</code> / <code>ProductResponse</code> (Pydantic Schema)</th>
+                        </tr>
+                        <tr>
+                            <td>Vai trò</td>
+                            <td>Ánh xạ bảng trong database</td>
+                            <td>Định dạng dữ liệu trao đổi qua API</td>
+                        </tr>
+                        <tr>
+                            <td>Kế thừa từ</td>
+                            <td><code>Base</code> (declarative_base)</td>
+                            <td><code>BaseModel</code> (Pydantic)</td>
+                        </tr>
+                        <tr>
+                            <td>Có <code>id</code>?</td>
+                            <td>Luôn có, do DB tự sinh</td>
+                            <td>Chỉ có ở <code>ProductResponse</code>, không có ở <code>ProductCreate</code></td>
+                        </tr>
+                        <tr>
+                            <td>Nằm ở đâu</td>
+                            <td><code>models/product.py</code></td>
+                            <td><code>schemas/product.py</code></td>
+                        </tr>
+                    </table>
+
+                    <h4 class="theory-h4">Cấu trúc Lớp Schema <code>ProductResponse</code>:</h4>
+                    <div class="code-block"><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel<br><br>
+<span class="kw">class</span> <span class="cls">ProductResponse</span>(BaseModel):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id: <span class="k">int</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;name: <span class="k">str</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;price: <span class="k">float</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;stock: <span class="k">int</span>
+                    </div>
+                    <p class="theory-p">FastAPI sẽ tự động đọc dữ liệu và serialize đối tượng trả về thành JSON đúng cấu trúc khai báo trong <code>ProductResponse</code>.</p>
+                </div>
+
+                <!-- ============ Tab 4: APIRouter ============ -->
+                <div id="tab-router" class="tab-pane">
+                    <p class="theory-p"><b>APIRouter</b> cho phép chia nhỏ các endpoint theo từng resource (products,
+                        users, orders...) thành các module riêng, rồi gộp lại tại <code>main.py</code>. Đây là ứng dụng
+                        trực tiếp của <b>Layered/Modular Architecture</b> đã học ở phần trước.</p>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img"
+                            aria-label="Sơ đồ ghép APIRouter vào main app">
+                            <rect x="20" y="20" width="150" height="45" rx="8" fill="#e8f0fe" stroke="#4285f4"
+                                stroke-width="2" />
+                            <text x="95" y="47" text-anchor="middle" font-size="12"
+                                fill="#1a1a1a">routers/product.py</text>
+
+                            <rect x="20" y="85" width="150" height="45" rx="8" fill="#e8f0fe" stroke="#4285f4"
+                                stroke-width="2" />
+                            <text x="95" y="112" text-anchor="middle" font-size="12"
+                                fill="#1a1a1a">routers/order.py</text>
+
+                            <rect x="20" y="150" width="150" height="45" rx="8" fill="#e8f0fe" stroke="#4285f4"
+                                stroke-width="2" />
+                            <text x="95" y="177" text-anchor="middle" font-size="12"
+                                fill="#1a1a1a">routers/user.py</text>
+
+                            <line x1="170" y1="42" x2="330" y2="100" stroke="#5f6368" stroke-width="1.5"
+                                marker-end="url(#arrM)" />
+                            <line x1="170" y1="107" x2="330" y2="107" stroke="#5f6368" stroke-width="1.5"
+                                marker-end="url(#arrM)" />
+                            <line x1="170" y1="172" x2="330" y2="114" stroke="#5f6368" stroke-width="1.5"
+                                marker-end="url(#arrM)" />
+
+                            <rect x="330" y="75" width="170" height="65" rx="10" fill="#fef7e0" stroke="#f9ab00"
+                                stroke-width="2" />
+                            <text x="415" y="102" text-anchor="middle" font-size="13" font-weight="700"
+                                fill="#1a1a1a">main.py</text>
+                            <text x="415" y="120" text-anchor="middle" font-size="10.5"
+                                fill="#555">app.include_router(...)</text>
+
+                            <line x1="500" y1="107" x2="580" y2="107" stroke="#34a853" stroke-width="2"
+                                marker-end="url(#arrM)" />
+                            <rect x="530" y="82" width="90" height="50" rx="8" fill="#e6f4ea" stroke="#34a853"
+                                stroke-width="2" />
+                            <text x="575" y="112" text-anchor="middle" font-size="12" font-weight="700"
+                                fill="#1a1a1a">FastAPI</text>
+                            <text x="575" y="126" text-anchor="middle" font-size="9.5" fill="#555">app</text>
+
+                            <defs>
+                                <marker id="arrM" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#5f6368" />
+                                </marker>
+                            </defs>
+                        </svg>
+                        <p class="figure-caption">Hình 2. Mỗi resource có một Router riêng, được gộp lại vào app chính
+                            qua <code>include_router()</code>.</p>
+                    </div>
+
+                    <h4 class="theory-h4">Khai báo Router cho resource "product":</h4>
+                    <div class="code-block"><span class="kw">from</span> fastapi <span class="kw">import</span> APIRouter<br><br>
+router = APIRouter(prefix=<span class="s">"/products"</span>, tags=[<span class="s">"Products"</span>])</div>
+
+                    <table class="theory-table">
+                        <tr>
+                            <th>Tham số</th>
+                            <th>Ý nghĩa</th>
+                        </tr>
+                        <tr>
+                            <td><code>prefix</code></td>
+                            <td>Tiền tố URL chung cho mọi endpoint trong router này (VD: <code>/products</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><code>tags</code></td>
+                            <td>Nhóm hiển thị trong Swagger UI (<code>/docs</code>) cho dễ nhìn</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- ============ Tab 5: POST & GET /products ============ -->
+                <div id="tab-crud" class="tab-pane">
+                    <p class="theory-p">Hai endpoint nền tảng của resource "product", theo đúng chuẩn REST đã học: <span
+                            class="badge badge-post">POST</span> để tạo, <span class="badge badge-get">GET</span> để
+                        đọc.</p>
+
+                    <table class="theory-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Schema Input</th>
+                            <th>Schema Output</th>
+                            <th>Status thành công</th>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-post">POST</span></td>
+                            <td><code>/products</code></td>
+                            <td><code>ProductCreate</code></td>
+                            <td><code>ProductResponse</code></td>
+                            <td><span class="badge badge-2xx">201</span> Created</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-get">GET</span></td>
+                            <td><code>/products/{id}</code></td>
+                            <td>— (path param)</td>
+                            <td><code>ProductResponse</code></td>
+                            <td><span class="badge badge-2xx">200</span> OK</td>
+                        </tr>
+                    </table>
+
+                    <h4 class="theory-h4">Code hai endpoint:</h4>
+                    <div class="code-block"><span class="kw">@router.post</span>(<span class="s">"/"</span>, response_model=ProductResponse, status_code=<span class="k">201</span>)<br>
+<span class="kw">def</span> <span class="fn">create_product</span>(product: ProductCreate, db: Session = Depends(get_db)):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new_product = Product(**product.model_dump())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;db.add(new_product)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;db.commit()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;db.refresh(new_product)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> new_product<br><br>
+<span class="kw">@router.get</span>(<span class="s">"/{product_id}"</span>, response_model=ProductResponse)<br>
+<span class="kw">def</span> <span class="fn">get_product</span>(product_id: <span class="k">int</span>, db: Session = Depends(get_db)):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;product = db.query(Product).filter(Product.id == product_id).first()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if not</span> product:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">raise</span> HTTPException(status_code=<span class="k">404</span>, detail=<span class="s">"Không tìm thấy sản phẩm"</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> product</div>
+
+                    <h4 class="theory-h4">Vì sao cần <code>response_model</code>?</h4>
+                    <ul class="theory-list">
+                        <li>Đảm bảo dữ liệu trả về đúng "hợp đồng" — chỉ những field khai báo trong
+                            <code>ProductResponse</code> mới lộ ra ngoài (ẩn field nhạy cảm nếu có).</li>
+                        <li>Tự sinh tài liệu API mẫu chính xác trong <code>/docs</code> (Swagger UI).</li>
+                        <li>FastAPI tự động chuyển object ORM → JSON nhờ <code>from_attributes = True</code>.</li>
+                    </ul>
+
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">💡</span>
+                        <span class="quote-text"><code>Depends(get_db)</code> là cơ chế <b>Dependency Injection</b> của
+                            FastAPI — tự động mở một phiên kết nối database (<code>Session</code>) cho mỗi request và
+                            đóng lại khi request kết thúc.</span>
+                    </blockquote>
+                </div>
+
+                <!-- ============ Tab 6: Tổng kết luồng ============ -->
+                <div id="tab-summary2" class="tab-pane">
+                    <p class="theory-p">Luồng xử lý đầy đủ của <code>POST /products</code> trong dự án
+                        <code>store_management</code>:</p>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" role="img"
+                            aria-label="Tổng kết luồng POST products">
+                            <rect x="160" y="10" width="300" height="40" rx="8" fill="#e8f0fe" stroke="#4285f4"
+                                stroke-width="2" />
+                            <text x="310" y="34" text-anchor="middle" font-size="12" fill="#1a1a1a">Client gửi POST
+                                /products (JSON)</text>
+
+                            <line x1="310" y1="50" x2="310" y2="73" stroke="#5f6368" stroke-width="2"
+                                marker-end="url(#b1)" />
+
+                            <rect x="130" y="78" width="360" height="40" rx="8" fill="#f3e8fd" stroke="#8b5cf6"
+                                stroke-width="2" />
+                            <text x="310" y="102" text-anchor="middle" font-size="12" fill="#1a1a1a">ProductCreate
+                                validate dữ liệu vào</text>
+
+                            <line x1="310" y1="118" x2="310" y2="141" stroke="#5f6368" stroke-width="2"
+                                marker-end="url(#b1)" />
+                            <text x="400" y="133" text-anchor="middle" font-size="9.5" fill="#ea4335">sai → 422</text>
+
+                            <rect x="130" y="146" width="360" height="40" rx="8" fill="#fef7e0" stroke="#f9ab00"
+                                stroke-width="2" />
+                            <text x="310" y="170" text-anchor="middle" font-size="12" fill="#1a1a1a">create_product()
+                                trong Router xử lý</text>
+
+                            <line x1="310" y1="186" x2="310" y2="209" stroke="#5f6368" stroke-width="2"
+                                marker-end="url(#b1)" />
+
+                            <rect x="130" y="214" width="360" height="40" rx="8" fill="#fce8e6" stroke="#ea4335"
+                                stroke-width="2" />
+                            <text x="310" y="238" text-anchor="middle" font-size="12" fill="#1a1a1a">Model Product ghi
+                                xuống Database</text>
+
+                            <line x1="310" y1="254" x2="310" y2="277" stroke="#5f6368" stroke-width="2"
+                                marker-end="url(#b1)" />
+
+                            <rect x="160" y="282" width="300" height="35" rx="8" fill="#e6f4ea" stroke="#34a853"
+                                stroke-width="2" />
+                            <text x="310" y="304" text-anchor="middle" font-size="12" font-weight="700"
+                                fill="#1a1a1a">ProductResponse → 201 Created (JSON)</text>
+
+                            <defs>
+                                <marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#5f6368" />
+                                </marker>
+                            </defs>
+                        </svg>
+                        <p class="figure-caption">Hình 3. Luồng xử lý <code>POST /products</code>: Schema validate →
+                            Router xử lý → Model ghi DB → Schema trả kết quả.</p>
+                    </div>
+
+                    <h4 class="theory-h4">Request / Response mẫu:</h4>
+                    <div class="code-block">
+                        <span class="c">// Request: POST /products</span><br>
+                        {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"name"</span>: <span class="s">"Bàn phím cơ Keychron
+                            K8"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"price"</span>: <span class="s">1500000</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"stock"</span>: <span class="s">25</span><br>
+                        }<br><br>
+
+                        <span class="c">// Response: 201 Created</span><br>
+                        {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"id"</span>: <span class="s">1</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"name"</span>: <span class="s">"Bàn phím cơ Keychron
+                            K8"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"price"</span>: <span class="s">1500000</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"stock"</span>: <span class="s">25</span><br>
+                        }
+                    </div>
+
+                    <h4 class="theory-h4">Câu hỏi ôn tập (SV tự trả lời trước khi lên lớp):</h4>
+                    <ul class="theory-list">
+                        <li>Vì sao <code>ProductCreate</code> không có field <code>id</code> nhưng
+                            <code>ProductResponse</code> thì có?</li>
+                        <li>Điều gì xảy ra nếu Client gửi <code>price: -50</code> lên endpoint
+                            <code>POST /products</code>?</li>
+                        <li><code>response_model</code> giúp ích gì khi Model ORM có nhiều field hơn Schema cần trả về?
+                        </li>
+                        <li>Vì sao nên tách Router theo từng resource thay vì viết hết endpoint trong
+                            <code>main.py</code>?</li>
+                        <li>Tham số <code>product_id</code> trong <code>GET /products/{id}</code> được lấy từ đâu, khác
+                            gì với Body của <code>POST</code>?</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <script>
+            (function () {
+                var section = document.getElementById('sec-theory-2');
+                if (!section) return;
+
+                var buttons = section.querySelectorAll('.tab-btn');
+                var panes = section.querySelectorAll('.tab-pane');
+
+                buttons.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var targetId = btn.getAttribute('data-target');
+
+                        buttons.forEach(function (b) {
+                            b.classList.remove('active');
+                            b.setAttribute('aria-selected', 'false');
+                        });
+                        panes.forEach(function (p) {
+                            p.classList.remove('active');
+                        });
+
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                        var targetPane = section.querySelector('#' + targetId);
+                        if (targetPane) targetPane.classList.add('active');
+                    });
+                });
+            })();
+        </script>
 
 
         <!-- Section 2: Demo Code Phân Tích (LIVE DUAL-LAYER VS CODE HIGHLIGHTING) -->
-        <section id="sec-demo" class="card-panel">
+        <style>
+            /* Khối code tĩnh - không phụ thuộc JS ngoài, luôn hiển thị đúng */
+            .static-code-block {
+                background: #1e1e2e;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 10px 0 16px 0;
+            }
+
+            .static-code-topbar {
+                background: #2a2a3c;
+                padding: 10px 16px;
+                color: #d4d4dc;
+                font-size: 13px;
+                font-weight: 600;
+                font-family: 'Courier New', monospace;
+                border-bottom: 1px solid #383850;
+            }
+
+            .static-code-body {
+                padding: 14px 18px;
+                font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.45;
+                color: #d4d4dc;
+                overflow-x: auto;
+                white-space: pre;
+            }
+
+            .static-code-body .kw {
+                color: #c586c0;
+            }
+
+            /* from, import, def, return, class */
+            .static-code-body .fn {
+                color: #dcdcaa;
+            }
+
+            /* tên hàm */
+            .static-code-body .str {
+                color: #ce9178;
+            }
+
+            /* chuỗi */
+            .static-code-body .com {
+                color: #6a9955;
+                font-style: italic;
+            }
+
+            /* comment */
+            .static-code-body .num {
+                color: #b5cea8;
+            }
+
+            /* số */
+            .static-code-body .cls {
+                color: #4ec9b0;
+            }
+
+            /* tên biến/hằng/lớp viết hoa */
+        </style>
+
+        <section id="sec-demo-2" class="card-panel">
             <div class="section-header">
                 <div class="section-num">2</div>
-                <div class="section-title">Ví Dụ Code & Ngữ Cảnh Cụ Thể (Interactive Sandbox - VS Code Theme Rực Rỡ)</div>
+                <div class="section-title">Ví Dụ Code & Ngữ Cảnh Cụ Thể</div>
             </div>
 
             <div class="context-box">
-                <div class="context-title">📌 Ngữ Cảnh Bài Toán: Hệ Thống Phân Tích Sinh Viên Cảnh Báo Học Tập</div>
+                <div class="context-title">📌 Ngữ Cảnh Bài Toán: Dự án Store Management — Tạo & Xem sản phẩm</div>
                 <p style="font-size: 0.94rem; color: var(--text-secondary);">
-                    Phòng Đào tạo Đại học vận hành hệ thống Quản lý Sinh viên (QLSV). Cuối mỗi học kỳ, hệ thống nhận về một danh sách <code>List[Dict]</code> chứa thông tin hồ sơ và điểm trung bình tích lũy <code>gpa</code> từ API Backend.<br>
-                    Yêu cầu bài toán là phải lọc ra toàn bộ các sinh viên có điểm <code>gpa &lt; 5.0</code> để phát thông báo <b>"Cảnh báo học tập Cấp 1"</b>.
+                    Sau khi đã có <code>GET /api/v1/health</code> và <code>GET /api/v1/store-info</code> ở Buổi 5, bước
+                    tiếp theo là cho phép cửa hàng <b>thêm sản phẩm mới</b> và <b>xem chi tiết một sản phẩm</b>.
+                    Ta cần một Schema <code>ProductCreate</code> để kiểm tra dữ liệu Client gửi lên, và một Router riêng
+                    cho resource <code>product</code> với 2 endpoint:
+                    <code>POST /api/v1/products</code> và <code>GET /api/v1/products/{id}</code>.<br>
+                    Đoạn code bên dưới trích từ dự án thật <code>store_management</code> — vì đây là code FastAPI cần
+                    chạy bằng Uvicorn server và có kết nối database, nên phần này chỉ hiển thị để đọc/tham khảo, không
+                    có nút chạy trực tiếp trên trình duyệt.
                 </p>
             </div>
 
-            <!-- Code Editor 1 -->
-            <div class="editor-wrapper">
-                <div class="editor-topbar">
-                    <span class="editor-file-title">🐍 demo_gpa_warning.py (Gõ code có màu VS Code rực rỡ)</span>
-                    <div class="editor-actions">
-                        <button class="btn btn-red" onclick="runPythonCode('demo1-code', 'demo1-out')">▶ Run Code</button>
-                    </div>
-                </div>
+            <!-- Khối code tĩnh: schemas/product.py -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">🐍 app/schemas/product.py</div>
+                <div class="static-code-body"><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel, Field
 
-                <div class="live-code-container">
-                    <div id="demo1-hl" class="live-code-highlight"></div>
-                    <textarea id="demo1-code" class="code-textarea" oninput="updateLiveSyntax('demo1-code', 'demo1-hl')"># Khởi tạo giỏ hàng ban đầu
-raw_cart = [
-    {"id": "SP1", "ten": " Áo sơ mi nam ", "gia": 150000, "sl": 2},
-    {"id": "SP2", "ten": "Quần tây ", "gia": 250000, "sl": 1}
-]
+<span class="kw">class</span> <span class="cls">ProductCreate</span>(BaseModel):
+    <span class="com"># Dữ liệu Client gửi lên khi tạo sản phẩm mới</span>
+    name: <span class="cls">str</span> = Field(min_length=<span class="num">1</span>, max_length=<span class="num">100</span>)
+    price: <span class="cls">float</span> = Field(gt=<span class="num">0</span>)
+    stock: <span class="cls">int</span> = Field(ge=<span class="num">0</span>)
 
-# Chuẩn hóa tên và tính tổng tiền
-for item in raw_cart:
-    item["ten"] = item["ten"].strip()
-    item["tong_tien"] = item["gia"] * item["sl"]
+<span class="kw">class</span> <span class="cls">ProductResponse</span>(BaseModel):
+    <span class="com"># Dữ liệu server trả về cho Client, có thêm id</span>
+    id: <span class="cls">int</span>
+    name: <span class="cls">str</span>
+    price: <span class="cls">float</span>
+    stock: <span class="cls">int</span></div>
+            </div>
 
-print("Giỏ hàng sau khi xử lý:", raw_cart)</textarea>
-                </div>
+            <!-- Khối code tĩnh: routers/product.py -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">🐍 app/api/v1/routers/product.py</div>
+                <div class="static-code-body"><span class="kw">from</span> fastapi <span class="kw">import</span> APIRouter, Depends, HTTPException
+<span class="kw">from</span> sqlalchemy.orm <span class="kw">import</span> Session
 
-                <div class="terminal-box" id="demo1-out">
-                    <div class="terminal-header">Console Output (Kết quả thực thi):</div>
-                    <i>Nhấn "▶ Run Code" để chạy chương trình Python...</i>
-                </div>
+<span class="kw">from</span> app.core.database <span class="kw">import</span> <span class="fn">get_db</span>
+<span class="kw">from</span> app.models.product <span class="kw">import</span> <span class="cls">Product</span>
+<span class="kw">from</span> app.schemas.product <span class="kw">import</span> <span class="cls">ProductCreate</span>, <span class="cls">ProductResponse</span>
+
+router = APIRouter(prefix=<span class="str">"/products"</span>, tags=[<span class="str">"Products"</span>])
+
+<span class="kw">@router.post</span>(<span class="str">"/"</span>, response_model=ProductResponse, status_code=<span class="num">201</span>)
+<span class="kw">def</span> <span class="fn">create_product</span>(product: <span class="cls">ProductCreate</span>, db: Session = Depends(get_db)):
+    <span class="com"># Tương ứng route POST /api/v1/products</span>
+    new_product = <span class="cls">Product</span>(**product.model_dump())
+    db.add(new_product)
+    db.commit()
+    db.refresh(new_product)
+    <span class="kw">return</span> new_product
+
+<span class="kw">@router.get</span>(<span class="str">"/{product_id}"</span>, response_model=ProductResponse)
+<span class="kw">def</span> <span class="fn">get_product</span>(product_id: <span class="cls">int</span>, db: Session = Depends(get_db)):
+    <span class="com"># Tương ứng route GET /api/v1/products/{id}</span>
+    product = db.query(Product).filter(Product.id == product_id).first()
+    <span class="kw">if not</span> product:
+        <span class="kw">raise</span> HTTPException(status_code=<span class="num">404</span>, detail=<span class="str">"Không tìm thấy sản phẩm"</span>)
+    <span class="kw">return</span> product</div>
+            </div>
+
+            <div class="context-box" style="margin-top: 16px;">
+                <div class="context-title">🚀 Cách chạy thử API thật</div>
+                <p style="font-size: 0.94rem; color: var(--text-secondary);">
+                    Từ thư mục gốc dự án, chạy lệnh <code>uvicorn app.main:app --reload</code>, sau đó test bằng
+                    <code>curl</code> hoặc Swagger UI tại <code>http://127.0.0.1:8000/docs</code>:
+                </p>
+            </div>
+
+            <div class="static-code-block">
+                <div class="static-code-topbar">💻 Terminal — test bằng curl</div>
+                <div class="static-code-body"><span class="com"># Tạo sản phẩm mới</span>
+curl -X POST <span class="str">"http://127.0.0.1:8000/api/v1/products/"</span> \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{"name": "Chuột Logitech G102", "price": 350000, "stock": 40}'</span>
+
+<span class="com"># Xem sản phẩm vừa tạo (id = 1)</span>
+curl <span class="str">"http://127.0.0.1:8000/api/v1/products/1"</span></div>
             </div>
         </section>
 
 
         <!-- Section 3: Bài Tập Thực Hành -->
-        <section id="sec-exercise" class="card-panel">
-            <div class="section-header">
-                <div class="section-num">3</div>
-                <div class="section-title">Phiếu Bài Tập Thực Hành CRUD & List Comprehension (30 - 40 phút)</div>
-            </div>
-
-            <div style="background: var(--bg-subtle); padding: 16px 20px; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-red); margin-bottom: 24px;">
-                <b>📑 Đề bài tập thực hành chính thức (Sinh viên gõ trực tiếp bên dưới hoặc tải file Word ở Mục 5):</b><br>
-                Sinh viên đọc kỹ yêu cầu, gõ code trực tiếp bên dưới và bấm <b>"▶ Chạy Thử"</b> để kiểm tra kết quả Python trực tiếp trên trình duyệt.
-            </div>
-
-            <!-- Exercise 1 -->
-            <div style="margin-bottom: 44px;">
-                <h3 style="color: var(--accent-red); margin-bottom: 8px;">Bài 1: Thao Tác CRUD Cơ Bản Với List & Dict (15 - 20 phút)</h3>
-                
-                <div class="context-box">
-                    <div class="context-title">📌 Yêu cầu Bài 1:</div>
-                    <p style="font-size: 0.94rem; color: var(--text-secondary);">
-                        1. Duyệt qua <code>raw_cart</code>, xóa khoảng trắng thừa ở <code>ten</code> bằng <code>.strip()</code>.<br>
-                        2. Thêm thuộc tính <code>tong_tien = gia * sl</code> cho từng item.<br>
-                        3. Thêm 1 sản phẩm mới SP5: <code>{"id": "SP5", "ten": "Áo khoác", "gia": 320000, "sl": 1, "danh_muc": "Thời trang", "tong_tien": 320000}</code>.<br>
-                        4. Xóa sản phẩm có <code>id == "SP4"</code> (Tất cổ ngắn) ra khỏi giỏ hàng.
-                    </p>
-                </div>
-
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 12px;">
-                    👉 <i>Gõ và chỉnh sửa code trực tiếp trong khung bên dưới, sau đó bấm <b>"▶ Chạy Thử"</b> hoặc <b>"Kiểm Tra Testcase"</b>:</i>
-                </p>
-
-                <!-- Exercise 1 Editor -->
-                <div class="editor-wrapper">
-                    <div class="editor-topbar">
-                        <span class="editor-file-title">📝 bai1_crud_list_dict.py (Gõ code có màu VS Code rực rỡ)</span>
-                        <div class="editor-actions">
-                            <button class="btn" onclick="runPythonCode('ex1-code', 'ex1-out')">▶ Chạy Thử</button>
-                            <button class="btn btn-red" onclick="checkExercise1()">✅ Kiểm Tra Testcase</button>
-                        </div>
-                    </div>
-
-                    <div class="live-code-container">
-                        <div id="ex1-hl" class="live-code-highlight"></div>
-                        <textarea id="ex1-code" class="code-textarea" oninput="updateLiveSyntax('ex1-code', 'ex1-hl')">raw_cart = [
-    {"id": "SP1", "ten": " Áo sơ mi nam ", "gia": 150000, "sl": 2, "danh_muc": "Thời trang"},
-    {"id": "SP2", "ten": "Quần tây ", "gia": 250000, "sl": 1, "danh_muc": "Thời trang"},
-    {"id": "SP3", "ten": " Giày thể thao ", "gia": 450000, "sl": 1, "danh_muc": "Giày dép"},
-    {"id": "SP4", "ten": "Tất cổ ngắn ", "gia": 30000, "sl": 5, "danh_muc": "Phụ kiện"}
-]
-
-# TODO 1: Duyệt raw_cart, dùng .strip() xóa khoảng trắng ở 'ten' và tính 'tong_tien' = gia * sl
-for item in raw_cart:
-    item["ten"] = item["ten"]....()
-    item["tong_tien"] = item["gia"] * item["..."]
-
-# TODO 2: Thêm sản phẩm SP5 mới vào raw_cart
-sp5 = {"id": "SP5", "ten": "Áo khoác", "gia": 320000, "sl": 1, "danh_muc": "Thời trang", "tong_tien": 320000}
-raw_cart....(sp5)
-
-# TODO 3: Xóa sản phẩm có id == "SP4" khỏi raw_cart
-raw_cart = [item for item in raw_cart if item["id"] != "..."]
-
-print("Giỏ hàng sau khi xử lý Bài 1:")
-for item in raw_cart:
-    print(item)</textarea>
-                    </div>
-
-                    <div class="terminal-box" id="ex1-out">
-                        <div class="terminal-header">Console Output:</div>
-                    </div>
-                </div>
-
-                <div id="ex1-res-box" class="test-box"></div>
-
-                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
-                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
-                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
-                    </summary>
-                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
-                        • TODO 1: Thay <code>....()</code> thành <code>.strip()</code> và <code>"..."</code> thành <code>"sl"</code>.<br>
-                        • TODO 2: Thay <code>"..."</code> thứ nhất thành <code>"SP5"</code> và <code>append(...)</code> thành <code>append(sp5)</code>.<br>
-                        • TODO 3: Thay <code>"..."</code> ở cuối thành <code>"SP4"</code>.
-                    </div>
-                </details>
-            </div>
-
-
-            <!-- Exercise 2 -->
-            <div>
-                <h3 style="color: var(--accent-red); margin-bottom: 8px;">Bài 2: Thao Tác Với Set & List Comprehension (15 - 20 phút)</h3>
-                
-                <div class="context-box">
-                    <div class="context-title">📌 Yêu cầu Bài 2:</div>
-                    <p style="font-size: 0.94rem; color: var(--text-secondary);">
-                        1. Dùng cấu trúc <b>Set</b> lấy ra danh sách các Danh mục sản phẩm duy nhất (danh_muc_set).<br>
-                        2. Dùng <b>1 dòng List Comprehension</b> lọc ra danh sách TÊN các sản phẩm có <code>tong_tien &gt; 200000</code> và gán vào <code>sp_cao_cap</code>.
-                    </p>
-                </div>
-
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 12px;">
-                    👉 <i>Gõ và chỉnh sửa code trực tiếp trong khung bên dưới, sau đó bấm <b>"▶ Chạy Thử"</b> hoặc <b>"Kiểm Tra Testcase"</b>:</i>
-                </p>
-
-                <!-- Exercise 2 Editor -->
-                <div class="editor-wrapper">
-                    <div class="editor-topbar">
-                        <span class="editor-file-title">📝 bai2_set_listcomp.py (Gõ code có màu VS Code rực rỡ)</span>
-                        <div class="editor-actions">
-                            <button class="btn" onclick="runPythonCode('ex2-code', 'ex2-out')">▶ Chạy Thử</button>
-                            <button class="btn btn-red" onclick="checkExercise2()">✅ Kiểm Tra Testcase</button>
-                        </div>
-                    </div>
-
-                    <div class="live-code-container">
-                        <div id="ex2-hl" class="live-code-highlight"></div>
-                        <textarea id="ex2-code" class="code-textarea" oninput="updateLiveSyntax('ex2-code', 'ex2-hl')">cart_processed = [
-    {"id": "SP1", "ten": "Áo sơ mi nam", "gia": 150000, "sl": 2, "danh_muc": "Thời trang", "tong_tien": 300000},
-    {"id": "SP2", "ten": "Quần tây", "gia": 250000, "sl": 1, "danh_muc": "Thời trang", "tong_tien": 250000},
-    {"id": "SP3", "ten": "Giày thể thao", "gia": 450000, "sl": 1, "danh_muc": "Giày dép", "tong_tien": 450000},
-    {"id": "SP5", "ten": "Áo khoác", "gia": 320000, "sl": 1, "danh_muc": "Thời trang", "tong_tien": 320000}
-]
-
-# TODO 1: Dùng Set lấy danh mục duy nhất:
-danh_muc_set = ...(item["danh_muc"] for item in cart_processed)
-
-# TODO 2: Dùng 1 dòng List Comprehension lọc tên sản phẩm có tong_tien > 200000:
-sp_cao_cap = [item["..."] for item in cart_processed if item["tong_tien"] > ...]
-
-print("Danh mục duy nhất (Set):", danh_muc_set)
-print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
-                    </div>
-
-                    <div class="terminal-box" id="ex2-out">
-                        <div class="terminal-header">Console Output:</div>
-                    </div>
-                </div>
-
-                <div id="ex2-res-box" class="test-box"></div>
-
-                <details style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; cursor: pointer;">
-                    <summary style="font-weight: 800; color: #92400e; font-size: 0.92rem; outline: none; user-select: none;">
-                        💡 Bấm vào đây để xem Gợi ý làm bài (Code Hints / Type Hints)
-                    </summary>
-                    <div style="margin-top: 10px; font-size: 0.88rem; color: #78350f; font-weight: 600; line-height: 1.6; border-top: 1px dashed #fcd34d; padding-top: 8px;">
-                        • TODO 1: Thay thế dấu ba chấm <code>...</code> trước dấu ngoặc thành <code>set</code> để lọc ra các danh mục duy nhất.<br>
-                        • TODO 2: Thay thế <code>"..."</code> trong <code>item["..."]</code> thành <code>"ten"</code> để lấy tên sản phẩm, và thay thế <code>...</code> ở cuối thành <code>200000</code>.
-                    </div>
-                </details>
-            </div>
-        </section>
-
 
         <!-- Section 4: Nộp Bài Học Viên & Bảng Quản Lý Giảng Viên (KHÓA MẬT KHẨU GIẢNG VIÊN) -->
         <section id="sec-submit" class="card-panel">
             <div class="section-header">
-                <div class="section-num">4</div>
+                <div class="section-num">3</div>
                 <div class="section-title">Nộp Bài Tập Học Viên & Bảng Kiểm Soát Lớp Học</div>
             </div>
 
             <!-- Student Submission Form (Công khai cho Sinh viên) -->
             <div style="margin-bottom: 28px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
                     <h3 style="color: var(--accent-red);">📤 Form Nộp Bài Tập Dành Cho Sinh Viên</h3>
-                    
+
                 </div>
 
                 <p style="font-size: 0.94rem; color: var(--text-secondary); margin-bottom: 8px;">
-                    Sinh viên đẩy code lên <b>GitHub Personal Repository</b>, sau đó điền thông tin và dán đường dẫn Github bài làm vào form bên dưới. Bài nộp sẽ được tự động lưu về máy chủ và phân loại theo Bài Học.
+                    Sinh viên đẩy code lên <b>GitHub Personal Repository</b>, sau đó điền thông tin và dán đường dẫn
+                    Github bài làm vào form bên dưới. Bài nộp sẽ được tự động lưu về máy chủ và phân loại theo Bài Học.
                 </p>
 
                 <form id="submissionForm" onsubmit="handleStudentSubmit(event)">
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Họ và Tên Sinh Viên *</label>
-                            <input type="text" id="subName" class="form-input" placeholder="Ví dụ: Nguyễn Văn An" required>
+                            <input type="text" id="subName" class="form-input" placeholder="Ví dụ: Nguyễn Văn An"
+                                required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Mã Sinh Viên (MSV) *</label>
@@ -1589,57 +2267,75 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Link GitHub Bài Làm *</label>
-                            <input type="url" id="subLink" class="form-input" placeholder="https://github.com/nguyenvanan/CNTT1_SV2026001_PythonCore_Day01" required>
+                            <input type="url" id="subLink" class="form-input"
+                                placeholder="https://github.com/nguyenvanan/CNTT1_SV2026001_PythonCore_Day01" required>
                         </div>
                     </div>
 
                     <div style="margin-top: 20px; display: flex; gap: 12px; align-items: center;">
-                        <button type="submit" class="btn btn-red" style="padding: 12px 28px; font-size: 1rem;">🚀 Gửi Bài Nộp Link GitHub</button>
+                        <button type="submit" class="btn btn-red" style="padding: 12px 28px; font-size: 1rem;">🚀 Gửi
+                            Bài Nộp Link GitHub</button>
                         <span id="submitStatusMsg" style="font-weight: 700; font-size: 0.95rem;"></span>
                     </div>
                 </form>
             </div>
 
             <!-- Teacher Admin Control Panel (BẢO VỆ BẰNG MẬT KHẨU - ẨN KHI LÀ SINH VIÊN) -->
-            <div id="teacherAdminArea" style="display: none; padding-top: 24px; border-top: 2px dashed var(--accent-red);">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+            <div id="teacherAdminArea"
+                style="display: none; padding-top: 24px; border-top: 2px dashed var(--accent-red);">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
                     <div>
-                        <h3 style="color: var(--accent-red-dark); font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                        <h3
+                            style="color: var(--accent-red-dark); font-weight: 800; display: flex; align-items: center; gap: 8px;">
                             🔒 BẢNG QUẢN LÝ BÀI NỘP TỔNG HỢP (DÀNH CHO GIẢNG VIÊN)
                         </h3>
-                        <p style="font-size: 0.88rem; color: var(--text-muted);">Đồng bộ 2 chiều trực tiếp với Google Sheet realtime, tự động sắp xếp theo Lớp & Bài học.</p>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">Đồng bộ 2 chiều trực tiếp với Google
+                            Sheet realtime, tự động sắp xếp theo Lớp & Bài học.</p>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn" style="border-color: #16a34a; color: #15803d; font-weight:800;" onclick="syncWithGoogleSheetLive()">🔄 Tải Lại Dữ Liệu Từ Google Sheet</button>
-                        <button class="btn btn-red" onclick="exportSubmissionsToFormattedExcel()">📥 Xuất File Excel Sắp Xếp Theo Lớp</button>
-                        <button class="btn" style="color: var(--accent-red);" onclick="clearAllSubmissions()">🗑️ Xóa Tất Cả</button>
+                        <button class="btn" style="border-color: #16a34a; color: #15803d; font-weight:800;"
+                            onclick="syncWithGoogleSheetLive()">🔄 Tải Lại Dữ Liệu Từ Google Sheet</button>
+                        <button class="btn btn-red" onclick="exportSubmissionsToFormattedExcel()">📥 Xuất File Excel Sắp
+                            Xếp Theo Lớp</button>
+                        <button class="btn" style="color: var(--accent-red);" onclick="clearAllSubmissions()">🗑️ Xóa
+                            Tất Cả</button>
                         <button class="btn" onclick="teacherLogout()">🔒 Đăng Xuất Giảng Viên</button>
                     </div>
                 </div>
 
                 <!-- Webhook Config Settings Box -->
                 <div class="gsheet-config-box">
-                    <div style="font-weight: 700; margin-bottom: 4px;">🔗 Cấu Hình Tự Động Đẩy Về Google Sheet (Tùy chọn):</div>
+                    <div style="font-weight: 700; margin-bottom: 4px;">🔗 Cấu Hình Tự Động Đẩy Về Google Sheet (Tùy
+                        chọn):</div>
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="url" id="googleSheetWebhookInput" class="form-input" style="height: 36px; font-size: 0.85rem;" placeholder="Dán Webhook Google Apps Script (để tự động lưu vào 1 file Google Sheet duy nhất)" onchange="saveGoogleSheetWebhook(this.value)">
-                        <button class="btn btn-sm" onclick="saveGoogleSheetWebhook(document.getElementById('googleSheetWebhookInput').value)">Lưu URL</button>
+                        <input type="url" id="googleSheetWebhookInput" class="form-input"
+                            style="height: 36px; font-size: 0.85rem;"
+                            placeholder="Dán Webhook Google Apps Script (để tự động lưu vào 1 file Google Sheet duy nhất)"
+                            onchange="saveGoogleSheetWebhook(this.value)">
+                        <button class="btn btn-sm"
+                            onclick="saveGoogleSheetWebhook(document.getElementById('googleSheetWebhookInput').value)">Lưu
+                            URL</button>
                     </div>
                     <div id="syncStatusMsg" style="display: none !important;"></div>
                 </div>
 
                 <!-- Multi-Dimensional Filter Bar (Lesson & Class Filter) -->
-                <div style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+                <div
+                    style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
                         <!-- Lesson Filter -->
                         <div style="display: flex; align-items: center; gap: 10px; display: none !important;">
                             <label style="font-weight: 700; font-size: 0.9rem;">📚 Lọc Theo Bài Học:</label>
-                            <select id="filterLessonSelect" onchange="loadSubmissionsTable()" class="form-input" style="width: auto; height: 36px; padding: 0 16px; font-weight: 700; cursor: pointer; max-width: 320px;">
+                            <select id="filterLessonSelect" onchange="loadSubmissionsTable()" class="form-input"
+                                style="width: auto; height: 36px; padding: 0 16px; font-weight: 700; cursor: pointer; max-width: 320px;">
                                 <option value="ALL">--- Tất Cả Các Bài Học (Ngày 1 -> Ngày 14) ---</option>
-                                <option value="DAY_01" selected>Ngày 1: Python Core 1</option>
+                                <option value="DAY_06" selected>Ngày 1: Python Core 1</option>
                                 <option value="DAY_02">Ngày 2: Python Core 2</option>
                                 <option value="DAY_03">Ngày 3: Python Core 3</option>
                                 <option value="DAY_04">Ngày 4: Python Core 4</option>
-                                <option value="DAY_05">Ngày 5: FastAPI Architecture</option>
+                                <option value="DAY_06">Ngày 5: FastAPI Architecture</option>
                                 <option value="DAY_06">Ngày 6: Pydantic Schemas</option>
                                 <option value="DAY_07">Ngày 7: Mini Project 1</option>
                                 <option value="DAY_08">Ngày 8: MySQL & SQLAlchemy</option>
@@ -1655,7 +2351,8 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
                         <!-- Class Filter -->
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <label style="font-weight: 700; font-size: 0.9rem;">🎯 Lọc Theo Lớp Học:</label>
-                            <select id="filterClassSelect" onchange="loadSubmissionsTable()" class="form-input" style="width: auto; height: 36px; padding: 0 16px; font-weight: 700; cursor: pointer;">
+                            <select id="filterClassSelect" onchange="loadSubmissionsTable()" class="form-input"
+                                style="width: auto; height: 36px; padding: 0 16px; font-weight: 700; cursor: pointer;">
                                 <option value="ALL">--- Tất Cả Các Lớp ---</option>
                                 <option value="HN-KS25-CNTT1">HN-KS25-CNTT1</option>
                                 <option value="HN-KS25-CNTT2">HN-KS25-CNTT2</option>
@@ -1672,23 +2369,68 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
                         </div>
 
                         <div style="font-size: 0.95rem; font-weight: 700;">
-                            📊 Hiển thị: <b id="filteredSubCount" style="color: var(--accent-red); font-size: 1.15rem;">0</b> bài nộp
+                            📊 Hiển thị: <b id="filteredSubCount"
+                                style="color: var(--accent-red); font-size: 1.15rem;">0</b> bài nộp
                         </div>
                     </div>
 
                     <!-- Breakdown per class counter -->
                     <div class="class-stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT1</div><div class="class-stat-num" id="stat-HN-KS25-CNTT1">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT2</div><div class="class-stat-num" id="stat-HN-KS25-CNTT2">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT3</div><div class="class-stat-num" id="stat-HN-KS25-CNTT3">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT4</div><div class="class-stat-num" id="stat-HN-KS25-CNTT4">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT5</div><div class="class-stat-num" id="stat-HN-KS25-CNTT5">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT6</div><div class="class-stat-num" id="stat-HN-KS25-CNTT6">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT8</div><div class="class-stat-num" id="stat-HN-KS25-CNTT8">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT5</div><div class="class-stat-num" id="stat-HCM-KS25-CNTT5">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT6</div><div class="class-stat-num" id="stat-HCM-KS25-CNTT6">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT7</div><div class="class-stat-num" id="stat-HCM-KS25-CNTT7">0</div></div>
-                        <div class="class-stat-card"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT8</div><div class="class-stat-num" id="stat-HCM-KS25-CNTT8">0</div></div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT1
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT1">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT2
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT2">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT3
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT3">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT4
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT4">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT5
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT5">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT6
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT6">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HN-KS25-CNTT8
+                            </div>
+                            <div class="class-stat-num" id="stat-HN-KS25-CNTT8">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT5
+                            </div>
+                            <div class="class-stat-num" id="stat-HCM-KS25-CNTT5">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT6
+                            </div>
+                            <div class="class-stat-num" id="stat-HCM-KS25-CNTT6">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT7
+                            </div>
+                            <div class="class-stat-num" id="stat-HCM-KS25-CNTT7">0</div>
+                        </div>
+                        <div class="class-stat-card">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">HCM-KS25-CNTT8
+                            </div>
+                            <div class="class-stat-num" id="stat-HCM-KS25-CNTT8">0</div>
+                        </div>
                     </div>
                 </div>
 
@@ -1710,7 +2452,8 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
                         <tbody id="adminTableBody">
                             <tr>
                                 <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;">
-                                    <i>Chưa có bài nộp nào. Sinh viên chọn lớp (CNTT1 - CNTT6) và nộp bài ở form trên.</i>
+                                    <i>Chưa có bài nộp nào. Sinh viên chọn lớp (CNTT1 - CNTT6) và nộp bài ở form
+                                        trên.</i>
                                 </td>
                             </tr>
                         </tbody>
@@ -1723,34 +2466,42 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         <!-- Section 5: ONLY Word Exercise File Resource Card -->
         <section id="sec-resource" class="card-panel">
             <div class="section-header">
-                <div class="section-num">5</div>
+                <div class="section-num">4</div>
                 <div class="section-title">Tài Nguyên File Bài Tập Word Đính Kèm</div>
             </div>
 
             <!-- Single Clean Primary Card for Word Document -->
             <div class="resource-single-card">
                 <div>
-                    <h3 id="resourceFileTitle" style="color: var(--accent-red-dark); margin-bottom: 6px; font-weight: 800;">📄 File Word Bài Tập: BT_Day01_PythonCore.docx</h3>
+                    <h3 id="resourceFileTitle"
+                        style="color: var(--accent-red-dark); margin-bottom: 6px; font-weight: 800;">📄 File Word Bài
+                        Tập: BT_Day06_PythonWeb.docx</h3>
                     <p id="resourceFileDesc" style="font-size: 0.95rem; color: var(--text-secondary);">
-                        Phiếu bài tập Word tổng hợp hoàn chỉnh (30 - 40 phút), chứa đầy đủ đề bài CRUD List/Dict/Set, List Comprehension, Kết quả đầu ra kỳ vọng và hướng dẫn nộp bài lên GitHub.
+                        Phiếu bài tập Word tổng hợp hoàn chỉnh (30 - 40 phút), chứa đầy đủ đề bài CRUD List/Dict/Set,
+                        List Comprehension, Kết quả đầu ra kỳ vọng và hướng dẫn nộp bài lên GitHub.
                     </p>
                 </div>
                 <div>
-                    <a id="resourceFileBtn" href="BT_Day01_PythonCore.docx" download style="display:inline-block; padding:12px 24px; background:var(--accent-red); color:#ffffff; text-decoration:none; font-weight:800; border-radius:var(--radius-sm); font-size:0.95rem; white-space:nowrap; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);">📥 Tải File Word Bài Tập (.docx)</a>
+                    <a id="resourceFileBtn" href="BT_Day06_PythonWeb.docx" download
+                        style="display:inline-block; padding:12px 24px; background:var(--accent-red); color:#ffffff; text-decoration:none; font-weight:800; border-radius:var(--radius-sm); font-size:0.95rem; white-space:nowrap; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);">📥
+                        Tải File Word Bài Tập (.docx)</a>
                 </div>
             </div>
         </section>
 
         <!-- BOTTOM LESSON NAVIGATION BAR (POINT 2) -->
-        <nav style="margin-top: 40px; padding: 24px; background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow-sm);">
-            <a href="../index.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; transition: all 0.2s;">
-                ⬅️ Trang Chủ Portal
+        <nav
+            style="margin-top: 40px; padding: 24px; background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow-sm);">
+            <a href="../day05/BT_Day05_FastAPI.html"
+                style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; transition: all 0.2s;">
+                ⏮️ Bài Trước: Bài 05 (FastAPI Basics)
             </a>
             <span style="font-weight: 800; color: #64748b; font-size: 0.9rem;">
-                📌 Đang học: Bài 01 / 14
+                📌 Đang học: Bài 06 / 14
             </span>
-            <a href="../day02/day02_python_core.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent-red); color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25); transition: all 0.2s;">
-                Bài 2: Flag, Count & Validation ➡️
+            <a href="../day07/BT_Day07_FastAPI.html"
+                style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent-red); color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25); transition: all 0.2s;">
+                Bài 7: Mini Project 1 ⏭️
             </a>
         </nav>
 
@@ -1761,13 +2512,17 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         <div class="modal-card">
             <div class="modal-title">🔐 Đăng Nhập Quản Lý Giảng Viên</div>
             <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Vui lòng nhập Mật khẩu Giảng viên để mở khóa Bảng quản lý xem và kiểm soát danh sách bài nộp của sinh viên.
+                Vui lòng nhập Mật khẩu Giảng viên để mở khóa Bảng quản lý xem và kiểm soát danh sách bài nộp của sinh
+                viên.
             </p>
             <div class="form-group" style="margin-bottom: 16px;">
                 <label class="form-label">Mật Khẩu Giảng Viên *</label>
-                <input type="password" id="teacherPassInput" class="form-input" placeholder="Nhập mật khẩu giảng viên..." onkeydown="if(event.key==='Enter') submitTeacherAuth()">
+                <input type="password" id="teacherPassInput" class="form-input"
+                    placeholder="Nhập mật khẩu giảng viên..." onkeydown="if(event.key==='Enter') submitTeacherAuth()">
             </div>
-            <div id="authErrMsg" style="color: var(--accent-red); font-size: 0.88rem; font-weight: 700; display: none; margin-bottom: 12px;"></div>
+            <div id="authErrMsg"
+                style="color: var(--accent-red); font-size: 0.88rem; font-weight: 700; display: none; margin-bottom: 12px;">
+            </div>
             <div style="display: flex; justify-content: flex-end; gap: 10px;">
                 <button class="btn" onclick="closeTeacherAuthModal()">Hủy</button>
                 <button class="btn btn-red" onclick="submitTeacherAuth()">🔓 Mở Khóa Quản Lý</button>
@@ -1776,25 +2531,26 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
     </div>
 
     <!-- Scripts -->
-    
-    
+
+
     <script>
         let pyEngine = null;
         let pyodidePromise = null;
-        let currentActiveLessonId = "DAY_01";
-        const CURRENT_LESSON_ID = "DAY_01";
+        let currentActiveLessonId = "DAY_06";
+        const CURRENT_LESSON_ID = "DAY_06";
+        const SUBMISSION = "DAY_06";
         let ex1Passed = false;
         let ex2Passed = false;
         const TEACHER_PASSWORD_KEY = "rikkeiedu";
-        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzUxkJRNnxeCczQONQ_Uhr2pu3tmzKmxS4HTvMBpsuW3WJwNY4vcnmDuWPw36aenOqF/exec";
+        const DEFAULT_GSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyr6zSiUA7ygY3c2_oo5XfIL7hZDvrysQaIPhZrNzGEczTYFSVwNajqdji_cvHMRaRm/exec";
 
         // MASTER CURRICULUM SYLLABUS DATA (14 DAYS COMPLETE TITLES FROM DOC)
         const SYLLABUS_MAP = {
-            "DAY_01": {
-                badge: "Tuần 1 • Ngày 1",
-                title: "Python Core 1 — Cấu Trúc Dữ Liệu & Tư Duy Phân Tích Mảng",
-                file: "BT_Day01_PythonCore.docx",
-                desc: "Phiếu bài tập Word tổng hợp làm sạch dữ liệu giỏ hàng, CRUD List/Dict/Set và List Comprehension."
+            "DAY_06": {
+                badge: "Tuần 1 • Ngày 6",
+                title: "Python Web 2 — FastAPI Pydantic Schemas & Parameters",
+                file: "BT_Day06_PythonWeb.docx",
+                desc: "Validate Request Body bằng Pydantic BaseModel, Path parameters và Query parameters."
             },
             "DAY_02": {
                 badge: "Tuần 1 • Ngày 2",
@@ -1817,16 +2573,16 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         };
 
         // PRE-POPULATE MOCK DATA
-        if (!localStorage.getItem('python_day1_submissions')) {
+        if (!localStorage.getItem(SUBMISSION)) {
             const mockData = [
-                { id: 1, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026001", name: "Nguyễn Văn An", className: "CNTT1", class: "CNTT1", lop: "CNTT1", link: "https://github.com/an/python-day1", time: "26/07/2026 09:15:00", status: "Đã nộp" },
-                { id: 2, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026002", name: "Trần Thị Bình", className: "CNTT2", class: "CNTT2", lop: "CNTT2", link: "https://github.com/binh/python-day1", time: "26/07/2026 09:18:22", status: "Đã nộp" },
-                { id: 3, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026003", name: "Lê Hoàng Cường", className: "CNTT3", class: "CNTT3", lop: "CNTT3", link: "https://github.com/cuong/python-day1", time: "26/07/2026 09:22:45", status: "Đã nộp" },
-                { id: 4, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026004", name: "Phạm Văn Dũng", className: "CNTT4", class: "CNTT4", lop: "CNTT4", link: "https://github.com/dung/python-day1", time: "26/07/2026 09:30:12", status: "Đã nộp" },
-                { id: 5, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026005", name: "Đỗ Minh Đăng", className: "CNTT5", class: "CNTT5", lop: "CNTT5", link: "https://github.com/dang/python-day1", time: "26/07/2026 09:35:50", status: "Đã nộp" },
-                { id: 6, lessonId: "DAY_01", lesson: "DAY_01", msv: "SV2026006", name: "Hoàng Thị Em", className: "CNTT6", class: "CNTT6", lop: "CNTT6", link: "https://github.com/em/python-day1", time: "26/07/2026 09:40:11", status: "Đã nộp" }
+                { id: 1, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026001", name: "Nguyễn Văn An", className: "CNTT1", class: "CNTT1", lop: "CNTT1", link: "https://github.com/an/python-day1", time: "26/07/2026 09:15:00", status: "Đã nộp" },
+                { id: 2, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026002", name: "Trần Thị Bình", className: "CNTT2", class: "CNTT2", lop: "CNTT2", link: "https://github.com/binh/python-day1", time: "26/07/2026 09:18:22", status: "Đã nộp" },
+                { id: 3, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026003", name: "Lê Hoàng Cường", className: "CNTT3", class: "CNTT3", lop: "CNTT3", link: "https://github.com/cuong/python-day1", time: "26/07/2026 09:22:45", status: "Đã nộp" },
+                { id: 4, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026004", name: "Phạm Văn Dũng", className: "CNTT4", class: "CNTT4", lop: "CNTT4", link: "https://github.com/dung/python-day1", time: "26/07/2026 09:30:12", status: "Đã nộp" },
+                { id: 5, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026005", name: "Đỗ Minh Đăng", className: "CNTT5", class: "CNTT5", lop: "CNTT5", link: "https://github.com/dang/python-day1", time: "26/07/2026 09:35:50", status: "Đã nộp" },
+                { id: 6, lessonId: "DAY_06", lesson: "DAY_06", msv: "SV2026006", name: "Hoàng Thị Em", className: "CNTT6", class: "CNTT6", lop: "CNTT6", link: "https://github.com/em/python-day1", time: "26/07/2026 09:40:11", status: "Đã nộp" }
             ];
-            localStorage.setItem('python_day1_submissions', JSON.stringify(mockData));
+            localStorage.setItem(SUBMISSION, JSON.stringify(mockData));
         }
 
         function getWebhookUrl() {
@@ -1867,7 +2623,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
             });
             const activePane = document.getElementById('tab-' + tabId);
             if (activePane) activePane.classList.add('active');
-            
+
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if (btn.getAttribute('onclick').includes(tabId)) {
                     btn.classList.add('active');
@@ -1878,7 +2634,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         // MASTER CURRICULUM MODULE SWITCHER
         function changeLessonModule(lessonId) {
             currentActiveLessonId = lessonId;
-            const data = SYLLABUS_MAP[lessonId] || SYLLABUS_MAP["DAY_01"];
+            const data = SYLLABUS_MAP[lessonId] || SYLLABUS_MAP["DAY_06"];
 
             const badgeEl = document.getElementById('bannerBadge');
             const titleEl = document.getElementById('bannerTitle');
@@ -1911,7 +2667,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
             if (window.Prism && Prism.languages && Prism.languages.python) {
                 try {
                     return Prism.highlight(code, Prism.languages.python, 'python');
-                } catch(e) {}
+                } catch (e) { }
             }
             return escapeHtml(code);
         }
@@ -2035,7 +2791,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         // BULLETPROOF PYODIDE ENGINE INITIALIZER
         async function ensurePyodide() {
             if (pyEngine) return pyEngine;
-            
+
             if (pyodidePromise) {
                 return await pyodidePromise;
             }
@@ -2053,10 +2809,10 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
                                 indexURL: cdn.index
                             });
                             pyEngine = engine;
-                            
+
                             return engine;
                         }
-                    } catch(e) {
+                    } catch (e) {
                         lastErr = e;
                         window.loadPyodide = undefined;
                     }
@@ -2066,7 +2822,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
 
             try {
                 return await pyodidePromise;
-            } catch(e) {
+            } catch (e) {
                 pyodidePromise = null;
                 throw e;
             }
@@ -2087,7 +2843,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
             try {
                 await ensurePyodide();
                 setReady('🟢 Môi trường ảo Python: Sẵn sàng');
-            } catch(e) {
+            } catch (e) {
                 if (txt) txt.innerText = '🔴 Môi trường ảo Python: Lỗi kết nối';
             }
         }
@@ -2099,7 +2855,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
             if (err.message) return err.message;
             try {
                 return JSON.stringify(err);
-            } catch(e) {
+            } catch (e) {
                 return String(err);
             }
         }
@@ -2121,7 +2877,7 @@ print("Sản phẩm > 200k (List Comp):", sp_cao_cap)</textarea>
         try {
             initTestcaseListEx1();
             initTestcaseListEx2();
-        } catch(e) {
+        } catch (e) {
             console.error("Immediate init failed:", e);
         }
 
@@ -2158,7 +2914,7 @@ sys.stdout = io.StringIO()
                 await activeEngine.runPythonAsync(code);
                 const res = activeEngine.runPython("sys.stdout.getvalue()");
                 outEl.innerText = res ? res : "✅ Code đã chạy thành công (Không có output in ra).";
-            } catch(err) {
+            } catch (err) {
                 outEl.innerText = "❌ Lỗi thực thi Python:\n" + stringifyError(err);
             }
         }
@@ -2172,8 +2928,8 @@ sys.stdout = io.StringIO()
             if (!btn) return;
             const isUnlocked = ex1Passed && ex2Passed;
             if (isUnlocked) {
-                btn.setAttribute('href', 'BT_Day01_PythonCore.docx');
-                btn.setAttribute('download', 'BT_Day01_PythonCore.docx');
+                btn.setAttribute('href', 'BT_Day06_PythonWeb.docx');
+                btn.setAttribute('download', 'BT_Day06_PythonWeb.docx');
                 btn.style.background = 'var(--accent-red, #dc2626)';
                 btn.style.opacity = '1';
                 btn.style.pointerEvents = 'auto';
@@ -2221,7 +2977,7 @@ sys.stdout = io.StringIO()
             if (!codeEl || !resBox) return;
 
             const code = codeEl.value;
-            
+
             // Re-render baseline testcases
             initTestcaseListEx1();
             const summaryEl = document.getElementById('ex1-summary-msg');
@@ -2239,7 +2995,7 @@ sys.stdout = io.StringIO()
             } else {
                 try {
                     const activeEngine = await ensurePyodide();
-                    
+
                     // TC1: Check strip
                     let py1 = activeEngine.runPython("1 if all(x['ten'] == x['ten'].strip() for x in raw_cart) else 0");
                     tc1 = (py1 === 1);
@@ -2262,7 +3018,7 @@ sys.stdout = io.StringIO()
                         tc5 = true;
                     }
 
-                } catch(e) {
+                } catch (e) {
                     console.error("Test validation failed:", e);
                 }
             }
@@ -2313,7 +3069,7 @@ sys.stdout = io.StringIO()
             } else {
                 try {
                     const activeEngine = await ensurePyodide();
-                    
+
                     // TC1: Check set filter
                     let py1 = activeEngine.runPython("1 if ('danh_muc_set' in globals() and isinstance(danh_muc_set, set) and len(danh_muc_set) == 2 and 'Thời trang' in danh_muc_set and 'Giày dép' in danh_muc_set) else 0");
                     tc1 = (py1 === 1);
@@ -2328,7 +3084,7 @@ sys.stdout = io.StringIO()
                         tc3 = true;
                     }
 
-                } catch(e) {
+                } catch (e) {
                     console.error("Test validation failed:", e);
                 }
             }
@@ -2443,9 +3199,9 @@ sys.stdout = io.StringIO()
                 status: 'Đã nộp'
             };
 
-            let existing = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            let existing = JSON.parse(localStorage.getItem(SUBMISSION) || '[]');
             existing.unshift(payload);
-            localStorage.setItem('python_day1_submissions', JSON.stringify(existing));
+            localStorage.setItem(SUBMISSION, JSON.stringify(existing));
 
             const webhookUrl = getWebhookUrl();
             if (webhookUrl && webhookUrl.length > 10) {
@@ -2456,7 +3212,7 @@ sys.stdout = io.StringIO()
                         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                         body: JSON.stringify(payload)
                     });
-                } catch(err) {
+                } catch (err) {
                     console.log('Webhook push error:', err);
                 }
             }
@@ -2523,9 +3279,9 @@ sys.stdout = io.StringIO()
                                 id: item.id || (Date.now() + idx),
                                 time: item.time || item.timestamp || '',
                                 timestamp: item.time || item.timestamp || '',
-                                lessonId: item.lessonId || item.bai_hoc || item.lesson || 'DAY_01',
-                                lesson: item.lessonId || item.bai_hoc || item.lesson || 'DAY_01',
-                                bai_hoc: item.lessonId || item.bai_hoc || item.lesson || 'DAY_01',
+                                lessonId: item.lessonId || item.bai_hoc || item.lesson || 'DAY_06',
+                                lesson: item.lessonId || item.bai_hoc || item.lesson || 'DAY_06',
+                                bai_hoc: item.lessonId || item.bai_hoc || item.lesson || 'DAY_06',
                                 className: item.className || item.class || item.lop || '',
                                 class: item.className || item.class || item.lop || '',
                                 lop: item.className || item.class || item.lop || '',
@@ -2537,7 +3293,7 @@ sys.stdout = io.StringIO()
                                 status: item.status || 'Đã nộp'
                             }));
 
-                            localStorage.setItem('python_day1_submissions', JSON.stringify(normalizedData));
+                            localStorage.setItem(SUBMISSION, JSON.stringify(normalizedData));
                             if (statusMsg) {
                                 statusMsg.style.background = '#dcfce7';
                                 statusMsg.style.color = '#15803d';
@@ -2551,7 +3307,7 @@ sys.stdout = io.StringIO()
                             statusMsg.innerText = '💡 Đang hiển thị dữ liệu bài nộp lưu trữ cục bộ (Google Sheet chưa phản hồi).';
                         }
                     }
-                } catch(e) {
+                } catch (e) {
                     if (statusMsg) {
                         statusMsg.style.background = '#fffbeb';
                         statusMsg.style.color = '#b45309';
@@ -2563,91 +3319,204 @@ sys.stdout = io.StringIO()
         }
 
         function loadSubmissionsTable() {
-            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
-            
+            let list = JSON.parse(localStorage.getItem(SUBMISSION) || "[]");
+
+            // Chỉ lấy bài DAY_06
             let dayList = list.filter(row => {
-                const les = String(row.lessonId || row.bai_hoc || row.lesson || '').trim();
-                return les === 'DAY_01' || les === 'Day_01' || les === 'day_01' || les.includes('01');
+                const lesson = String(
+                    row.lessonId || row.lesson || row.bai_hoc || ""
+                ).trim().toUpperCase();
+                console.log("Lesson:", lesson);
+                return lesson === "DAY_06";
             });
 
-            const ALL_CLASSES = [
-                'HN-KS25-CNTT1', 'HN-KS25-CNTT2', 'HN-KS25-CNTT3', 'HN-KS25-CNTT4', 'HN-KS25-CNTT5', 'HN-KS25-CNTT6', 'HN-KS25-CNTT8',
-                'HCM-KS25-CNTT5', 'HCM-KS25-CNTT6', 'HCM-KS25-CNTT7', 'HCM-KS25-CNTT8'
-            ];
-            const stats = {};
-            ALL_CLASSES.forEach(c => stats[c] = 0);
+            // ===============================
+            // Thống kê số lượng từng lớp
+            // ===============================
+            const stats = {
+                "HN-KS25-CNTT1": 0,
+                "HN-KS25-CNTT2": 0,
+                "HN-KS25-CNTT3": 0,
+                "HN-KS25-CNTT4": 0,
+                "HN-KS25-CNTT5": 0,
+                "HN-KS25-CNTT6": 0,
+                "HN-KS25-CNTT8": 0,
+
+                "HCM-KS25-CNTT5": 0,
+                "HCM-KS25-CNTT6": 0,
+                "HCM-KS25-CNTT7": 0,
+                "HCM-KS25-CNTT8": 0
+            };
+
             dayList.forEach(row => {
-                const cName = row.className || row.class || row.lop || row['Lớp'] || 'HN-KS25-CNTT1';
-                if (stats[cName] !== undefined) stats[cName]++;
+                const className = (
+                    row.className ||
+                    row.class ||
+                    row.lop ||
+                    row["Lớp"] ||
+                    ""
+                ).trim();
+
+                if (stats.hasOwnProperty(className)) {
+                    stats[className]++;
+                }
             });
 
-            // Update stats labels in UI
-            ALL_CLASSES.forEach(ck => {
-                let el = document.getElementById(`stat-${ck}`);
-                if (el) el.innerText = stats[ck];
+            // Cập nhật thống kê từng lớp
+            Object.keys(stats).forEach(key => {
+                const el = document.getElementById(`stat-${key}`);
+                if (el) {
+                    el.innerText = stats[key];
+                }
             });
 
-            // Filter by selected Class
-            const filterClassEl = document.getElementById('filterClassSelect');
-            const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
-            if (filterClass !== 'ALL') {
-                dayList = dayList.filter(row => (row.className || row.class || row.lop || row['Lớp']) === filterClass);
+            // ===============================
+            // Lọc theo lớp
+            // ===============================
+            const filterClassEl = document.getElementById("filterClassSelect");
+            const filterClass = filterClassEl ? filterClassEl.value : "ALL";
+
+            if (filterClass !== "ALL") {
+                dayList = dayList.filter(row => {
+                    const className =
+                        row.className ||
+                        row.class ||
+                        row.lop ||
+                        row["Lớp"] ||
+                        "";
+
+                    return className === filterClass;
+                });
             }
 
-            const tbody = document.getElementById('adminTableBody');
+            // Hiển thị tổng số bài
+            const countEl = document.getElementById("filteredSubCount");
+            if (countEl) {
+                countEl.innerText = dayList.length;
+            }
+
+            // ===============================
+            // Hiển thị bảng
+            // ===============================
+            const tbody = document.getElementById("adminTableBody");
             if (!tbody) return;
 
             if (dayList.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">Chưa có dữ liệu bài nộp nào trong hệ thống.</td></tr>';
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align:center;padding:20px;color:#94a3b8;">
+                            Chưa có bài nộp nào của DAY_06.
+                        </td>
+                    </tr>
+                `;
                 return;
             }
 
-            tbody.innerHTML = '';
-            dayList.forEach((sub, i) => {
-                const tr = document.createElement('tr');
-                const cName = sub.className || sub.class || sub.lop || sub['Lớp'] || 'HN-KS25-CNTT1';
-                const link = sub.link || sub.github || sub['Link Github'] || '#';
-                const sName = sub.name || sub.ho_ten || sub['Họ và Tên'] || '';
-                const sMsv = sub.msv || sub['Mã Sinh Viên'] || '';
-                const sTime = sub.time || sub.timestamp || sub['Thời Gian Nộp'] || 'Vừa xong';
-                const lesCode = sub.bai_hoc || sub.lessonId || CURRENT_LESSON_ID;
+            tbody.innerHTML = "";
 
-                tr.innerHTML = `
-                    <td class="center"><b>${i + 1}</b></td>
-                    <td class="center"><b>${escapeHtml(lesCode)}</b></td>
-                    <td class="center"><code>${escapeHtml(sMsv)}</code></td>
-                    <td><b>${escapeHtml(sName)}</b></td>
-                    <td class="center"><span class="status-badge" style="background:#fef2f2; color:#dc2626; font-weight:800; padding:2px 8px; border-radius:4px;">${escapeHtml(cName)}</span></td>
-                    <td><a href="${escapeHtml(link)}" target="_blank" style="color:var(--accent-red); font-weight:700;">👉 Link Github Repo</a></td>
-                    <td class="center">${escapeHtml(sTime)}</td>
-                    <td class="center"><span class="status-badge" style="background:#dcfce7; color:#15803d; font-weight:bold;">Đã nộp</span></td>
+            dayList.forEach((sub, index) => {
+
+                const className =
+                    sub.className ||
+                    sub.class ||
+                    sub.lop ||
+                    sub["Lớp"] ||
+                    "";
+
+                const lesson =
+                    sub.lessonId ||
+                    sub.lesson ||
+                    sub.bai_hoc ||
+                    "DAY_06";
+
+                const msv =
+                    sub.msv ||
+                    sub["Mã Sinh Viên"] ||
+                    "";
+
+                const name =
+                    sub.name ||
+                    sub.ho_ten ||
+                    sub["Họ và Tên"] ||
+                    "";
+
+                const github =
+                    sub.link ||
+                    sub.github ||
+                    sub["Link Github"] ||
+                    "#";
+
+                const time =
+                    sub.time ||
+                    sub.timestamp ||
+                    sub["Thời Gian Nộp"] ||
+                    "";
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="center"><b>${index + 1}</b></td>
+
+                        <td class="center">
+                            <b>${escapeHtml(lesson)}</b>
+                        </td>
+
+                        <td class="center">
+                            <code>${escapeHtml(msv)}</code>
+                        </td>
+
+                        <td>
+                            <b>${escapeHtml(name)}</b>
+                        </td>
+
+                        <td class="center">
+                            <span class="status-badge"
+                                style="background:#fef2f2;color:#dc2626;font-weight:700;">
+                                ${escapeHtml(className)}
+                            </span>
+                        </td>
+
+                        <td>
+                            <a href="${escapeHtml(github)}"
+                            target="_blank"
+                            style="color:var(--accent-red);font-weight:bold;">
+                                👉 Link Github Repo
+                            </a>
+                        </td>
+
+                        <td class="center">
+                            ${escapeHtml(time)}
+                        </td>
+
+                        <td class="center">
+                            <span class="status-badge"
+                                style="background:#dcfce7;color:#15803d;font-weight:bold;">
+                                Đã nộp
+                            </span>
+                        </td>
+                    </tr>
                 `;
-                tbody.appendChild(tr);
             });
         }
 
         function exportSubmissionsToFormattedExcel() {
-            let list = JSON.parse(localStorage.getItem('python_day1_submissions') || '[]');
+            let list = JSON.parse(localStorage.getItem(SUBMISSION) || '[]');
             const filterClassEl = document.getElementById('filterClassSelect');
             const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
 
-            let filteredList = list.filter(sub => (sub.lessonId || sub.lesson || 'DAY_01') === 'DAY_01');
+            let filteredList = list.filter(sub => (sub.lessonId || sub.lesson || 'DAY_06') === 'DAY_06');
             if (filterClass !== 'ALL') {
                 filteredList = filteredList.filter(sub => (sub.className || sub.class || sub.lop) === filterClass);
             }
             if (filteredList.length === 0) { alert('Chưa có dữ liệu bài nộp để xuất Excel!'); return; }
 
-            const classOrder = {
-                "HN-KS25-CNTT1": 1, "HN-KS25-CNTT2": 2, "HN-KS25-CNTT3": 3, "HN-KS25-CNTT4": 4, "HN-KS25-CNTT5": 5, "HN-KS25-CNTT6": 6, "HN-KS25-CNTT8": 7,
-                "HCM-KS25-CNTT5": 8, "HCM-KS25-CNTT6": 9, "HCM-KS25-CNTT7": 10, "HCM-KS25-CNTT8": 11
-            };
+            const classOrder = { "CNTT1": 1, "CNTT2": 2, "CNTT3": 3, "CNTT4": 4, "CNTT5": 5, "CNTT6": 6 };
             filteredList.sort((a, b) => {
                 let cA = classOrder[a.className || a.class || a.lop] || 99;
                 let cB = classOrder[b.className || b.class || b.lop] || 99;
                 return cA - cB;
             });
 
-            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_01`;
+            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_06`;
             let excelHTML = `
                 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
                 <head>
@@ -2703,7 +3572,7 @@ sys.stdout = io.StringIO()
                 excelHTML += `
                     <tr>
                         <td class="center">${stt++}</td>
-                        <td class="center">DAY_01</td>
+                        <td class="center">DAY_06</td>
                         <td class="center">${sub.msv || ''}</td>
                         <td>${sub.name || sub.ho_ten || ''}</td>
                         <td class="class-badge">${cName}</td>
@@ -2724,15 +3593,15 @@ sys.stdout = io.StringIO()
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `BaoCao_NopBai_DAY_01_${filterClass}_${new Date().toISOString().slice(0,10)}.xls`;
+            a.download = `BaoCao_NopBai_DAY_06_${filterClass}_${new Date().toISOString().slice(0, 10)}.xls`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-    
-        
 
-</script>
+
+
+    </script>
 
 </html>
