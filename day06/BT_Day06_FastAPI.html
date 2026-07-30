@@ -2593,7 +2593,7 @@ curl <span class="str">"http://127.0.0.1:8000/api/v1/products/1"</span></div>
         function navigateToLesson(val) {
             if (!val) return;
             const currentPath = window.location.pathname.replace(/\\/g, '/');
-            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/');
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/') || currentPath.includes('/day08/');
             const prefix = isInSubfolder ? '../' : './';
 
             const routes = {
@@ -2603,7 +2603,8 @@ curl <span class="str">"http://127.0.0.1:8000/api/v1/products/1"</span></div>
                 "DAY_04": "day04/day04_python_core.html",
                 "DAY_05": "day05/BT_Day05_FastAPI.html",
                 "DAY_06": "day06/BT_Day06_FastAPI.html",
-                "DAY_07": "day07/BT_Day07_FastAPI.html"
+                "DAY_07": "day07/BT_Day07_FastAPI.html",
+                "DAY_08": "day08/BT_Day08_FastAPI.html"
             };
 
             if (routes[val]) {

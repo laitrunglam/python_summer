@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Day 7 | Rikkei Education</title>
+    <title>Python Day 8 | Rikkei Education</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1147,8 +1147,8 @@
     <header class="master-header" style="background: var(--card-bg, #ffffff); border-bottom: 1px solid var(--border-color, #e2e8f0); padding: 14px 24px; margin-bottom: 20px;">
         <div class="master-header-container" style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
             <div style="flex:1; min-width:320px;">
-                <span class="banner-badge" id="bannerBadge" style="background:var(--accent-red, #dc2626); color:white; font-weight:800; font-size:0.8rem; padding:4px 10px; border-radius:4px; text-transform:uppercase;">Tuần 1 • Ngày 7</span>
-                <h1 class="banner-title" id="bannerTitle" style="font-size:1.6rem; font-weight:800; color:var(--text-primary, #0f172a); margin-top:8px;">Python Web 2 — Mini Project 1</h1>
+                <span class="banner-badge" id="bannerBadge" style="background:var(--accent-red, #dc2626); color:white; font-weight:800; font-size:0.8rem; padding:4px 10px; border-radius:4px; text-transform:uppercase;">Tuần 2 • Ngày 1</span>
+                <h1 class="banner-title" id="bannerTitle" style="font-size:1.6rem; font-weight:800; color:var(--text-primary, #0f172a); margin-top:8px;">Python Web 1 — Kết Nối MySQL Workbench & SQLAlchemy ORM Cơ Bản</h1>
             </div>
         </div>
     </header>
@@ -1156,11 +1156,11 @@
 
     <!-- Compact Navigation Bar -->
     <nav class="top-nav">
-        <!-- <a href="#sec-theory" class="nav-link active">📖 1. Lý Thuyết Chuyên Sâu</a>
-        <a href="#sec-demo" class="nav-link">⚡ 2. Demo Code Phân Tích</a> -->
-        <a href="#sec-exercise" class="nav-link">✏️ 1. Bài Tập Thực Hành</a>
-        <a href="#sec-submit" class="nav-link">📤 2. Nộp Bài Học Viên</a>
-        <a href="#sec-resource" class="nav-link">📁 3. File Word Bài Tập</a>
+        <a href="#sec-theory" class="nav-link active">📖 1. Lý Thuyết Chuyên Sâu</a>
+        <a href="#sec-demo" class="nav-link">⚡ 2. Demo Code Phân Tích</a>
+        <a href="#sec-exercise" class="nav-link">✏️ 3. Bài Tập Thực Hành</a>
+        <a href="#sec-submit" class="nav-link">📤 4. Nộp Bài Học Viên</a>
+        <a href="#sec-resource" class="nav-link">📁 5. File Word Bài Tập</a>
     </nav>
 
     <!-- Main Content Area -->
@@ -1169,8 +1169,8 @@
         <!-- Dynamic Lesson Header Banner -->
         <div style="background: var(--accent-red-light); border: 2px solid var(--accent-red); padding: 18px 24px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
-                <span id="bannerBadge" style="background: var(--accent-red); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase;">Tuần 1 • Ngày 7</span>
-                <h2 id="bannerTitle" style="color: var(--accent-red-dark); font-weight: 800; font-size: 1.25rem; margin-top: 4px;">Python Web 2 — Mini Project 1</h2>
+                <span id="bannerBadge" style="background: var(--accent-red); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase;">Tuần 2 • Ngày 1</span>
+                <h2 id="bannerTitle" style="color: var(--accent-red-dark); font-weight: 800; font-size: 1.25rem; margin-top: 4px;">Python Web 1 — Kết Nối MySQL Workbench & SQLAlchemy ORM Cơ Bản</h2>
             </div>
             <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">
                 ⏱️ Thời lượng học: <b>60 - 90 phút</b> | 🎯 Mức độ: <b>Cơ bản ➔ Nâng cao</b>
@@ -1178,15 +1178,676 @@
         </div>
 
         <!-- Section 1: Lý Thuyết Ôn Tập Chuyên Sâu -->
+        <style>
+        /* ============ CSS fallback cho toàn bộ section lý thuyết ============ */
+        .code-block{
+            background:#1e1e2e;
+            color:#d4d4d4;
+            padding:18px 22px;
+            border-radius:10px;
+            font-family:"Consolas","Cascadia Code","Fira Code",monospace;
+            font-size:15px;
+            line-height:1.8;
+            white-space:pre-wrap;
+            overflow-x:auto;
+        }
+
+        /* Keyword */
+        .k{
+            color:#569CD6;
+            font-weight:600;
+        }
+
+        /* Data Type */
+        .t{
+            color:#4EC9B0;
+        }
+
+        /* Table name */
+        .tb{
+            color:#DCDCAA;
+        }
+
+        /* Column name */
+        .c{
+            color:#9CDCFE;
+        }
+
+        /* Number */
+        .n{
+            color:#B5CEA8;
+        }
+        .theory-quote {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 16px 0;
+            padding: 14px 16px;
+            background: #f0f6ff;
+            border-left: 4px solid #4285f4;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .theory-quote .quote-icon { font-size: 18px; line-height: 1; }
+
+        .theory-figure { margin: 18px 0; text-align: center; }
+        .theory-figure svg { max-width: 100%; height: auto; }
+        .figure-caption { margin-top: 6px; font-size: 12px; font-style: italic; color: #666; }
+
+        /* Thanh nút chuyển tab kiến thức */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 4px 0 18px 0;
+            border-bottom: 2px solid #eef0f3;
+            padding-bottom: 12px;
+        }
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border: 1px solid #dfe3e8;
+            background: #f7f8fa;
+            color: #444;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .tab-btn .tab-btn-icon { font-size: 15px; }
+        .tab-btn:hover {
+            background: #eef3ff;
+            border-color: #a9c4f5;
+            color: #1a56d6;
+            transform: translateY(-1px);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4285f4, #1a56d6);
+            border-color: #1a56d6;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(26, 86, 214, 0.25);
+        }
+
+        .tab-pane { animation: fadeInTab 0.25s ease; }
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bảng lý thuyết */
+        .theory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 20px 0;
+            font-size: 13.5px;
+        }
+        .theory-table th, .theory-table td {
+            border: 1px solid #e3e6ea;
+            padding: 9px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .theory-table th {
+            background: #f4f7fd;
+            font-weight: 700;
+            color: #223;
+        }
+        .theory-table tr:nth-child(even) td { background: #fafbfd; }
+        .theory-table code { background: #eef1f6; padding: 1px 6px; border-radius: 4px; }
+
+        /* Khối code/JSON */
+        .code-block {
+            background: #1e1e2e;
+            color: #d4d4dc;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 14px 0;
+        }
+        .code-block .k { color: #7dcfff; }
+        .code-block .s { color: #9ece6a; }
+
+        /* Badge nhóm status code / method */
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .badge-get { background: #34a853; }
+        .badge-post { background: #4285f4; }
+        .badge-put { background: #f9ab00; }
+        .badge-delete { background: #ea4335; }
+        .badge-2xx { background: #34a853; }
+        .badge-3xx { background: #4285f4; }
+        .badge-4xx { background: #f9ab00; }
+        .badge-5xx { background: #ea4335; }
+        </style>
+
+        <section id="sec-db-theory" class="card-panel">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <div class="section-title">Kết nối MySQL với Python bằng SQLAlchemy</div>
+            </div>
+
+            <!-- Thanh nút chuyển tab kiến thức -->
+            <div class="tab-nav" role="tablist" aria-label="Chuyển kiến thức MySQL - SQLAlchemy">
+                <button class="tab-btn active" data-target="tab-overview" role="tab" aria-selected="true">
+                    <span class="tab-btn-icon">🏗️</span> Tổng quan
+                </button>
+                <button class="tab-btn" data-target="tab-sql" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🗄️</span> store_db.sql
+                </button>
+                <button class="tab-btn" data-target="tab-database-py" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🔌</span> database.py
+                </button>
+                <button class="tab-btn" data-target="tab-models" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">📦</span> ProductModel (ORM)
+                </button>
+                <button class="tab-btn" data-target="tab-demo" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🔁</span> CRUD trong demo.py
+                </button>
+                <button class="tab-btn" data-target="tab-summary-flow" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">📊</span> Tổng kết luồng
+                </button>
+            </div>
+
+            <div class="theory-block">
+
+                <!-- ============ Tab 1: Tổng quan kiến trúc ============ -->
+                <div id="tab-overview" class="tab-pane active">
+                    <p class="theory-p"><b>Mục tiêu:</b> cho phép code Python (backend) lưu và lấy dữ liệu sản phẩm từ một database MySQL được quản lý bằng <b>MySQL Workbench</b>, thông qua thư viện <b>SQLAlchemy</b> (ORM).</p>
+
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">💡</span>
+                        <span class="quote-text"><b>Điểm mấu chốt:</b> MySQL Workbench thao tác trực tiếp trên <b>database vật lý</b> bằng SQL thuần, còn Python + SQLAlchemy giao tiếp với database đó qua một <b>lớp ánh xạ đối tượng (ORM)</b> — không cần viết SQL tay.</span>
+                    </blockquote>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tổng quan MySQL Workbench và SQLAlchemy">
+                            <rect x="20" y="75" width="170" height="80" rx="10" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+                            <text x="105" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">MySQL Workbench</text>
+                            <text x="105" y="125" text-anchor="middle" font-size="10.5" fill="#555">chạy store_db.sql</text>
+                            <text x="105" y="140" text-anchor="middle" font-size="10.5" fill="#555">(DDL/DML thủ công)</text>
+
+                            <line x1="190" y1="115" x2="290" y2="115" stroke="#34a853" stroke-width="2" marker-end="url(#arG)"/>
+                            <text x="240" y="105" text-anchor="middle" font-size="10" fill="#34a853">tạo bảng</text>
+
+                            <rect x="290" y="30" width="150" height="170" rx="10" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+                            <text x="365" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">MySQL Server</text>
+                            <rect x="305" y="70" width="120" height="40" rx="6" fill="#fff" stroke="#34a853"/>
+                            <text x="365" y="94" text-anchor="middle" font-size="10.5" fill="#333">DB: store_db</text>
+                            <rect x="305" y="120" width="120" height="40" rx="6" fill="#fff" stroke="#34a853"/>
+                            <text x="365" y="144" text-anchor="middle" font-size="10.5" fill="#333">Bảng: products</text>
+
+                            <line x1="440" y1="115" x2="530" y2="115" stroke="#f9ab00" stroke-width="2" marker-end="url(#arO)"/>
+                            <text x="485" y="80" text-anchor="middle" font-size="10" fill="#f9ab00">pymysql</text>
+                            <text x="485" y="93" text-anchor="middle" font-size="10" fill="#f9ab00">driver</text>
+
+                            <rect x="530" y="30" width="170" height="170" rx="10" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+                            <text x="615" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">Python App</text>
+                            <rect x="545" y="63" width="140" height="30" rx="6" fill="#fff" stroke="#f9ab00"/>
+                            <text x="615" y="83" text-anchor="middle" font-size="10.5" fill="#333">database.py (Engine)</text>
+                            <rect x="545" y="98" width="140" height="30" rx="6" fill="#fff" stroke="#f9ab00"/>
+                            <text x="615" y="118" text-anchor="middle" font-size="10.5" fill="#333">models.py (ORM)</text>
+                            <rect x="545" y="133" width="140" height="30" rx="6" fill="#fff" stroke="#f9ab00"/>
+                            <text x="615" y="153" text-anchor="middle" font-size="10.5" fill="#333">demo.py (CRUD)</text>
+
+                            <defs>
+                                <marker id="arG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#34a853"/></marker>
+                                <marker id="arO" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#f9ab00"/></marker>
+                            </defs>
+                        </svg>
+                        <p class="figure-caption">Hình 1. MySQL Workbench tạo database, Python (SQLAlchemy) kết nối và thao tác dữ liệu qua driver pymysql.</p>
+                    </div>
+
+                    <h4 class="theory-h4">4 file trong dự án và vai trò của chúng:</h4>
+                    <table class="theory-table">
+                        <tr><th>File</th><th>Loại</th><th>Vai trò</th></tr>
+                        <tr><td><code>store_db.sql</code></td><td>SQL script</td><td>Định nghĩa cấu trúc database/bảng (schema) — chạy trong Workbench</td></tr>
+                        <tr><td><code>database.py</code></td><td>Python</td><td>Thiết lập kết nối (Engine, Session, Base)</td></tr>
+                        <tr><td><code>models.py</code></td><td>Python (ORM)</td><td>Ánh xạ class <code>ProductModel</code> ↔ bảng <code>products</code></td></tr>
+                        <tr><td><code>demo.py</code></td><td>Python</td><td>Thao tác CRUD: thêm, lấy, cập nhật sản phẩm</td></tr>
+                    </table>
+                </div>
+
+                <!-- ============ Tab 2: store_db.sql ============ -->
+                <div id="tab-sql" class="tab-pane">
+                    <p class="theory-p"><code>store_db.sql</code> là tập lệnh <b>DDL (Data Definition Language)</b> — định nghĩa "hình dạng" của dữ liệu, chạy <b>trực tiếp trong MySQL Workbench</b>, độc lập với code Python.</p>
+
+                    <h4 class="theory-h4">Các lệnh chính:</h4>
+                    <table class="theory-table">
+                        <tr><th>Lệnh</th><th>Ý nghĩa</th></tr>
+                        <tr><td><code>CREATE DATABASE</code></td><td>Tạo "hộp chứa" riêng cho toàn bộ bảng của dự án, tránh đụng độ với database khác trên cùng MySQL Server</td></tr>
+                        <tr><td><code>CREATE TABLE</code></td><td>Định nghĩa schema: tên cột, kiểu dữ liệu, ràng buộc (constraint)</td></tr>
+                        <tr><td><code>INSERT</code></td><td>Lệnh DML (Data Manipulation Language) — chèn dữ liệu mẫu để test nhanh, không cần chạy Python</td></tr>
+                    </table>
+
+                    <h4 class="theory-h4">Vì sao chọn kiểu dữ liệu như vậy?</h4>
+                    <ul class="theory-list">
+                        <li><code>id INT AUTO_INCREMENT PRIMARY KEY</code>: khóa chính tự tăng, đảm bảo mỗi dòng là duy nhất.</li>
+                        <li><code>price DECIMAL(10,2)</code> thay vì <code>FLOAT</code>/<code>DOUBLE</code>: tiền tệ cần chính xác tuyệt đối, không được sai số làm tròn của số thực dấu phẩy động.</li>
+                        <li><code>updated_at ... ON UPDATE CURRENT_TIMESTAMP</code>: MySQL <b>tự động</b> cập nhật thời gian mỗi khi dòng bị <code>UPDATE</code> — code Python không cần tự nhớ set giá trị này.</li>
+                    </ul>
+
+<pre class="code-block"><span class="k">CREATE TABLE</span> <span class="tb">products</span> (
+    <span class="c">id</span>           <span class="t">INT</span> <span class="k">AUTO_INCREMENT PRIMARY KEY</span>,
+    <span class="c">name</span>         <span class="t">VARCHAR(255)</span> <span class="k">NOT NULL</span>,
+    <span class="c">price</span>        <span class="t">DECIMAL(10,2)</span> <span class="k">NOT NULL DEFAULT</span> <span class="n">0</span>,
+    <span class="c">quantity</span>     <span class="t">INT</span> <span class="k">NOT NULL DEFAULT</span> <span class="n">0</span>,
+    <span class="c">updated_at</span>   <span class="t">DATETIME</span> <span class="k">DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</span>
+);</pre>
+
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">📌</span>
+                        <span class="quote-text">File này chỉ cần chạy <b>một lần</b> (hoặc mỗi khi thay đổi cấu trúc bảng) — nó tách biệt hoàn toàn với vòng đời chạy của ứng dụng Python.</span>
+                    </blockquote>
+                </div>
+
+                <!-- ============ Tab 3: database.py ============ -->
+                <div id="tab-database-py" class="tab-pane">
+                    <p class="theory-p"><code>database.py</code> là <b>lớp kết nối</b>, dựng nên 3 khái niệm cốt lõi của SQLAlchemy: <b>Engine</b>, <b>Session</b>, <b>Base</b>.</p>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ Engine Session Base">
+                            <rect x="60" y="10" width="500" height="50" rx="6" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+                            <text x="310" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">Engine</text>
+                            <text x="310" y="46" text-anchor="middle" font-size="10.5" fill="#555">"Cổng kết nối" tới MySQL — quản lý connection pool</text>
+
+                            <rect x="60" y="68" width="500" height="50" rx="6" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+                            <text x="310" y="88" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">Session (SessionLocal)</text>
+                            <text x="310" y="104" text-anchor="middle" font-size="10.5" fill="#555">"Phiên làm việc" — nơi mọi thao tác add/query/commit đi qua</text>
+
+                            <rect x="60" y="126" width="500" height="50" rx="6" fill="#fce8e6" stroke="#ea4335" stroke-width="2"/>
+                            <text x="310" y="146" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">Base (declarative_base)</text>
+                            <text x="310" y="162" text-anchor="middle" font-size="10.5" fill="#555">Lớp cha để mọi Model kế thừa, đánh dấu "đây là 1 bảng"</text>
+
+                            <line x1="310" y1="60" x2="310" y2="68" stroke="#888" stroke-width="1.5"/>
+                            <line x1="310" y1="118" x2="310" y2="126" stroke="#888" stroke-width="1.5"/>
+                        </svg>
+                        <p class="figure-caption">Hình 2. Ba thành phần cốt lõi được khai báo trong database.py.</p>
+                    </div>
+
+                    <h4 class="theory-h4">Giải thích từng thành phần:</h4>
+                    <table class="theory-table">
+                        <tr><th>Thành phần</th><th>Vai trò</th></tr>
+                        <tr><td><code>create_engine(DATABASE_URL)</code></td><td>Tạo kết nối tới MySQL; tái sử dụng connection thay vì mở/đóng liên tục (tốn tài nguyên)</td></tr>
+                        <tr><td><code>mysql+pymysql://</code></td><td><code>pymysql</code> là driver — SQLAlchemy tự nó không giao tiếp mạng với MySQL được, cần driver trung gian</td></tr>
+                        <tr><td><code>sessionmaker(bind=engine)</code></td><td>Tạo "khuôn" để sinh ra các Session dùng chung 1 Engine</td></tr>
+                        <tr><td><code>declarative_base()</code></td><td>Nền tảng ORM — class nào kế thừa <code>Base</code> sẽ được map sang 1 bảng SQL</td></tr>
+                    </table>
+
+                    <div class="code-block">DATABASE_URL = <span class="s">f"mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}"</span>
+
+engine = create_engine(DATABASE_URL, pool_pre_ping=<span class="k">True</span>)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()</div>
+                </div>
+
+                <!-- ============ Tab 4: ProductModel (ORM) ============ -->
+                <div id="tab-models" class="tab-pane">
+                    <p class="theory-p"><b>ORM (Object-Relational Mapping)</b> là kỹ thuật ánh xạ giữa <b>bảng SQL</b> và <b>class Python</b>, để thao tác dữ liệu bằng object thay vì viết chuỗi SQL tay.</p>
+
+                    <h4 class="theory-h4">Bảng ánh xạ SQL ↔ SQLAlchemy:</h4>
+                    <table class="theory-table">
+                        <tr><th>SQL (store_db.sql)</th><th>SQLAlchemy (models.py)</th></tr>
+                        <tr><td><code>CREATE TABLE products</code></td><td><code>__tablename__ = "products"</code></td></tr>
+                        <tr><td><code>id INT PRIMARY KEY</code></td><td><code>Column(Integer, primary_key=True)</code></td></tr>
+                        <tr><td><code>price DECIMAL(10,2)</code></td><td><code>Column(Numeric(10,2))</code></td></tr>
+                        <tr><td><code>name VARCHAR(255)</code></td><td><code>Column(String(255))</code></td></tr>
+                    </table>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 620 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="So sánh dòng SQL và object Python">
+                            <rect x="20" y="20" width="260" height="100" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+                            <text x="150" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">Dòng trong bảng MySQL</text>
+                            <text x="150" y="65" text-anchor="middle" font-size="11" fill="#333">id=1, name='Áo thun'</text>
+                            <text x="150" y="82" text-anchor="middle" font-size="11" fill="#333">price=150000, quantity=50</text>
+
+                            <line x1="280" y1="70" x2="340" y2="70" stroke="#5f6368" stroke-width="2" marker-end="url(#a2)"/>
+                            <text x="310" y="60" text-anchor="middle" font-size="10" fill="#555">ORM</text>
+
+                            <rect x="340" y="20" width="260" height="100" rx="8" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+                            <text x="470" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">Object ProductModel</text>
+                            <text x="470" y="65" text-anchor="middle" font-size="11" fill="#333">product.name</text>
+                            <text x="470" y="82" text-anchor="middle" font-size="11" fill="#333">product.price</text>
+
+                            <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5f6368"/></marker></defs>
+                        </svg>
+                        <p class="figure-caption">Hình 3. ORM biến 1 dòng SQL thành 1 object Python có thuộc tính (attribute).</p>
+                    </div>
+
+                    <h4 class="theory-h4">Lợi ích của ORM:</h4>
+                    <ul class="theory-list">
+                        <li>Thao tác bằng object Python (<code>product.name</code>) — IDE gợi ý, tránh lỗi cú pháp SQL.</li>
+                        <li>Không phụ thuộc cụ thể vào MySQL — đổi sang PostgreSQL chỉ cần đổi <code>DATABASE_URL</code>, không cần sửa <code>models.py</code>.</li>
+                        <li>Có thể thêm hàm tiện ích như <code>to_dict()</code> để phục vụ trả JSON cho API sau này.</li>
+                    </ul>
+                </div>
+
+                <!-- ============ Tab 5: CRUD trong demo.py ============ -->
+                <div id="tab-demo" class="tab-pane">
+                    <p class="theory-p"><code>demo.py</code> minh họa 4 thao tác chuẩn <b>CRUD</b> (Create – Read – Update – Delete) thông qua Session.</p>
+
+                    <table class="theory-table">
+                        <tr><th>Thao tác</th><th>Hàm SQLAlchemy</th><th>Tương đương SQL</th></tr>
+                        <tr><td><span class="badge badge-post">Create</span></td><td><code>db.add(obj)</code> → <code>db.commit()</code></td><td><code>INSERT INTO products ...</code></td></tr>
+                        <tr><td><span class="badge badge-get">Read</span></td><td><code>db.query(Model).all() / .filter().first()</code></td><td><code>SELECT * FROM products WHERE ...</code></td></tr>
+                        <tr><td><span class="badge badge-put">Update</span></td><td>sửa thuộc tính object → <code>db.commit()</code></td><td><code>UPDATE products SET ... WHERE id=...</code></td></tr>
+                        <tr><td><span class="badge badge-delete">Delete</span></td><td><code>db.delete(obj)</code> → <code>db.commit()</code></td><td><code>DELETE FROM products WHERE id=...</code></td></tr>
+                    </table>
+
+                    <h4 class="theory-h4">Vòng đời một thao tác Create:</h4>
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vòng đời thao tác Create trong SQLAlchemy">
+                            <text x="70" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">demo.py</text>
+                            <text x="640" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">MySQL</text>
+                            <line x1="70" y1="35" x2="70" y2="160" stroke="#c8cdd6" stroke-width="2"/>
+                            <line x1="640" y1="35" x2="640" y2="160" stroke="#c8cdd6" stroke-width="2"/>
+
+                            <text x="355" y="55" text-anchor="middle" font-size="10.5" fill="#333">1. db.add(product) — đưa vào "hàng đợi" của Session (chưa lưu)</text>
+
+                            <line x1="70" y1="75" x2="640" y2="75" stroke="#34a853" stroke-width="2" marker-end="url(#a3)"/>
+                            <text x="355" y="70" text-anchor="middle" font-size="10.5" fill="#34a853">2. db.commit() — thực thi transaction, ghi thật xuống MySQL</text>
+
+                            <line x1="640" y1="105" x2="70" y2="105" stroke="#ea4335" stroke-width="2" marker-end="url(#a4)"/>
+                            <text x="355" y="100" text-anchor="middle" font-size="10.5" fill="#ea4335">3. db.refresh(product) — lấy lại id, created_at do MySQL sinh ra</text>
+
+                            <text x="355" y="135" text-anchor="middle" font-size="10.5" fill="#333">4. db.close() (trong finally) — trả kết nối về pool</text>
+
+                            <defs>
+                                <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#34a853"/></marker>
+                                <marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#ea4335"/></marker>
+                            </defs>
+                        </svg>
+                        <p class="figure-caption">Hình 4. Vòng đời thao tác Create qua add → commit → refresh → close.</p>
+                    </div>
+
+                    <blockquote class="theory-quote">
+                        <span class="quote-icon">💡</span>
+                        <span class="quote-text"><b>Transaction &amp; Rollback:</b> nếu có lỗi giữa chừng, <code>db.rollback()</code> hủy toàn bộ thay đổi chưa commit, đảm bảo dữ liệu không bị lưu nửa vời (tính <b>ACID</b>). Luôn gọi <code>db.close()</code> trong <code>finally</code> để tránh rò rỉ connection.</span>
+                    </blockquote>
+                </div>
+
+                <!-- ============ Tab 6: Tổng kết luồng ============ -->
+                <div id="tab-summary-flow" class="tab-pane">
+                    <p class="theory-p">Toàn bộ luồng dữ liệu khi chạy <code>python demo.py</code>:</p>
+
+                    <div class="theory-figure">
+                        <svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tổng kết luồng dữ liệu demo.py tới MySQL">
+                            <rect x="160" y="10" width="300" height="42" rx="8" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+                            <text x="310" y="35" text-anchor="middle" font-size="12" fill="#1a1a1a">demo.py: add_product(...)</text>
+
+                            <line x1="310" y1="52" x2="310" y2="75" stroke="#5f6368" stroke-width="2" marker-end="url(#a5)"/>
+                            <text x="440" y="68" text-anchor="middle" font-size="10" fill="#555">tạo object ProductModel</text>
+
+                            <rect x="130" y="80" width="360" height="42" rx="8" fill="#f3e8fd" stroke="#8b5cf6" stroke-width="2"/>
+                            <text x="310" y="105" text-anchor="middle" font-size="12" fill="#1a1a1a">Session (SessionLocal) — add() / commit()</text>
+
+                            <line x1="310" y1="122" x2="310" y2="145" stroke="#5f6368" stroke-width="2" marker-end="url(#a5)"/>
+                            <text x="440" y="138" text-anchor="middle" font-size="10" fill="#555">Session dùng chung Engine</text>
+
+                            <rect x="130" y="150" width="360" height="42" rx="8" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+                            <text x="310" y="175" text-anchor="middle" font-size="12" fill="#1a1a1a">Engine → driver pymysql</text>
+
+                            <line x1="310" y1="192" x2="310" y2="215" stroke="#5f6368" stroke-width="2" marker-end="url(#a5)"/>
+
+                            <rect x="160" y="220" width="300" height="42" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+                            <text x="310" y="245" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">MySQL: INSERT INTO products ...</text>
+
+                            <defs><marker id="a5" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5f6368"/></marker></defs>
+                        </svg>
+                        <p class="figure-caption">Hình 5. Luồng xử lý khi gọi add_product() trong demo.py tới khi dữ liệu vào MySQL.</p>
+                    </div>
+
+                    <h4 class="theory-h4">Câu hỏi ôn tập (tự trả lời trước khi thực hành):</h4>
+                    <ul class="theory-list">
+                        <li><code>store_db.sql</code> chạy ở đâu, và vì sao nó tách biệt với vòng đời của Python app?</li>
+                        <li>Engine, Session, Base trong SQLAlchemy khác nhau ở điểm nào?</li>
+                        <li>Vì sao nên dùng <code>DECIMAL</code> thay vì <code>FLOAT</code> cho cột giá tiền?</li>
+                        <li>ORM giúp ích gì so với việc viết SQL trực tiếp trong Python?</li>
+                        <li>Nếu quên gọi <code>db.commit()</code>, dữ liệu có được lưu vào MySQL không? Vì sao?</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <script>
+        (function () {
+            var section = document.getElementById('sec-db-theory');
+            if (!section) return;
+
+            var buttons = section.querySelectorAll('.tab-btn');
+            var panes = section.querySelectorAll('.tab-pane');
+
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-target');
+
+                    buttons.forEach(function (b) {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    panes.forEach(function (p) {
+                        p.classList.remove('active');
+                    });
+
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                    var targetPane = section.querySelector('#' + targetId);
+                    if (targetPane) targetPane.classList.add('active');
+                });
+            });
+        })();
+        </script>
 
         <!-- Section 2: Demo Code Phân Tích (LIVE DUAL-LAYER VS CODE HIGHLIGHTING) -->
+        <style>
+        /* Khối code tĩnh - không phụ thuộc JS ngoài, luôn hiển thị đúng */
+        .static-code-block {
+            background: #1e1e2e;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0 16px 0;
+        }
+        .static-code-topbar {
+            background: #2a2a3c;
+            padding: 10px 16px;
+            color: #d4d4dc;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid #383850;
+        }
+        .static-code-body {
+            padding: 16px 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #d4d4dc;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .static-code-body .kw   { color: #c586c0; }  /* from, import, def, return, CREATE, INSERT... */
+        .static-code-body .fn   { color: #dcdcaa; }  /* tên hàm */
+        .static-code-body .str  { color: #ce9178; }  /* chuỗi */
+        .static-code-body .com  { color: #6a9955; font-style: italic; } /* comment */
+        .static-code-body .num  { color: #b5cea8; }  /* số */
+        .static-code-body .cls  { color: #4ec9b0; }  /* tên bảng/biến/hằng viết hoa */
+        .static-code-body .dec  { color: #dcdcaa; }  /* decorator @app.get(...) */
+
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .section-num {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, #4285f4, #1a56d6);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px; flex-shrink: 0;
+        }
+        .section-title { font-size: 19px; font-weight: 700; }
+        .context-box {
+            background: #f4f7fd;
+            border: 1px solid #e3e6ea;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 10px 0 16px 0;
+        }
+        .context-title { font-size: 14.5px; font-weight: 700; margin-bottom: 6px; color: #1a1a1a; }
+        </style>
+
+        <section id="sec-demo-mysql" class="card-panel">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <div class="section-title">Ví Dụ Code & Ngữ Cảnh Cụ Thể</div>
+            </div>
+
+            <div class="context-box">
+                <div class="context-title">📌 Ngữ Cảnh Bài Toán: Dự án Store Management — Lưu sản phẩm vào MySQL</div>
+                <p style="font-size: 0.94rem; color: var(--text-secondary);">
+                    Ở buổi trước, API <code>GET /api/v1/store-info</code> mới chỉ trả về <b>mock data</b> (dictionary viết cứng trong code). Bước tiếp theo là kết nối tới một database <b>MySQL thật</b> (tạo sẵn bằng MySQL Workbench) để lưu và lấy danh sách sản phẩm.<br>
+                    4 file bên dưới trích từ dự án thật: <code>store_db.sql</code> (chạy trong Workbench), <code>app/database.py</code>, <code>app/models.py</code>, <code>app/demo.py</code> — vì cần một MySQL Server thật đang chạy nên phần này chỉ hiển thị để đọc/tham khảo, không có nút chạy trực tiếp trên trình duyệt.
+                </p>
+            </div>
+
+            <!-- ============ Khối 1: store_db.sql ============ -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">🗄️ store_db.sql</div>
+                <div class="static-code-body"><span class="com">-- Chạy trong MySQL Workbench để khởi tạo database</span>
+<span class="kw">CREATE DATABASE IF NOT EXISTS</span> <span class="cls">store_db</span>
+    <span class="kw">CHARACTER SET</span> utf8mb4;
+
+<span class="kw">USE</span> <span class="cls">store_db</span>;
+
+<span class="kw">CREATE TABLE IF NOT EXISTS</span> <span class="cls">products</span> (
+    id          <span class="fn">INT</span> <span class="kw">AUTO_INCREMENT PRIMARY KEY</span>,
+    name        <span class="fn">VARCHAR</span>(<span class="num">255</span>) <span class="kw">NOT NULL</span>,
+    price       <span class="fn">DECIMAL</span>(<span class="num">10</span>,<span class="num">2</span>) <span class="kw">NOT NULL DEFAULT</span> <span class="num">0</span>,
+    quantity    <span class="fn">INT</span> <span class="kw">NOT NULL DEFAULT</span> <span class="num">0</span>,
+    created_at  <span class="fn">DATETIME</span> <span class="kw">DEFAULT CURRENT_TIMESTAMP</span>
+);
+
+<span class="com">-- Dữ liệu mẫu để test nhanh</span>
+<span class="kw">INSERT INTO</span> products (name, price, quantity) <span class="kw">VALUES</span>
+(<span class="str">'Áo thun nam'</span>, <span class="num">150000</span>, <span class="num">50</span>),
+(<span class="str">'Giày sneaker'</span>, <span class="num">550000</span>, <span class="num">20</span>);</div>
+    </div>
+
+            <!-- ============ Khối 2: database.py ============ -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">🔌 app/database.py</div>
+                <div class="static-code-body"><span class="kw">import</span> os
+<span class="kw">from</span> sqlalchemy <span class="kw">import</span> create_engine
+<span class="kw">from</span> sqlalchemy.orm <span class="kw">import</span> sessionmaker, declarative_base
+
+<span class="com"># Thông tin kết nối tới MySQL Server đang chạy trong Workbench</span>
+<span class="cls">DB_USER</span> = os.getenv(<span class="str">"DB_USER"</span>, <span class="str">"root"</span>)
+<span class="cls">DB_PASSWORD</span> = os.getenv(<span class="str">"DB_PASSWORD"</span>, <span class="str">"your_password"</span>)
+<span class="cls">DB_HOST</span> = os.getenv(<span class="str">"DB_HOST"</span>, <span class="str">"127.0.0.1"</span>)
+<span class="cls">DB_NAME</span> = os.getenv(<span class="str">"DB_NAME"</span>, <span class="str">"store_db"</span>)
+
+<span class="cls">DATABASE_URL</span> = <span class="str">f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:3306/{DB_NAME}"</span>
+
+<span class="com"># Engine: "cổng kết nối" tới MySQL, tự quản lý connection pool</span>
+engine = create_engine(<span class="cls">DATABASE_URL</span>, pool_pre_ping=<span class="kw">True</span>)
+
+<span class="com"># Session: mọi thao tác add / query / commit đều đi qua đây</span>
+<span class="cls">SessionLocal</span> = sessionmaker(bind=engine)
+
+<span class="com"># Base: lớp cha để ProductModel kế thừa</span>
+<span class="cls">Base</span> = declarative_base()</div>
+    </div>
+
+            <!-- ============ Khối 3: models.py ============ -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">📦 app/models.py</div>
+                <div class="static-code-body"><span class="kw">from</span> sqlalchemy <span class="kw">import</span> Column, Integer, String, Numeric, DateTime
+<span class="kw">from</span> sqlalchemy.sql <span class="kw">import</span> func
+<span class="kw">from</span> app.database <span class="kw">import</span> Base
+
+
+<span class="kw">class</span> <span class="cls">ProductModel</span>(Base):
+    __tablename__ = <span class="str">"products"</span>
+
+    id = Column(Integer, primary_key=<span class="kw">True</span>)
+    name = Column(String(<span class="num">255</span>), nullable=<span class="kw">False</span>)
+    price = Column(Numeric(<span class="num">10</span>, <span class="num">2</span>), nullable=<span class="kw">False</span>, default=<span class="num">0</span>)
+    quantity = Column(Integer, nullable=<span class="kw">False</span>, default=<span class="num">0</span>)
+    created_at = Column(DateTime, server_default=func.now())
+
+    <span class="kw">def</span> <span class="fn">to_dict</span>(<span class="kw">self</span>):
+        <span class="kw">return</span> {
+            <span class="str">"id"</span>: <span class="kw">self</span>.id,
+            <span class="str">"name"</span>: <span class="kw">self</span>.name,
+            <span class="str">"price"</span>: <span class="fn">float</span>(<span class="kw">self</span>.price),
+            <span class="str">"quantity"</span>: <span class="kw">self</span>.quantity,
+        }</div>
+    </div>
+
+            <!-- ============ Khối 4: demo.py ============ -->
+            <div class="static-code-block">
+                <div class="static-code-topbar">🔁 app/demo.py</div>
+                <div class="static-code-body"><span class="kw">from</span> app.database <span class="kw">import</span> engine, SessionLocal, Base
+<span class="kw">from</span> app.models <span class="kw">import</span> ProductModel
+
+
+<span class="kw">def</span> <span class="fn">add_product</span>(name, price, quantity):
+    <span class="com"># Tạo Session mới cho mỗi thao tác</span>
+    db = SessionLocal()
+    <span class="kw">try</span>:
+        product = ProductModel(name=name, price=price, quantity=quantity)
+        db.add(product)        <span class="com"># đưa vào hàng đợi</span>
+        db.commit()             <span class="com"># ghi thật xuống MySQL</span>
+        db.refresh(product)     <span class="com"># lấy lại id do MySQL sinh ra</span>
+        <span class="fn">print</span>(<span class="str">f"✅ Đã thêm: {product.name} (id={product.id})"</span>)
+    <span class="kw">finally</span>:
+        db.close()
+
+
+<span class="kw">def</span> <span class="fn">get_all_products</span>():
+    db = SessionLocal()
+    <span class="kw">try</span>:
+        <span class="kw">return</span> db.query(ProductModel).all()
+    <span class="kw">finally</span>:
+        db.close()
+
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    Base.metadata.create_all(bind=engine)
+    add_product(<span class="str">"Quần jeans"</span>, <span class="num">320000</span>, <span class="num">40</span>)
+
+    <span class="kw">for</span> p <span class="kw">in</span> get_all_products():
+        <span class="fn">print</span>(p.to_dict())</div>
+    </div>
+
+            <div class="context-box" style="margin-top: 16px;">
+                <div class="context-title">🚀 Cách chạy thử với dữ liệu thật</div>
+                <p style="font-size: 0.94rem; color: var(--text-secondary);">
+                    1. Mở MySQL Workbench, chạy <code>store_db.sql</code> để tạo database và bảng.<br>
+                    2. Cài thư viện: <code>pip install sqlalchemy pymysql</code>.<br>
+                    3. Sửa <code>DB_PASSWORD</code> trong <code>database.py</code> (hoặc set biến môi trường) cho đúng mật khẩu MySQL của bạn.<br>
+                    4. Chạy <code>python -m app.demo</code> — sản phẩm mới sẽ được thêm vào bảng <code>products</code>, sau đó danh sách được in ra dạng JSON. Có thể mở lại MySQL Workbench, chạy <code>SELECT * FROM products;</code> để xác nhận dữ liệu đã lưu.
+                </p>
+            </div>
+        </section>
+
 
         <!-- Section 3: Bài Tập Thực Hành -->
+
 
         <!-- Section 4: Nộp Bài Học Viên & Bảng Quản Lý Giảng Viên (KHÓA MẬT KHẨU GIẢNG VIÊN) -->
         <section id="sec-submit" class="card-panel">
             <div class="section-header">
-                <div class="section-num">1</div>
+                <div class="section-num">3</div>
                 <div class="section-title">Nộp Bài Tập Học Viên & Bảng Kiểm Soát Lớp Học</div>
             </div>
 
@@ -1276,14 +1937,14 @@
                             <label style="font-weight: 700; font-size: 0.9rem;">📚 Lọc Theo Bài Học:</label>
                             <select id="filterLessonSelect" onchange="loadSubmissionsTable()" class="form-input" style="width: auto; height: 36px; padding: 0 16px; font-weight: 700; cursor: pointer; max-width: 320px;">
                                 <option value="ALL">--- Tất Cả Các Bài Học (Ngày 1 -> Ngày 14) ---</option>
-                                <option value="DAY_07" selected>Ngày 1: Python Core 1</option>
+                                <option value="DAY_01">Ngày 1: Python Core 1</option>
                                 <option value="DAY_02">Ngày 2: Python Core 2</option>
                                 <option value="DAY_03">Ngày 3: Python Core 3</option>
                                 <option value="DAY_04">Ngày 4: Python Core 4</option>
                                 <option value="DAY_05">Ngày 5: FastAPI Architecture</option>
-                                <option value="DAY_07">Ngày 6: Pydantic Schemas</option>
+                                <option value="DAY_06">Ngày 6: Pydantic Schemas</option>
                                 <option value="DAY_07">Ngày 7: Mini Project 1</option>
-                                <option value="DAY_08">Ngày 8: MySQL & SQLAlchemy</option>
+                                <option value="DAY_08" selected>Ngày 8: MySQL & SQLAlchemy</option>
                                 <option value="DAY_09">Ngày 9: Service CRUD</option>
                                 <option value="DAY_10">Ngày 10: Project Structure</option>
                                 <option value="DAY_11">Ngày 11: Hackathon API</option>
@@ -1360,38 +2021,37 @@
             </div>
         </section>
 
-
         <!-- Section 5: ONLY Word Exercise File Resource Card -->
         <section id="sec-resource" class="card-panel">
             <div class="section-header">
-                <div class="section-num">2</div>
+                <div class="section-num">4</div>
                 <div class="section-title">Tài Nguyên File Bài Tập Word Đính Kèm</div>
             </div>
 
             <!-- Single Clean Primary Card for Word Document -->
             <div class="resource-single-card">
                 <div>
-                    <h3 id="resourceFileTitle" style="color: var(--accent-red-dark); margin-bottom: 6px; font-weight: 800;">📄 File Word Bài Tập: BT_Day07_PythonWeb.docx</h3>
+                    <h3 id="resourceFileTitle" style="color: var(--accent-red-dark); margin-bottom: 6px; font-weight: 800;">📄 File Word Bài Tập: BT_Day08_PythonWeb.docx</h3>
                     <p id="resourceFileDesc" style="font-size: 0.95rem; color: var(--text-secondary);">
                         Phiếu bài tập Word tổng hợp hoàn chỉnh (30 - 40 phút), chứa đầy đủ đề bài CRUD List/Dict/Set, List Comprehension, Kết quả đầu ra kỳ vọng và hướng dẫn nộp bài lên GitHub.
                     </p>
                 </div>
                 <div>
-                    <a id="resourceFileBtn" href="BT_Day07_PythonWeb.docx" download style="display:inline-block; padding:12px 24px; background:var(--accent-red); color:#ffffff; text-decoration:none; font-weight:800; border-radius:var(--radius-sm); font-size:0.95rem; white-space:nowrap; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);">📥 Tải File Word Bài Tập (.docx)</a>
+                    <a id="resourceFileBtn" href="BT_Day08_PythonWeb.docx" download style="display:inline-block; padding:12px 24px; background:var(--accent-red); color:#ffffff; text-decoration:none; font-weight:800; border-radius:var(--radius-sm); font-size:0.95rem; white-space:nowrap; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);">📥 Tải File Word Bài Tập (.docx)</a>
                 </div>
             </div>
         </section>
 
         <!-- BOTTOM LESSON NAVIGATION BAR (POINT 2) -->
         <nav style="margin-top: 40px; padding: 24px; background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow-sm);">
-            <a href="../day06/BT_Day06_FastAPI.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; transition: all 0.2s;">
-                ⏮️ Bài Trước: Bài 06 (Pydantic Schemas)
+            <a href="../day07/BT_Day07_FastAPI.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; border: 1px solid #cbd5e1; transition: all 0.2s;">
+                ⏮️ Bài Trước: Bài 07 (Mini Project 1 RAM)
             </a>
             <span style="font-weight: 800; color: #64748b; font-size: 0.9rem;">
-                📌 Đang học: Bài 07 / 14
+                📌 Đang học: Bài 08 / 14
             </span>
-            <a href="../day08/BT_Day08_FastAPI.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent-red); color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25); transition: all 0.2s;">
-                Bài 8: MySQL & SQLAlchemy ➡️
+            <a href="#" onclick="alert('📌 Bài 09 (Service CRUD Nâng Cao) đang trong tiến trình chuẩn bị!'); return false;" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #cbd5e1; color: #64748b; text-decoration: none; font-weight: 800; font-size: 0.95rem; border-radius: 10px; cursor: not-allowed; transition: all 0.2s;">
+                Bài 9: Service CRUD Nâng Cao 🔒
             </a>
         </nav>
 
@@ -1422,9 +2082,9 @@
     <script>
         let pyEngine = null;
         let pyodidePromise = null;
-        let currentActiveLessonId = "DAY_07";
-        const CURRENT_LESSON_ID = "DAY_07";
-        const SUBMISSION = "DAY_07";
+        let currentActiveLessonId = "DAY_08";
+        const CURRENT_LESSON_ID = "DAY_08";
+        const SUBMISSION = "DAY_08";
         let ex1Passed = false;
         let ex2Passed = false;
         const TEACHER_PASSWORD_KEY = "rikkeiedu";
@@ -1432,11 +2092,11 @@
 
         // MASTER CURRICULUM SYLLABUS DATA (14 DAYS COMPLETE TITLES FROM DOC)
         const SYLLABUS_MAP = {
-            "DAY_07": {
-                badge: "Tuần 1 • Ngày 7",
-                title: "Python Web 3 — Mini Project 1 CRUD API Quản Lý Thư Viện (RAM)",
-                file: "BT_Day07_PythonWeb.docx",
-                desc: "Xây dựng ứng dụng RESTful API hoàn chỉnh lưu trữ trên bộ nhớ RAM."
+            "DAY_08": {
+                badge: "Tuần 1 • Ngày 4",
+                title: "Python Web 1 — Kết Nối MySQL Workbench & SQLAlchemy ORM Cơ Bản",
+                file: "BT_Day08_PythonWeb.docx",
+                desc: "Phiếu bài tập Word tổng hợp làm sạch dữ liệu giỏ hàng, CRUD List/Dict/Set và List Comprehension."
             },
             "DAY_02": {
                 badge: "Tuần 1 • Ngày 2",
@@ -1461,12 +2121,12 @@
         // PRE-POPULATE MOCK DATA
         if (!localStorage.getItem(SUBMISSION)) {
             const mockData = [
-                { id: 1, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026001", name: "Nguyễn Văn An", className: "CNTT1", class: "CNTT1", lop: "CNTT1", link: "https://github.com/an/python-day1", time: "26/07/2026 09:15:00", status: "Đã nộp" },
-                { id: 2, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026002", name: "Trần Thị Bình", className: "CNTT2", class: "CNTT2", lop: "CNTT2", link: "https://github.com/binh/python-day1", time: "26/07/2026 09:18:22", status: "Đã nộp" },
-                { id: 3, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026003", name: "Lê Hoàng Cường", className: "CNTT3", class: "CNTT3", lop: "CNTT3", link: "https://github.com/cuong/python-day1", time: "26/07/2026 09:22:45", status: "Đã nộp" },
-                { id: 4, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026004", name: "Phạm Văn Dũng", className: "CNTT4", class: "CNTT4", lop: "CNTT4", link: "https://github.com/dung/python-day1", time: "26/07/2026 09:30:12", status: "Đã nộp" },
-                { id: 5, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026005", name: "Đỗ Minh Đăng", className: "CNTT5", class: "CNTT5", lop: "CNTT5", link: "https://github.com/dang/python-day1", time: "26/07/2026 09:35:50", status: "Đã nộp" },
-                { id: 6, lessonId: "DAY_07", lesson: "DAY_07", msv: "SV2026006", name: "Hoàng Thị Em", className: "CNTT6", class: "CNTT6", lop: "CNTT6", link: "https://github.com/em/python-day1", time: "26/07/2026 09:40:11", status: "Đã nộp" }
+                { id: 1, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026001", name: "Nguyễn Văn An", className: "CNTT1", class: "CNTT1", lop: "CNTT1", link: "https://github.com/an/python-day1", time: "26/07/2026 09:15:00", status: "Đã nộp" },
+                { id: 2, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026002", name: "Trần Thị Bình", className: "CNTT2", class: "CNTT2", lop: "CNTT2", link: "https://github.com/binh/python-day1", time: "26/07/2026 09:18:22", status: "Đã nộp" },
+                { id: 3, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026003", name: "Lê Hoàng Cường", className: "CNTT3", class: "CNTT3", lop: "CNTT3", link: "https://github.com/cuong/python-day1", time: "26/07/2026 09:22:45", status: "Đã nộp" },
+                { id: 4, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026004", name: "Phạm Văn Dũng", className: "CNTT4", class: "CNTT4", lop: "CNTT4", link: "https://github.com/dung/python-day1", time: "26/07/2026 09:30:12", status: "Đã nộp" },
+                { id: 5, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026005", name: "Đỗ Minh Đăng", className: "CNTT5", class: "CNTT5", lop: "CNTT5", link: "https://github.com/dang/python-day1", time: "26/07/2026 09:35:50", status: "Đã nộp" },
+                { id: 6, lessonId: "DAY_08", lesson: "DAY_08", msv: "SV2026006", name: "Hoàng Thị Em", className: "CNTT6", class: "CNTT6", lop: "CNTT6", link: "https://github.com/em/python-day1", time: "26/07/2026 09:40:11", status: "Đã nộp" }
             ];
             localStorage.setItem(SUBMISSION, JSON.stringify(mockData));
         }
@@ -1521,7 +2181,7 @@
         // MASTER CURRICULUM MODULE SWITCHER
         function changeLessonModule(lessonId) {
             currentActiveLessonId = lessonId;
-            const data = SYLLABUS_MAP[lessonId] || SYLLABUS_MAP["DAY_07"];
+            const data = SYLLABUS_MAP[lessonId] || SYLLABUS_MAP["DAY_08"];
 
             const badgeEl = document.getElementById('bannerBadge');
             const titleEl = document.getElementById('bannerTitle');
@@ -1815,8 +2475,8 @@ sys.stdout = io.StringIO()
             if (!btn) return;
             const isUnlocked = ex1Passed && ex2Passed;
             if (isUnlocked) {
-                btn.setAttribute('href', 'BT_Day07_PythonWeb.docx');
-                btn.setAttribute('download', 'BT_Day07_PythonWeb.docx');
+                btn.setAttribute('href', 'BT_Day01_PythonCore.docx');
+                btn.setAttribute('download', 'BT_Day01_PythonCore.docx');
                 btn.style.background = 'var(--accent-red, #dc2626)';
                 btn.style.opacity = '1';
                 btn.style.pointerEvents = 'auto';
@@ -2166,9 +2826,9 @@ sys.stdout = io.StringIO()
                                 id: item.id || (Date.now() + idx),
                                 time: item.time || item.timestamp || '',
                                 timestamp: item.time || item.timestamp || '',
-                                lessonId: item.lessonId || item.bai_hoc || item.lesson || 'DAY_07',
-                                lesson: item.lessonId || item.bai_hoc || item.lesson || 'DAY_07',
-                                bai_hoc: item.lessonId || item.bai_hoc || item.lesson || 'DAY_07',
+                                lessonId: item.lessonId || item.bai_hoc || item.lesson || 'DAY_08',
+                                lesson: item.lessonId || item.bai_hoc || item.lesson || 'DAY_08',
+                                bai_hoc: item.lessonId || item.bai_hoc || item.lesson || 'DAY_08',
                                 className: item.className || item.class || item.lop || '',
                                 class: item.className || item.class || item.lop || '',
                                 lop: item.className || item.class || item.lop || '',
@@ -2208,13 +2868,13 @@ sys.stdout = io.StringIO()
         function loadSubmissionsTable() {
             let list = JSON.parse(localStorage.getItem(SUBMISSION) || "[]");
 
-            // Chỉ lấy bài DAY_07
+            // Chỉ lấy bài DAY_08
             let dayList = list.filter(row => {
                 const lesson = String(
                     row.lessonId || row.lesson || row.bai_hoc || ""
                 ).trim().toUpperCase();
-                console.log("Lesson:", lesson);
-                return lesson === "DAY_07";
+
+                return lesson === "DAY_08";
             });
 
             // ===============================
@@ -2292,7 +2952,7 @@ sys.stdout = io.StringIO()
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="8" style="text-align:center;padding:20px;color:#94a3b8;">
-                            Chưa có bài nộp nào của DAY_07.
+                            Chưa có bài nộp nào của DAY_08.
                         </td>
                     </tr>
                 `;
@@ -2314,7 +2974,7 @@ sys.stdout = io.StringIO()
                     sub.lessonId ||
                     sub.lesson ||
                     sub.bai_hoc ||
-                    "DAY_07";
+                    "DAY_08";
 
                 const msv =
                     sub.msv ||
@@ -2384,13 +3044,12 @@ sys.stdout = io.StringIO()
                 `;
             });
         }
-
         function exportSubmissionsToFormattedExcel() {
             let list = JSON.parse(localStorage.getItem(SUBMISSION) || '[]');
             const filterClassEl = document.getElementById('filterClassSelect');
             const filterClass = filterClassEl ? filterClassEl.value : 'ALL';
 
-            let filteredList = list.filter(sub => (sub.lessonId || sub.lesson || 'DAY_07') === 'DAY_07');
+            let filteredList = list.filter(sub => (sub.lessonId || sub.lesson || 'DAY_08') === 'DAY_08');
             if (filterClass !== 'ALL') {
                 filteredList = filteredList.filter(sub => (sub.className || sub.class || sub.lop) === filterClass);
             }
@@ -2403,7 +3062,7 @@ sys.stdout = io.StringIO()
                 return cA - cB;
             });
 
-            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_07`;
+            const titleText = `BÁO CÁO TỔNG HỢP NỘP BÀI TẬP PYTHON CORE - BÀI DAY_08`;
             let excelHTML = `
                 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
                 <head>
@@ -2459,7 +3118,7 @@ sys.stdout = io.StringIO()
                 excelHTML += `
                     <tr>
                         <td class="center">${stt++}</td>
-                        <td class="center">DAY_07</td>
+                        <td class="center">DAY_08</td>
                         <td class="center">${sub.msv || ''}</td>
                         <td>${sub.name || sub.ho_ten || ''}</td>
                         <td class="class-badge">${cName}</td>
@@ -2480,7 +3139,7 @@ sys.stdout = io.StringIO()
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `BaoCao_NopBai_DAY_07_${filterClass}_${new Date().toISOString().slice(0,10)}.xls`;
+            a.download = `BaoCao_NopBai_DAY_08_${filterClass}_${new Date().toISOString().slice(0,10)}.xls`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

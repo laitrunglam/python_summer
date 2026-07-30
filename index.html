@@ -321,16 +321,16 @@
             </div>
 
             <!-- Day 8 Card -->
-            <div class="day-card">
+            <div class="day-card active-lesson">
                 <div>
                     <div class="card-head">
                         <span class="day-badge">Tuần 2 • Bài 08</span>
-                        <span class="status-pill upcoming">⏳ Sắp ra mắt</span>
+                        <span class="status-pill ready">✅ Đã sẵn sàng</span>
                     </div>
                     <h3 class="card-title">Ngày 8: MySQL Workbench & SQLAlchemy ORM</h3>
                     <p class="card-desc">Kết nối cơ sở dữ liệu quan hệ MySQL, định nghĩa ORM Models và thao tác với Database.</p>
                 </div>
-                <button class="btn-enter-lesson btn-disabled" onclick="alert('📌 Bài học này đang trong tiến trình chuẩn bị!')">🔒 ĐANG CẬP NHẬT</button>
+                <a href="day08/BT_Day08_FastAPI.html" class="btn-enter-lesson">🚀 VÀO HỌC BÀI 08 NGAY</a>
             </div>
 
             <!-- Day 9 Card -->
@@ -584,6 +584,12 @@
                 path: "day07/BT_Day07_PythonWeb.docx",
                 title: "📄 File Word Bài Tập: BT_Day07_PythonWeb.docx",
                 desc: "Mini Project 1: RESTful API CRUD Quản lý Thư viện lưu trữ trên RAM."
+            },
+            "DAY_08": {
+                file: "BT_Day08_PythonWeb.docx",
+                path: "day08/BT_Day08_PythonWeb.docx",
+                title: "📄 File Word Bài Tập: BT_Day08_PythonWeb.docx",
+                desc: "Kết nối cơ sở dữ liệu quan hệ MySQL, định nghĩa ORM Models và thao tác với Database."
             }
         };
 
@@ -614,7 +620,7 @@
         function navigateToLesson(val) {
             if (!val) return;
             const currentPath = window.location.pathname.replace(/\\/g, '/');
-            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/');
+            const isInSubfolder = currentPath.includes('/day01/') || currentPath.includes('/day02/') || currentPath.includes('/day03/') || currentPath.includes('/day04/') || currentPath.includes('/day05/') || currentPath.includes('/day06/') || currentPath.includes('/day07/') || currentPath.includes('/day08/');
             const prefix = isInSubfolder ? '../' : './';
 
             const routes = {
@@ -624,7 +630,8 @@
                 "DAY_04": "day04/day04_python_core.html",
                 "DAY_05": "day05/BT_Day05_FastAPI.html",
                 "DAY_06": "day06/BT_Day06_FastAPI.html",
-                "DAY_07": "day07/BT_Day07_FastAPI.html"
+                "DAY_07": "day07/BT_Day07_FastAPI.html",
+                "DAY_08": "day08/BT_Day08_FastAPI.html"
             };
 
             if (routes[val]) {
